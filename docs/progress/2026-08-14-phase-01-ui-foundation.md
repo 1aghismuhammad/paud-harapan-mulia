@@ -1,156 +1,81 @@
-# Progress Report — Phase 1 Design System & Global Layout
+# Progress Report — Phase 1 Design System & Public UI
 
 ## Metadata
 
-- **Date:** 2026-08-14
-- **Phase:** Phase 1 — Design System & Global Layout
-- **Checkpoint:** 1A — UI Reference Analysis
-- **Status:** IN PROGRESS
-- **Source-code implementation:** NOT STARTED
-- **Risk Level:** LOW
+- Date: 2026-08-14
+- Status: IN PROGRESS — IMPLEMENTATION DRAFT READY FOR USER REVIEW
+- Risk Level: LOW
 
----
+## Completed in Draft Bundle
 
-## Objective
-
-Menerjemahkan UI reference menjadi kontrak implementasi yang jelas sebelum mengubah source code.
-
----
-
-## Completed
-
-- Referensi homepage lengkap diterima.
-- Referensi dropdown `About Us` diterima.
-- Referensi dropdown `Our School` diterima.
-- Referensi halaman Sejarah diterima.
-- Referensi halaman Visi & Misi diterima.
-- Referensi halaman Fasilitas diterima.
-- Referensi halaman PAUD diterima.
-- Referensi halaman TK diterima.
-- Referensi halaman Berita diterima.
-- Arah visual diputuskan cukup dekat dengan reference.
-- Brand tetap diadaptasi ke hijau/orange/yellow PAUD Harapan Mulia.
-- Navigasi dikunci dalam Bahasa Indonesia.
-- `Tentang Kami` dikunci: Sejarah, Visi & Misi, Fasilitas.
-- `Sekolah Kami` dikunci: PAUD, TK.
-- Modul Galeri dihapus dari MVP.
-- Hero dikunci sebagai image carousel.
-- Unit Pendidikan dikunci menjadi PAUD dan TK.
-- Testimonial dipertahankan dengan placeholder development yang tidak boleh masuk production sebagai fakta.
-- Temporary logo menggunakan asset dataset.
-
----
-
-## Documentation Changes
-
-Di checkpoint ini disiapkan update untuk:
-
-- `README.md`
-- `docs/PRD.md`
-- `docs/ARCHITECTURE.md`
-- `docs/DESIGN.md`
-- `docs/progress/2026-08-14-phase-00-foundation.md`
-- `docs/phase-01/UI-REFERENCE-CONTRACT.md`
-- `docs/progress/2026-08-14-phase-01-ui-foundation.md`
-
----
+- documentation consistency cleanup;
+- Galeri removed from PRD/Architecture/Design/README;
+- brand tokens;
+- Poppins-based typography preview;
+- global public layout;
+- topbar;
+- desktop navbar/dropdowns;
+- mobile menu/accordion;
+- hero carousel;
+- homepage skeleton;
+- footer;
+- static page shells for all public navigation;
+- static preview news list;
+- public route smoke test;
+- school dataset images renamed/copied for preview.
 
 ## Database / Migration
 
 Tidak ada perubahan.
 
-Galeri yang sebelumnya direncanakan juga dihapus dari architecture sebelum migration pernah dibuat.
+## Dependency
 
----
+Tidak ada package Composer/NPM baru.
 
-## Routes
+Typography preview memuat Poppins melalui Google Fonts dari layout. Jika nanti diputuskan self-host font, perubahan tersebut menjadi task terpisah.
 
-Belum ada source route yang diubah.
-
-Candidate route map sudah dikunci pada documentation contract.
-
----
-
-## Dependencies
-
-Tidak ada dependency baru.
-
-Font final dan carousel implementation tidak boleh menambah package tanpa review.
-
----
-
-## Tests
-
-Belum ada test source-code baru karena implementation belum dimulai.
-
----
-
-## Responsive QA
-
-Belum dilakukan pada implementation.
-
-Target QA:
+## Routes Added/Changed
 
 ```text
-390 × 844
-768 × 1024
-1440 × 900
-1920 × 1080
+/
+/tentang-kami/sejarah
+/tentang-kami/visi-misi
+/tentang-kami/fasilitas
+/sekolah/paud
+/sekolah/tk
+/berita
 ```
 
----
+## Placeholder Content
 
-## Decisions
+- testimonial: development placeholder;
+- berita: preview cards;
+- PAUD/TK copy: beberapa bagian masih menunggu detail unit resmi;
+- logo visual: temporary dataset asset.
 
-### P1-D001
-UI akan dibuat cukup dekat dengan reference, bukan sekadar mengambil inspirasi abstrak.
+Tidak boleh dianggap konten production final.
 
-### P1-D002
-Brand reference biru/ungu diganti dengan brand PAUD hijau/orange/yellow.
+## Review Required
 
-### P1-D003
-Navigation menggunakan Bahasa Indonesia.
+User perlu mengecek:
 
-### P1-D004
-Galeri dihapus dari seluruh MVP, architecture, CMS, dan roadmap.
+- kemiripan layout terhadap reference;
+- font;
+- warna;
+- header height/spacing;
+- dropdown behavior;
+- hero height/crop;
+- highlight cards;
+- unit PAUD/TK cards;
+- testimonial area;
+- news cards;
+- footer.
 
-### P1-D005
-Testimonial placeholder hanya untuk development.
+## Next Step After Approval
 
-### P1-D006
-Exact font tidak boleh ditebak; harus diverifikasi atau dipreview sebelum dikunci.
-
-### P1-D007
-Source code Phase 1 tidak dimulai sebelum implementation contract disetujui user.
-
----
-
-## Issues / Blockers
-
-Tidak ada blocker untuk planning.
-
-Non-blocking pending:
-
-- exact font;
-- final logo;
-- testimonial asli;
-- final hero images;
-- final highlight copy.
-
----
-
-## Next Step
-
-Setelah user approve `docs/phase-01/UI-REFERENCE-CONTRACT.md`:
-
-```text
-1B Design Tokens
-1C Global Layout
-1D Header/Navbar
-1E Footer
-1F Static Hero
-1G Home Skeleton
-1H Responsive QA
-```
-
-Sebelum batch pertama source-code, AI agent wajib menyebut file yang akan ditambah/diubah dan menunggu approval.
+1. perbaikan visual hasil review;
+2. responsive QA aktual di local browser;
+3. `npm run build`;
+4. `php artisan test`;
+5. mark Phase 1 DONE;
+6. lanjut Phase 2 content finalization.

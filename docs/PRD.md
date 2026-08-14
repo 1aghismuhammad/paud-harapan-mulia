@@ -1,162 +1,37 @@
 # PRD — Company Profile PAUD Harapan Mulia
 
-**Dokumen:** Product Requirements Document  
-**Produk:** Company Profile PAUD Harapan Mulia  
-**Institusi:** PAUD (KB & TK) Islam Terpadu Harapan Mulia  
-**Versi:** 1.1 Scope & UI Reference Update  
-**Tanggal:** 14 Agustus 2026  
-**Status:** Siap digunakan sebagai baseline development
+**Version:** 1.2 — Scope Locked  
+**Date:** 14 Agustus 2026  
+**Product:** Company Profile PAUD Harapan Mulia  
+**Institution:** Single institution
 
----
+## 1. Product Summary
 
-## 1. Ringkasan Produk
+Website resmi PAUD (KB & TK) Islam Terpadu Harapan Mulia untuk memperkenalkan sekolah kepada masyarakat dan menyediakan kanal publikasi berita.
 
-Company Profile PAUD Harapan Mulia adalah website publik untuk memperkenalkan PAUD (KB & TK) Islam Terpadu Harapan Mulia kepada masyarakat, calon orang tua/wali, dan pihak lain yang ingin mengetahui profil sekolah.
+Produk **bukan** sistem akademik dan **bukan** SaaS.
 
-Produk ini berfokus pada:
+## 2. Primary Goals
 
-1. membangun identitas digital resmi sekolah;
-2. menyajikan informasi profil sekolah secara terstruktur;
-3. menampilkan dokumentasi kegiatan dan fasilitas;
-4. menyediakan berita sekolah yang dapat diperbarui melalui CMS;
-5. menampilkan dokumentasi sekolah sebagai bagian dari halaman company profile;
-6. meningkatkan discoverability melalui SEO dan desain responsive mobile-first.
+1. Memberikan identitas digital resmi sekolah.
+2. Menyajikan profil, sejarah, visi-misi, fasilitas, dan unit pendidikan secara jelas.
+3. Menampilkan dokumentasi aktivitas sekolah secara kontekstual pada halaman terkait.
+4. Memberikan CMS berita yang mudah digunakan pada Phase 3.
+5. Mobile-first, SEO-friendly, dan layak di-host pada cPanel/shared hosting.
 
-Website ini adalah **single institution website**, bukan SaaS dan bukan sistem informasi akademik.
+## 3. Users
 
----
+### Public Visitor
 
-## 2. Latar Belakang dan Masalah
+Tanpa login. Dapat membaca seluruh informasi publik dan berita.
 
-PAUD Harapan Mulia membutuhkan "muka digital" resmi agar sekolah:
+### Admin
 
-- lebih mudah ditemukan dan dikenal masyarakat;
-- memiliki satu sumber informasi resmi;
-- dapat menyampaikan profil, visi, misi, program, kegiatan, fasilitas, dan kontak;
-- dapat mempublikasikan berita tanpa harus meminta developer setiap kali ada berita baru;
-- dapat menampilkan dokumentasi sekolah secara lebih profesional.
-
-Masalah yang diselesaikan produk ini bukan pengelolaan akademik internal, melainkan **visibilitas, kredibilitas, komunikasi publik, dan publikasi konten sekolah**.
-
----
-
-## 3. Tujuan Produk
-
-### 3.1 Tujuan Utama
-
-- Menjadi website resmi Company Profile PAUD Harapan Mulia.
-- Membantu masyarakat memahami identitas dan karakter sekolah.
-- Menampilkan kegiatan, fasilitas, dan dokumentasi sekolah.
-- Memberikan CMS sederhana dan nyaman untuk mengelola berita.
-- Menjadi fondasi digital untuk pengembangan fitur lain pada fase berikutnya.
-
-### 3.2 Sasaran Keberhasilan
-
-Produk dianggap berhasil apabila:
-
-- pengunjung dapat memahami profil sekolah tanpa perlu login;
-- halaman utama bekerja dengan baik di mobile, tablet, dan desktop;
-- admin dapat login dan mengelola berita;
-- berita memiliki URL yang bersih dan dapat dibagikan;
-- website memiliki metadata SEO, sitemap, robots, canonical, Open Graph, dan struktur semantic HTML;
-- gambar dapat ditampilkan dengan performa yang memadai;
-- website dapat dideploy ke shared hosting/cPanel yang telah disiapkan.
-
----
-
-## 4. Scope Produk
-
-### 4.1 In Scope — MVP
-
-#### Website Publik
-
-- Home
-- About Us / Tentang Kami
-- Our School / Sekolah Kami
-- Berita
-- Detail Berita
-- Contact information pada header/footer
-- Responsive navigation
-- Hero/banner carousel
-- Informasi keunggulan sekolah
-- Informasi fasilitas
-- Informasi program/kegiatan
-- Visi, misi, tujuan, sejarah, dan profil sekolah
-- Tautan media sosial
-- Video profil bila digunakan
-- SEO teknis dasar dan advanced baseline
-
-#### Admin / CMS
-
-- Login admin
-- Dashboard admin
-- Manajemen berita
-- Upload gambar
-- Draft/publish berita
-- Preview berita sebelum publish
-- Delete/restore sesuai implementasi soft delete
-- Search/filter daftar konten
-
-### 4.2 Out of Scope — MVP
-
-Belum termasuk:
-
-- akun orang tua;
-- data siswa;
-- absensi;
-- pembayaran/SPP;
-- rapor;
-- pendaftaran siswa;
-- portal guru;
-- multi-role kompleks;
-- multi-institution/multi-tenant;
-- payment gateway;
-- aplikasi mobile native;
-- notifikasi WhatsApp otomatis;
-- sistem akademik.
-
-Fitur tersebut hanya dapat masuk melalui keputusan scope baru pada fase lanjutan.
-
----
-
-## 5. Pengguna dan Role
-
-### 5.1 Public Visitor
-
-Tidak memerlukan login.
-
-Kebutuhan utama:
-
-- melihat informasi sekolah;
-- membaca berita;
-- mendapatkan alamat/kontak;
-- membuka media sosial;
-- mengenal program dan karakter sekolah.
-
-### 5.2 Admin
-
-MVP hanya menggunakan **satu role: Admin**.
-
-Admin dapat:
-
-- login;
-- membuka dashboard;
-- membuat berita;
-- mengedit berita;
-- menyimpan berita sebagai draft;
-- mempublikasikan berita;
-- menghapus/memulihkan berita bila soft delete digunakan;
-- mengedit metadata konten.
+Satu role authenticated pada MVP. Pada Phase 3 dapat login dan mengelola berita.
 
 Tidak ada Super Admin pada MVP.
 
----
-
-## 6. Struktur Informasi Website
-
-Struktur navigasi MVP telah dikunci berdasarkan referensi UI dan keputusan project.
-
-### 6.1 Navigasi Utama
+## 4. Final MVP Navigation
 
 ```text
 Beranda
@@ -173,619 +48,225 @@ Sekolah Kami
 Berita
 ```
 
-Tidak ada menu atau modul Galeri pada MVP.
+## 5. Public Pages
 
-### 6.2 Struktur Beranda
+### Beranda
 
-```text
-Beranda
-├── Header / Topbar
-├── Navigation
-├── Hero Image Carousel
-├── Highlight / Keunggulan
-├── Visi & Misi
-├── Profil Sekolah + Video/Gambar
-├── Unit Pendidikan
-│   ├── PAUD
-│   └── TK
-├── Testimonial
-├── Berita Terbaru
-└── Footer
-```
-
-### 6.3 Halaman Publik
+Urutan section:
 
 ```text
-Tentang Kami
-├── Sejarah
-├── Visi & Misi
-└── Fasilitas
-
-Sekolah Kami
-├── PAUD
-└── TK
-
-Berita
-├── Daftar Berita
-└── Detail Berita
+Topbar
+Navigation
+Hero Image Carousel
+3 Highlight / Keunggulan
+Visi & Misi
+Profil Sekolah + Video/Gambar
+Unit Pendidikan — PAUD / TK
+Testimonial
+Berita Terbaru
+Footer
 ```
 
-Kontak tidak memerlukan halaman terpisah pada MVP. Informasi kontak ditampilkan pada header/footer sesuai referensi desain.
+### Tentang Kami
 
-Dokumentasi foto kegiatan tetap dapat digunakan pada section company profile, unit pendidikan, fasilitas, testimonial, atau berita, tetapi **bukan sebagai modul galeri tersendiri**.
+- Sejarah
+- Visi & Misi
+- Fasilitas
 
----
+### Sekolah Kami
 
-## 7. Sumber Konten Awal
+- PAUD
+- TK
 
-Dataset yang diberikan sudah memuat bahan awal berikut:
+### Berita
 
-- nama resmi sekolah;
-- alamat;
-- email;
-- nomor WhatsApp/telepon;
-- akun media sosial;
-- visi dan misi;
-- sejarah/karakteristik sekolah;
-- tujuan;
-- dokumentasi kegiatan;
-- dokumentasi Home Parenting;
-- dokumentasi Akhirussanah;
-- foto kelompok;
-- foto kegiatan keagamaan;
-- foto kunjungan/kegiatan lapangan;
-- video landscape dan portrait;
-- kebutuhan fasilitas, testimonial, dan berita.
+- daftar berita;
+- detail berita pada Phase 3 ketika model berita dibuat.
 
-### Identitas yang ditemukan pada dataset
+## 6. Dynamic vs Static Content
 
-**Nama:** PAUD (KB & TK) Islam Terpadu Harapan Mulia  
-**Alamat referensi:** Jl. Caren RT 01 RW 04, Kel. Ngawen, Kec. Ngawen, Kab. Blora  
-**Email referensi:** tkitharapanmulia063@gmail.com  
-**Nomor referensi:** 089613624186
+### Static / Blade pada MVP
 
-> Seluruh data kontak dan isi final harus diverifikasi kembali oleh pihak sekolah sebelum production release.
-
----
-
-## 8. Konten Static vs Dynamic
-
-### 8.1 Static / Hardcoded Blade
-
-Sesuai keputusan project, konten berikut pada MVP disimpan di Blade/config dan hanya diubah melalui source code:
-
-- profil sekolah;
+- profil;
 - sejarah;
 - visi;
 - misi;
 - tujuan;
-- deskripsi program;
-- keunggulan;
-- informasi fasilitas;
-- informasi kontak;
-- tautan sosial media;
-- kata perenungan/footer;
-- konten hero non-CMS bila tidak menggunakan berita sebagai banner.
+- fasilitas;
+- unit PAUD/TK;
+- contact info;
+- kata perenungan;
+- highlight sekolah.
 
-Alasan:
+### Dynamic / Database
 
-- frekuensi perubahan rendah;
-- scope admin tetap kecil;
-- menghindari CMS generik yang tidak diperlukan pada MVP.
+Phase 3:
 
-### 8.2 Dynamic / Database
+- user/admin;
+- news posts;
+- metadata berita;
+- path featured image.
 
-Data yang dikelola melalui database:
+## 7. Galeri Decision
 
-- users/admin;
-- berita;
-- metadata terkait konten dynamic.
+**Galeri dihapus dari MVP.**
 
-File image **tidak disimpan sebagai binary di database**. Database hanya menyimpan path, filename, metadata, dan alt text yang relevan.
+Tidak dibuat:
 
-### 8.3 Testimonial pada Development
+- menu Galeri;
+- route Galeri;
+- tabel album/foto;
+- Gallery Controller/Service/Action;
+- Gallery CMS;
+- Gallery tests.
 
-Section testimonial dipertahankan mengikuti referensi UI. Selama development boleh menggunakan **data placeholder/fiktif yang diberi penanda jelas sebagai placeholder**. Data tersebut tidak boleh dianggap sebagai testimoni nyata dan wajib diganti atau dinonaktifkan sebelum production release apabila pihak sekolah belum memberikan testimoni yang sah.
+Foto sekolah tetap boleh digunakan sebagai static visual atau media berita.
 
----
+## 8. News CMS — Phase 3
 
-## 9. Modul Berita — CMS WordPress-Inspired
+WordPress-inspired publishing UX tanpa menyalin WordPress secara penuh.
 
-Tujuan UX CMS bukan menyalin WordPress secara identik, tetapi mengambil pola yang sudah familiar dan nyaman.
+Field minimum:
 
-### 9.1 Daftar Berita
+```text
+title
+slug
+excerpt
+content
+featured_image_path
+featured_image_alt
+status: draft | published
+published_at
+seo_title
+seo_description
+author_id
+timestamps
+```
 
-Admin dapat:
+Candidate features:
 
-- melihat daftar berita;
-- search berdasarkan judul;
-- filter status;
-- melihat tanggal publish;
-- melihat status;
-- membuka edit;
-- menghapus berita;
-- membuat berita baru.
-
-### 9.2 Form Berita
-
-Field MVP:
-
-- title;
-- slug;
-- excerpt/ringkasan;
-- content;
+- list/search/filter;
+- create/edit;
+- save draft;
+- preview;
+- publish/update;
 - featured image;
-- featured image alt text;
-- status: `draft` / `published`;
-- published_at;
-- SEO title;
-- SEO meta description.
+- SEO metadata.
 
-Field system:
+Rich text editor belum dikunci pada Phase 1.
 
-- author_id;
-- created_at;
-- updated_at;
-- deleted_at bila soft delete digunakan.
+## 9. Testimonial Rule
 
-### 9.3 Rich Text Editor
+Section testimonial dipertahankan untuk mengikuti referensi UI.
 
-CMS harus menyediakan editor yang terasa seperti editor publishing modern:
+Saat development, placeholder/fiktif boleh digunakan **hanya untuk menguji layout** dan harus diberi penanda jelas sebagai placeholder.
 
-- heading;
-- paragraph;
-- bold;
-- italic;
-- bullet list;
-- numbered list;
-- link;
-- image;
-- quote bila diperlukan;
-- undo/redo;
-- clean HTML output.
-
-**Pilihan editor final belum dikunci** dan akan ditentukan setelah referensi CMS dari user diberikan.
-
-Penambahan dependency editor tidak boleh dilakukan tanpa review dependency terlebih dahulu.
-
-### 9.4 Fitur yang Ditunda
-
-Untuk mencegah overengineering, berikut ditunda sampai ada kebutuhan:
-
-- tags;
-- banyak kategori;
-- scheduled publishing kompleks;
-- revision history seperti WordPress;
-- multi-author workflow;
-- approval workflow;
-- comments publik.
-
----
-
-## 10. Modul Galeri
-
-Galeri menggunakan konsep album.
-
-### 10.1 Album
-
-Field minimum:
-
-- title;
-- slug;
-- description;
-- cover_image;
-- cover_alt_text;
-- published_at;
-- created_at;
-- updated_at.
-
-### 10.2 Gallery Image
-
-Field minimum:
-
-- gallery_album_id;
-- image_path;
-- alt_text;
-- caption;
-- sort_order;
-- created_at.
-
-### 10.3 Candidate Album dari Dataset
-
-Candidate awal berdasarkan aset yang diterima:
-
-- Akhirussanah;
-- Home Parenting;
-- Kegiatan Keagamaan;
-- Kegiatan Lapangan/Kunjungan;
-- Kegiatan Siswa;
-- Dokumentasi Sekolah.
-
-Nama album final harus mengikuti persetujuan pihak sekolah.
-
----
-
-## 11. SEO Requirements
-
-Website harus menggunakan pendekatan **people-first + search-friendly**, bukan keyword stuffing.
-
-### 10.1 SEO Teknis
-
-Wajib:
-
-- unique `<title>` per halaman;
-- meta description;
-- canonical URL;
-- Open Graph;
-- social preview image;
-- robots.txt;
-- sitemap.xml;
-- clean slug;
-- semantic heading hierarchy;
-- descriptive image alt;
-- descriptive filename untuk aset baru;
-- breadcrumb pada halaman yang membutuhkan hierarchy;
-- structured data yang sesuai konten;
-- 404 page yang benar;
-- status HTTP yang benar;
-- redirect permanent bila slug berubah dan fitur tersebut dibuat;
-- HTTPS di production.
-
-### 10.2 Structured Data
-
-Baseline:
-
-- `Organization` / tipe yang sesuai untuk institusi;
-- `Article` atau `NewsArticle` untuk berita bila sesuai;
-- `BreadcrumbList` pada detail/hierarchy;
-- metadata gambar yang relevan.
-
-Structured data harus sama dengan konten yang terlihat pada halaman.
-
-### 10.3 Mobile SEO
-
-Website menggunakan URL dan HTML yang sama untuk semua perangkat melalui responsive design.
-
-Konten penting tidak boleh hilang di mobile.
-
-### 10.4 Image SEO
-
-- image relevan dengan konteks halaman;
-- alt text deskriptif;
-- nama file baru dibuat deskriptif;
-- ukuran image sesuai kebutuhan;
-- hindari image beresolusi sangat kecil;
-- gunakan lazy loading untuk image di bawah fold bila tepat;
-- hero/LCP image tidak boleh diperlakukan sama seperti image sekunder.
-
----
-
-## 11. Performance Requirements
-
-Target baseline:
-
-- mobile-first;
-- Core Web Vitals dipantau;
-- target LCP ≤ 2.5 s;
-- target INP < 200 ms;
-- target CLS < 0.1;
-- asset CSS/JS dibuild dan versioned melalui Vite;
-- gambar tidak dikirim jauh lebih besar dari ukuran render;
-- width/height/aspect ratio image ditentukan untuk mengurangi layout shift;
-- minimize blocking scripts;
-- carousel tidak boleh membebani halaman dengan terlalu banyak image eager-load.
-
----
-
-## 12. Responsive Requirements
-
-Responsive implementation bersifat **content-driven**, bukan mengunci diri pada nama perangkat tertentu.
-
-Breakpoint project mengikuti baseline Tailwind CSS:
+Sebelum production:
 
 ```text
-Base      : < 640px
-sm        : >= 640px
-md        : >= 768px
-lg        : >= 1024px
-xl        : >= 1280px
-2xl       : >= 1536px
+testimonial nyata tersedia -> ganti placeholder
+testimonial nyata belum tersedia -> nonaktifkan section
 ```
 
-Untuk QA, kelompok praktis:
+## 10. Media
+
+Developer-managed static media dapat berada pada `public/images/paud/` pada Phase 1.
+
+Media berita yang di-upload admin pada Phase 3 menggunakan Laravel filesystem/public disk.
+
+Binary image tidak disimpan di database.
+
+## 11. Responsive Requirements
+
+Mobile-first.
+
+Baseline Tailwind:
 
 ```text
-Mobile    : < 768px
-Tablet    : 768px - 1023px
-Desktop   : >= 1024px
-Wide      : >= 1536px
+base < 640px
+sm   >= 640px
+md   >= 768px
+lg   >= 1024px
+xl   >= 1280px
+2xl  >= 1536px
 ```
 
-Representative QA viewport:
+QA representative viewport:
 
 ```text
-390 × 844     Mobile
-768 × 1024    Tablet
-1440 × 900    Desktop
-1920 × 1080   Wide Desktop / reference
+390 × 844
+768 × 1024
+1440 × 900
+1920 × 1080
 ```
 
-Breakpoint tidak boleh ditentukan berdasarkan merek perangkat.
+## 12. SEO Baseline
 
----
+Wajib dipersiapkan sejak public UI:
 
-## 13. Acceptance Criteria MVP
+- semantic HTML;
+- unique title/description per page;
+- canonical-ready layout;
+- descriptive heading hierarchy;
+- descriptive alt text;
+- clean routes;
+- responsive/mobile parity.
 
-### Public
+Phase 4 menambahkan audit sitemap, robots, structured data, Open Graph, performance, dan accessibility.
 
-- [ ] Home tampil normal pada mobile/tablet/desktop.
-- [ ] Navbar responsive.
-- [ ] Hero/banner berfungsi.
-- [ ] Profil, visi, misi, tujuan, dan sejarah tersedia.
-- [ ] Berita dapat dilihat publik.
-- [ ] Detail berita menggunakan slug.
-- [ ] Kontak dan sosial media tampil.
-- [ ] Metadata SEO tersedia.
-- [ ] Tidak ada konten utama desktop yang hilang pada mobile.
-
-### Admin
-
-- [ ] Admin dapat login.
-- [ ] Route admin terlindungi authentication.
-- [ ] Admin dapat CRUD berita.
-- [ ] Admin dapat upload featured image.
-- [ ] Admin dapat draft/publish.
-- [ ] Validation berjalan.
-- [ ] Upload file dibatasi tipe dan ukuran.
-- [ ] Error ditampilkan dengan aman.
-
-### QA
-
-- [ ] Feature test penting lulus.
-- [ ] Tidak ada secret masuk Git.
-- [ ] Tidak ada broken route.
-- [ ] Tidak ada N+1 yang diketahui pada list berita.
-- [ ] Production build berhasil.
-- [ ] Smoke test production berhasil.
-
----
-
-## 14. Development Phases
+## 13. Development Phases
 
 ### Phase 0 — Foundation & Documentation
 
-Tujuan:
+Status: DONE.
 
-- kunci PRD;
-- kunci architecture;
-- kunci design system;
-- inventaris asset;
-- definisikan folder/route;
-- verifikasi environment;
-- buat baseline progress reporting.
+### Phase 1 — Design System & Public UI
 
-Output:
-
-- `docs/PRD.md`
-- `docs/ARCHITECTURE.md`
-- `docs/DESIGN.md`
-
-### Phase 1 — Public UI Foundation
-
-- global layout;
-- header;
-- navigation;
-- hero;
-- footer;
 - design tokens;
-- responsive container;
-- component umum;
-- static Home skeleton.
+- public layout;
+- topbar/navbar/dropdown/mobile menu;
+- footer;
+- hero carousel;
+- homepage skeleton;
+- page shells;
+- responsive QA.
 
-### Phase 2 — Static Company Profile
+### Phase 2 — Static Content Finalization
 
-- About Us;
-- Our School;
-- sejarah;
-- visi-misi;
-- tujuan;
-- fasilitas;
-- program/kegiatan;
-- konten dataset;
-- optimasi asset awal.
+- content verification;
+- page content polish;
+- asset finalization;
+- final logo/contact/testimonial decisions.
 
-### Phase 3 — Admin Authentication & News CMS
+### Phase 3 — Authentication & News CMS
 
-- admin login;
+- admin auth;
 - dashboard;
-- news schema;
-- news CRUD;
+- news model/migration;
+- CMS CRUD;
 - rich text editor;
-- upload featured image;
-- draft/publish;
-- SEO metadata berita;
-- public news listing/detail.
+- featured image;
+- public news detail;
+- tests.
 
-### Phase 4 — SEO, Performance, Accessibility & Hardening
+### Phase 4 — SEO / Performance / Accessibility / Hardening
 
-- sitemap;
-- robots;
-- structured data;
-- Open Graph;
-- canonical;
-- alt audit;
-- performance audit;
-- Core Web Vitals optimization;
-- keyboard/focus/accessibility checks;
-- security review.
+### Phase 5 — UAT & Production Deployment
 
-### Phase 5 — UAT, Deployment & Production
+## 14. MVP Acceptance Criteria
 
-- content final;
-- backup;
-- production `.env`;
-- database migration;
-- storage link;
-- production Vite build;
-- cPanel deployment;
-- SSL;
-- smoke test;
-- Search Console setup;
-- handover.
+- public navigation bekerja pada desktop/mobile;
+- seluruh public route utama dapat dibuka;
+- layout konsisten dengan approved reference direction;
+- responsive tanpa horizontal overflow;
+- placeholder production tidak tersisa saat release;
+- CMS berita dapat digunakan admin pada Phase 3;
+- tidak ada Galeri pada MVP;
+- build production berhasil;
+- test relevan lulus.
 
----
+## 15. Change Control
 
-## 15. Progress Reporting
+Seluruh development wajib mengikuti `AGENTS.md` dan `.agents/skills/paud-project-standards/`.
 
-Setiap fase wajib memiliki progress report di:
-
-```text
-docs/progress/
-```
-
-Format nama:
-
-```text
-YYYY-MM-DD-phase-XX-nama-phase.md
-```
-
-Contoh:
-
-```text
-2026-08-14-phase-00-foundation.md
-```
-
-Format laporan minimum:
-
-```markdown
-# Progress Report
-
-## Phase
-Phase X — Nama
-
-## Status
-NOT STARTED | IN PROGRESS | BLOCKED | DONE
-
-## Target
-- ...
-
-## Selesai
-- ...
-
-## Sedang Dikerjakan
-- ...
-
-## Belum Dikerjakan
-- ...
-
-## File Ditambah/Diubah
-- ...
-
-## Database/Migration
-- ...
-
-## Tests
-- ...
-
-## Masalah / Blocker
-- ...
-
-## Keputusan
-- ...
-
-## Risiko
-LOW | MEDIUM | HIGH
-
-## Next Step
-1. ...
-2. ...
-```
-
-Perubahan kode individual tetap mengikuti Change Log yang sudah ditentukan di `.agents`.
-
----
-
-## 16. Prioritas Mulai Development
-
-Urutan pertama yang direkomendasikan:
-
-```text
-1. Finalisasi dokumen baseline.
-2. Susun asset inventory dan naming.
-3. Buat design tokens + layout global.
-4. Implement header/navbar/footer.
-5. Implement Home static.
-6. Implement static profile pages.
-7. Baru masuk authentication + CMS berita.
-```
-
-Alasan: public design perlu dikunci lebih dulu agar CMS nantinya menghasilkan konten yang jelas akan ditampilkan dalam komponen apa.
-
----
-
-## 17. Risiko dan Mitigasi
-
-### Scope Creep
-
-Risiko:
-project berubah menjadi sistem akademik sebelum MVP selesai.
-
-Mitigasi:
-semua fitur di luar PRD masuk backlog, bukan langsung dikembangkan.
-
-### Asset Tidak Konsisten
-
-Risiko:
-image berasal dari WhatsApp dengan ukuran/orientasi berbeda.
-
-Mitigasi:
-inventaris, rename, crop/aspect convention, dan optimasi sebelum publish.
-
-### CMS Terlalu Kompleks
-
-Risiko:
-mencoba meniru WordPress secara penuh.
-
-Mitigasi:
-hanya adopsi UX publishing yang relevan dengan kebutuhan sekolah.
-
-### Shared Hosting Constraints
-
-Risiko:
-permission storage, symlink, PHP extension, build/deploy.
-
-Mitigasi:
-uji deployment sebelum UAT final dan dokumentasikan langkah production.
-
----
-
-## 18. Backlog Future
-
-Candidate pengembangan berikutnya:
-
-- dynamic settings/profile content;
-- admin management;
-- user role tambahan;
-- parent portal;
-- pendaftaran online;
-- form kontak;
-- newsletter;
-- WhatsApp integration;
-- analytics dashboard;
-- revision history CMS;
-- search global;
-- category/tag berita.
-
-Tidak masuk MVP tanpa perubahan PRD.
-
----
-
-## 19. Referensi Teknis
-
-- Repository project: https://github.com/1aghismuhammad/paud-harapan-mulia
-- Tailwind responsive design: https://tailwindcss.com/docs/responsive-design
-- Responsive Web Design — web.dev: https://web.dev/articles/responsive-web-design-basics
-- Google mobile-first indexing: https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing
-- Google SEO Starter Guide: https://developers.google.com/search/docs/fundamentals/seo-starter-guide
-- Google Image SEO: https://developers.google.com/search/docs/appearance/google-images
-- Google Core Web Vitals: https://developers.google.com/search/docs/appearance/core-web-vitals
+Perubahan scope yang tumpang tindih dengan dokumen ini wajib dikonfirmasi sebelum implementasi.

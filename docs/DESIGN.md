@@ -1,205 +1,167 @@
 # DESIGN — Company Profile PAUD Harapan Mulia
 
-**Dokumen:** UI/UX & Visual Design Specification  
-**Versi:** 1.1 UI Reference Locked  
-**Tanggal:** 14 Agustus 2026
+**Version:** 1.2 — Reference Direction Locked  
+**Date:** 14 Agustus 2026
 
----
+## 1. Visual Direction
 
-## 1. Design Direction
+UI dibuat **cukup dekat dengan referensi** dalam layout language dan hierarchy, tetapi bukan clone identitas visual institusi referensi.
 
-Website harus terasa:
+Dipertahankan:
 
-- ramah;
-- hangat;
-- ceria;
-- cocok untuk institusi PAUD;
-- tetap profesional;
-- tidak berlebihan seperti website anak yang penuh dekorasi;
-- mudah dibaca orang tua;
-- cepat dipahami;
-- kuat pada foto kegiatan nyata.
+- banyak whitespace;
+- centered content;
+- top contact row + navigation row;
+- dropdown putih dengan shadow lembut;
+- hero visual besar;
+- card clean;
+- section image + text;
+- testimonial green section;
+- news cards;
+- footer tiga kolom.
 
-Arah visual utama:
+Diganti:
 
-```text
-Friendly Education
-+
-Islamic School Identity
-+
-Clean Company Profile
-+
-Real Activity Photography
-```
+- blue/purple reference -> hijau, orange, yellow PAUD Harapan Mulia;
+- jenjang sekolah reference -> PAUD dan TK;
+- copy reference -> konten PAUD Harapan Mulia.
 
-Foto sekolah harus menjadi pusat visual, bukan ilustrasi dekoratif yang berlebihan.
-
----
-
-## 2. Design References yang Diberikan
-
-Referensi awal menunjukkan struktur:
-
-### Header
-
-- logo;
-- social/contact info di top area;
-- WhatsApp/telepon;
-- email;
-- navbar.
-
-### Navbar
-
-Referensi label:
+## 2. Brand Colors
 
 ```text
-Home
-About Us
-Our School
-Berita
+brand-green-dark   #29693E
+brand-green        #5EA10F
+brand-green-light  #93C854
+brand-orange       #F66F09
+brand-yellow       #F4C90F
+white              #FFFFFF
+surface            #F8FAF8
+text               #17201A
+muted              #667269
+border             #E4E9E5
 ```
 
-Galeri dapat ditambahkan sebagai menu utama atau submenu `Our School` setelah implementasi layout diuji.
+Green dominan. Orange/yellow hanya accent.
 
-### Hero
+## 3. Typography
+
+Reference memiliki karakter geometric sans. Phase 1 menggunakan **Poppins** sebagai implementation approximation yang paling dekat untuk review visual.
+
+```text
+font-family: Poppins, ui-sans-serif, system-ui, sans-serif
+```
+
+Jika user menilai visual font belum cocok, typography dapat diganti tanpa mengubah component architecture.
+
+## 4. Navigation
+
+### Desktop
+
+```text
+Logo + social + WhatsApp + email
+────────────────────────────────
+Beranda   Tentang Kami▼   Sekolah Kami▼   Berita
+```
+
+Tentang Kami:
+
+```text
+Sejarah
+Visi & Misi
+Fasilitas
+```
+
+Sekolah Kami:
+
+```text
+PAUD
+TK
+```
+
+### Mobile
+
+Logo + hamburger. Submenu menggunakan accordion.
+
+Tidak ada menu Galeri.
+
+## 5. Hero
 
 - image carousel;
-- navigasi kiri/kanan;
-- pagination indicator;
-- large visual focus.
+- no heavy text overlay;
+- previous/next button;
+- pagination dots;
+- responsive crop;
+- first slide menjadi candidate LCP;
+- autoplay lembut, berhenti saat hover/focus, menghormati reduced motion.
 
-### Feature Cards
-
-Di bawah hero terdapat card keunggulan seperti:
-
-- Learning Skills;
-- Expert Teachers;
-- Certificates.
-
-Label final harus menggunakan konten nyata sekolah, bukan placeholder.
-
-### Footer
-
-Referensi terdiri dari tiga kolom:
+## 6. Homepage Composition
 
 ```text
-Contact
-Links
-Kata Perenungan
+Header
+Navigation
+Hero
+Highlight Cards
+Visi & Misi
+Profil Sekolah
+Unit Pendidikan
+Testimonial
+Berita Terbaru
+Footer
 ```
 
-Footer menggunakan dark green.
+## 7. Highlight Cards
 
----
+Tiga card mengikuti reference, diadaptasi menjadi:
 
-## 3. Color System
+1. Lingkungan Islami
+2. Pembelajaran Menyenangkan
+3. Pendampingan Orang Tua
 
-Warna berikut diambil/diaproksimasi dari referensi palet dan footer yang diberikan.
+Ketiganya bersumber dari dokumen sekolah: program keagamaan, pembelajaran kreatif/menyenangkan, dan program parenting.
 
-### Brand Colors
+## 8. Unit Pendidikan
 
-| Token | Hex | Penggunaan |
-|---|---|---|
-| `brand-green-900` | `#29693E` | footer, dark section, strong brand |
-| `brand-green-600` | `#5EA10F` | primary accent |
-| `brand-green-300` | `#93C854` | soft accent/background |
-| `brand-orange-500` | `#F66F09` | CTA/highlight |
-| `brand-yellow-400` | `#F4C90F` | icon/accent |
-| `brand-orange-300` | `#F09712` | secondary warm accent |
-
-### Neutral
-
-Recommended:
+Section affiliation reference diadaptasi menjadi:
 
 ```text
-White       #FFFFFF
-Surface     #F8FAF8
-Text        #17201A
-Muted       #667269
-Border      #E4E9E5
+Unit Pendidikan
+[ PAUD ] [ TK ]
 ```
 
-Neutral boleh disesuaikan saat visual QA.
+Card menuju route unit masing-masing.
 
-### Color Usage Rule
+## 9. Testimonial
 
-Gunakan hijau sebagai identitas utama.
+Visual dipertahankan seperti reference: green background + white cards.
 
-Orange/yellow adalah accent, bukan warna dominan pada seluruh halaman.
+Pada Phase 1, isi bersifat placeholder dan ditandai `Preview / Placeholder`.
 
-Rule:
+Sebelum production wajib diganti testimonial nyata atau section dinonaktifkan.
+
+## 10. News
+
+Phase 1 menampilkan preview cards static supaya layout dapat direview.
+
+Phase 3 menggantinya dengan data CMS.
+
+## 11. Footer
 
 ```text
-70% neutral / white
-20% green
-10% orange/yellow accent
+Dark Green
+├── Kontak
+├── Link
+└── Kata Perenungan
+
+Bottom bar
+├── Copyright
+└── Social icons
 ```
 
-Ini bukan formula pixel yang kaku, tetapi batas visual agar halaman tidak terlalu ramai.
+## 12. Responsive
 
----
+Mobile-first.
 
-## 4. Typography
-
-Requirement visual dari user adalah **mengikuti font pada UI referensi sedekat mungkin**.
-
-Exact font-family belum boleh ditebak hanya dari screenshot. Sebelum implementasi typography final:
-
-1. identifikasi font melalui source/computed style referensi bila dapat diverifikasi;
-2. jika tidak dapat diverifikasi, gunakan fallback geometric sans-serif yang paling dekat setelah user melihat preview;
-3. jangan menambahkan font/dependency baru tanpa konfirmasi.
-
-Baseline sementara sebelum verifikasi:
-
-```text
-Primary fallback: Instrument Sans / geometric sans-serif
-Fallback system: ui-sans-serif, system-ui, sans-serif
-```
-
-### Type Scale
-
-Suggested:
-
-```text
-Display/Hero    clamp(2rem, 5vw, 4rem)
-H1              2.25rem desktop / 1.875rem mobile
-H2              1.875rem desktop / 1.5rem mobile
-H3              1.25rem - 1.5rem
-Body            1rem
-Small           0.875rem
-Caption         0.75rem - 0.875rem
-```
-
-Typography final wajib dibandingkan secara visual dengan referensi sebelum dianggap selesai.
-
----
-
-## 5. Layout System
-
-### Mobile-first
-
-Base CSS adalah mobile.
-
-Kemudian enhancement:
-
-```text
-sm   >= 640px
-md   >= 768px
-lg   >= 1024px
-xl   >= 1280px
-2xl  >= 1536px
-```
-
-### Practical QA Classes
-
-```text
-Mobile     < 768px
-Tablet     768 - 1023px
-Desktop    >= 1024px
-Wide       >= 1536px
-```
-
-### Representative Viewports
+Representative QA:
 
 ```text
 390 × 844
@@ -208,710 +170,48 @@ Wide       >= 1536px
 1920 × 1080
 ```
 
-**Catatan penting:** responsive design tidak bekerja berdasarkan "rasio perangkat" tertentu. Yang utama adalah available width dan bagaimana content mulai tidak nyaman. Viewport di atas adalah QA samples, bukan device-specific code.
+Rule:
 
----
+- no horizontal overflow;
+- navbar desktop tidak dipaksa ke mobile;
+- image menggunakan `object-fit: cover` dan content-aware position;
+- section dua kolom menjadi satu kolom di mobile;
+- footer tiga kolom menjadi stack;
+- touch target menu memadai.
 
-## 6. Container
-
-Suggested public container:
-
-```text
-max-width: 1280px - 1440px
-```
-
-Untuk viewport 1920px, content utama tetap memiliki max-width agar line length dan alignment tidak terlalu lebar.
-
-Hero dapat menggunakan width lebih besar daripada content text jika desain memerlukan.
-
-Suggested horizontal padding:
+## 13. Image Ratios
 
 ```text
-Mobile   16px
-sm       24px
-lg       32px
-Wide     40px / container centered
+Hero desktop      ~16:7 / wide
+Hero mobile       adaptive / portrait-aware crop
+News card         16:9
+Unit card         4:3 atau square visual
+Profile visual    4:3
 ```
 
----
-
-## 7. Spacing
-
-Gunakan spacing konsisten dari Tailwind scale.
-
-Recommended section rhythm:
-
-```text
-Mobile:
-py-12 / py-14
-
-Desktop:
-py-16 / py-20 / py-24
-```
-
-Card gap:
-
-```text
-gap-4 mobile
-gap-6 tablet
-gap-8 desktop
-```
-
-Hindari arbitrary margin berbeda di setiap halaman tanpa alasan.
-
----
-
-## 8. Header & Navigation
-
-### Desktop
-
-Struktur final:
-
-```text
-Top Info Bar
-├── Logo
-├── Social icon
-├── WhatsApp / phone
-└── Email
-
-Main Navigation
-├── Beranda
-├── Tentang Kami ▼
-│   ├── Sejarah
-│   ├── Visi & Misi
-│   └── Fasilitas
-├── Sekolah Kami ▼
-│   ├── PAUD
-│   └── TK
-└── Berita
-```
-
-Visual dropdown mengikuti referensi:
-
-- panel putih;
-- shadow lembut;
-- spacing lega;
-- pointer/triangle kecil di atas bila cocok;
-- divider tipis antar item;
-- radius ringan;
-- active/hover menggunakan brand color Harapan Mulia.
-
-### Mobile
-
-Topbar desktop tidak dipaksakan penuh.
-
-Structure:
-
-```text
-Logo                     Menu Button
-
-Menu
-├── Beranda
-├── Tentang Kami
-│   ├── Sejarah
-│   ├── Visi & Misi
-│   └── Fasilitas
-├── Sekolah Kami
-│   ├── PAUD
-│   └── TK
-└── Berita
-```
-
-Dropdown desktop berubah menjadi accordion/collapsible hierarchy pada mobile.
-
-### Sticky
-
-Navbar boleh menjadi sticky setelah visual QA. Jangan membuat header terlalu tinggi pada mobile.
-
----
-
-## 9. Hero / Banner
-
-Hero adalah visual utama Home.
-
-### Desktop
-
-Recommended ratio:
-
-```text
-~16:7 hingga 2:1
-```
-
-Referensi desktop yang diberikan menggunakan banner lebar.
-
-### Tablet
-
-Recommended:
-
-```text
-16:9 atau crop content-aware
-```
-
-### Mobile
-
-Recommended:
-
-```text
-4:5, 3:4, atau crop portrait yang tetap menjaga subject
-```
-
-Jangan mengandalkan satu crop landscape untuk semua ukuran bila wajah/subjek terpotong.
-
-Gunakan:
-
-- `<picture>`;
-- responsive image source;
-- atau `object-position` per breakpoint bila asset memungkinkan.
-
-### Carousel Rules
-
-- 3–5 slide ideal untuk MVP;
-- tidak autoplay terlalu cepat;
-- kontrol previous/next;
-- indicator;
-- keyboard usable;
-- image pertama diprioritaskan karena berpotensi menjadi LCP;
-- slide lain jangan semua eager-loaded.
-
----
-
-## 10. Home Page Composition
-
-Urutan homepage dikunci mengikuti referensi:
-
-```text
-1. Header / Topbar
-2. Main Navigation
-3. Hero Image Carousel
-4. Highlight / Keunggulan
-5. Visi & Misi
-6. Profil Sekolah + Video/Gambar
-7. Unit Pendidikan
-   ├── PAUD
-   └── TK
-8. Testimonial
-9. Berita Terbaru
-10. Footer
-```
-
-### Highlight Cards
-
-Desktop menggunakan tiga card seperti referensi. Isi final menyesuaikan keunggulan PAUD Harapan Mulia, bukan menyalin placeholder reference.
-
-### Unit Pendidikan
-
-Section yang pada reference menggunakan konsep affiliation diadaptasi menjadi:
-
-```text
-Unit Pendidikan
-[ PAUD ] [ TK ]
-```
-
-Masing-masing card/link menuju halaman unitnya sendiri.
-
-### Testimonial
-
-Section testimonial dipertahankan.
-
-Selama development boleh menggunakan placeholder/fiktif **dengan penanda internal yang jelas** agar layout dapat diuji. Placeholder wajib diganti atau section dinonaktifkan sebelum production bila pihak sekolah belum memberikan testimonial nyata.
-
----
-
-## 11. About Us
-
-Recommended sections:
-
-```text
-Page Hero / Breadcrumb
-Profil Singkat
-Sejarah
-Visi
-Misi
-Tujuan
-School Photography
-```
-
-Gunakan layout text + image bergantian untuk menghindari halaman berupa teks panjang tanpa visual.
-
----
-
-## 12. Sekolah Kami
-
-Dropdown dan halaman unit hanya mencakup:
-
-```text
-Sekolah Kami
-├── PAUD
-└── TK
-```
-
-Setiap unit memiliki halaman sendiri.
-
-Baseline halaman unit:
-
-```text
-Page Hero
-Profil unit
-Program / pendekatan
-Dokumentasi aktivitas
-Informasi relevan unit
-CTA / kontak bila diperlukan
-```
-
-Tidak menyalin jenjang SD/SMP/SMA/SMK dari institusi referensi karena tidak sesuai scope PAUD Harapan Mulia.
-
----
-
-## 13. News Public UI
-
-### News Listing
-
-Card:
-
-```text
-Featured image
-Date
-Title
-Excerpt
-Read More
-```
-
-Grid:
-
-```text
-Mobile: 1 column
-Tablet: 2 columns
-Desktop: 3 columns
-```
-
-### News Detail
-
-```text
-Breadcrumb
-Title
-Publish date
-Featured image
-Article content
-Optional share
-Related/latest news
-```
-
-Article max-width lebih sempit daripada full website container agar nyaman dibaca.
-
-Recommended text width:
-
-```text
-~65–75 characters per line
-```
-
----
-
-## 14. Media Aspect Ratio Standard
-
-Recommended standard untuk mengurangi layout inconsistency:
-
-```text
-Hero desktop       16:7 / wide
-News card          16:9
-News detail        natural / max constrained
-Profile square     1:1
-Portrait feature   4:5
-Video landscape    16:9
-Video portrait     9:16
-```
-
-Dataset saat ini memiliki video landscape sekitar 848×478 dan video portrait sekitar 478×850, sehingga kedua orientasi memang tersedia.
-
----
-
-## 15. Image Handling
-
-Setiap image wajib punya purpose.
-
-### Static Profile Image
-
-Alt text ditulis di Blade.
-
-### CMS Image
-
-Admin harus dapat memberikan alt text.
-
-### Decorative Image
-
-Gunakan empty alt jika benar-benar decorative.
-
-### File Naming
-
-Sebelum aset dataset masuk public production, rename.
-
-Contoh:
-
-```text
-home-parenting-paud-harapan-mulia-01.jpg
-akhirussanah-paud-harapan-mulia-2026-01.jpg
-```
-
----
-
-## 16. Footer
-
-Mengikuti referensi:
-
-```text
-Dark Green Footer
-
-Column 1
-Contact
-- WhatsApp/phone
-- Email
-- Address
-
-Column 2
-Links
-- Home
-- Tentang
-- Sekolah
-- Berita
-- Galeri
-
-Column 3
-Kata Perenungan
-- quote/short message
-```
-
-### Mobile
-
-3 kolom berubah menjadi vertical stack.
-
-Social media dapat ditambahkan dekat contact atau bottom footer.
-
----
-
-## 17. Buttons
-
-### Primary
-
-Green.
-
-Use:
-
-- main CTA;
-- publish/save primary action bila sesuai.
-
-### Accent
-
-Orange.
-
-Use:
-
-- CTA penting tertentu;
-- badge/highlight.
-
-Jangan menggunakan orange untuk seluruh tombol sehingga hierarchy hilang.
-
-### Danger
-
-Gunakan red semantic untuk destructive action, bukan brand orange.
-
----
-
-## 18. CMS Admin Design
-
-Arah:
-
-```text
-WordPress-inspired publishing experience
-NOT WordPress clone
-```
-
-### Admin Shell
-
-Recommended desktop:
-
-```text
-Sidebar
-├── Dashboard
-├── Berita
-└── Galeri
-
-Topbar
-└── User / Logout
-
-Content Area
-```
-
-Mobile admin:
-
-- collapsible sidebar;
-- form tetap usable;
-- table dapat berubah menjadi cards/scroll container bila dibutuhkan.
-
-### News List
-
-Columns:
-
-```text
-Title
-Status
-Published At
-Updated At
-Action
-```
-
-Feature:
-
-- search;
-- status filter;
-- pagination;
-- create button.
-
-### News Editor
-
-Recommended desktop composition:
-
-```text
-Main Column
-├── Title
-├── Slug
-├── Excerpt
-└── Rich Text Editor
-
-Side Column
-├── Publish Status
-├── Published At
-├── Featured Image
-├── Alt Text
-└── SEO
-```
-
-Pada mobile, semua section menjadi satu kolom.
-
-### Save Behavior
-
-Actions:
-
-```text
-Save Draft
-Preview
-Publish / Update
-```
-
-Destructive delete terpisah dan perlu confirmation.
-
----
-
-## 19. CMS Empty/Loading/Error States
-
-Setiap dynamic screen harus punya:
-
-### Empty
-
-Contoh:
-
-```text
-Belum ada berita.
-[Tambah Berita]
-```
-
-### Loading
-
-Gunakan feedback yang tidak membuat layout lompat.
-
-### Success
-
-Toast/alert:
-
-```text
-Berita berhasil disimpan.
-```
-
-### Error
-
-Message actionable.
-
-Jangan tampilkan raw stack trace kepada admin production.
-
----
-
-## 20. Form Rules
-
-- label selalu terlihat;
-- placeholder bukan pengganti label;
-- validation message dekat field;
-- required state jelas;
-- destructive action tidak dekat primary save tanpa separation;
-- focus state terlihat;
-- keyboard navigation tetap berfungsi.
-
----
-
-## 21. Accessibility
-
-Baseline:
+## 14. Accessibility Baseline
 
 - semantic landmarks;
-- correct heading order;
-- button benar-benar `<button>`;
-- link benar-benar `<a>`;
-- keyboard usable;
+- heading hierarchy;
+- button untuk action;
+- link untuk navigation;
 - visible focus;
-- sufficient contrast;
-- alt text;
-- form label;
-- tidak mengandalkan warna saja untuk state;
-- reduced motion dipertimbangkan untuk animation/carousel.
+- keyboard usable dropdown/menu/carousel;
+- descriptive alt;
+- reduced-motion support;
+- tidak mengandalkan warna saja.
 
----
+## 15. Phase 1 Review Gate
 
-## 22. SEO-Aware Visual Rules
+User melakukan visual review setelah bundle Phase 1 diterapkan.
 
-- H1 satu tujuan utama per halaman;
-- logo bukan pengganti page title;
-- berita punya title text HTML, bukan text di image;
-- image ditempatkan dekat text relevan;
-- image share/OG harus representatif;
-- jangan embed informasi kritis hanya dalam gambar;
-- mobile menyajikan content penting yang sama dengan desktop.
+Hal yang dapat direvisi tanpa mengubah architecture:
 
----
-
-## 23. Animation
-
-Motion ringan:
-
-- fade/slide kecil;
-- hover card;
-- menu transition;
-- carousel transition.
-
-Tidak menggunakan animation dekoratif berat.
-
-Respect:
-
-```css
-prefers-reduced-motion
-```
-
-bila motion dibuat.
-
----
-
-## 24. Responsive Component Rules
-
-### Navbar
-
-```text
-Mobile: hamburger
-lg+: full menu
-```
-
-### Hero
-
-```text
-Mobile: portrait/content-aware crop
-lg+: wide
-```
-
-### Cards
-
-Public cards menggunakan responsive grid sesuai kebutuhan konten.
-
-### Footer
-
-```text
-1 col -> 2 col -> 3 col
-```
-
-### Admin Editor
-
-```text
-1 col -> main + side panel
-```
-
----
-
-## 25. Design QA Matrix
-
-Setiap public page wajib dicek:
-
-| Check | 390×844 | 768×1024 | 1440×900 | 1920×1080 |
-|---|---:|---:|---:|---:|
-| No horizontal overflow | ✓ | ✓ | ✓ | ✓ |
-| Navbar usable | ✓ | ✓ | ✓ | ✓ |
-| Hero crop valid | ✓ | ✓ | ✓ | ✓ |
-| Text readable | ✓ | ✓ | ✓ | ✓ |
-| Images not distorted | ✓ | ✓ | ✓ | ✓ |
-| Footer valid | ✓ | ✓ | ✓ | ✓ |
-| CTA visible | ✓ | ✓ | ✓ | ✓ |
-
-Tambahkan intermediate width bila content pecah.
-
----
-
-## 26. Asset Inventory Rules
-
-Sebelum implementasi final:
-
-```text
-assets-source/
-├── logo
-├── hero
-├── facilities
-├── activities
-├── gallery
-├── profile
-└── video
-```
-
-Folder `assets-source` di atas adalah konsep staging, bukan keputusan wajib untuk source repo.
-
-Production asset harus memiliki naming bersih.
-
-Aset dari WhatsApp tidak boleh langsung dijadikan public filename.
-
----
-
-## 27. Design Decisions Pending
-
-Masih menunggu/opsional:
-
-1. referensi UI CMS WordPress-like dari user;
-2. logo final high-resolution;
-4. final text highlight card;
-5. quote/kata perenungan final;
-6. hero slide copy;
-7. exact crop image setelah semua asset dipilih.
-
-Keputusan pending tidak menghalangi pembuatan layout foundation.
-
----
-
-## 28. Recommended First Design Implementation
-
-Urutan:
-
-```text
-1. Define Tailwind brand tokens.
-2. Create public container/layout.
-3. Create topbar.
-4. Create navbar desktop/mobile.
-5. Create footer.
-6. Build hero with one static slide first.
-7. Verify responsive behavior.
-8. Baru aktifkan carousel.
-9. Build common cards.
-10. Build Home sections.
-```
-
-Jangan mulai dari animation atau CMS editor.
-
----
-
-## 29. References
-
-- Tailwind Responsive Design: https://tailwindcss.com/docs/responsive-design
-- web.dev Responsive Web Design: https://web.dev/articles/responsive-web-design-basics
-- Google Mobile-first Indexing: https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing
-- Google Image SEO: https://developers.google.com/search/docs/appearance/google-images
-- Google SEO Starter Guide: https://developers.google.com/search/docs/fundamentals/seo-starter-guide
-- Google Core Web Vitals: https://developers.google.com/search/docs/appearance/core-web-vitals
+- exact spacing;
+- font;
+- image selection/crop;
+- section height;
+- border radius;
+- card shadow;
+- copy placeholder;
+- green/orange shade.

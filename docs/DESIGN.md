@@ -1,7 +1,7 @@
 # DESIGN — Company Profile PAUD Harapan Mulia
 
 **Dokumen:** UI/UX & Visual Design Specification  
-**Versi:** 1.0 Draft Baseline  
+**Versi:** 1.1 UI Reference Locked  
 **Tanggal:** 14 Agustus 2026
 
 ---
@@ -141,21 +141,20 @@ Ini bukan formula pixel yang kaku, tetapi batas visual agar halaman tidak terlal
 
 ## 4. Typography
 
-Baseline:
+Requirement visual dari user adalah **mengikuti font pada UI referensi sedekat mungkin**.
+
+Exact font-family belum boleh ditebak hanya dari screenshot. Sebelum implementasi typography final:
+
+1. identifikasi font melalui source/computed style referensi bila dapat diverifikasi;
+2. jika tidak dapat diverifikasi, gunakan fallback geometric sans-serif yang paling dekat setelah user melihat preview;
+3. jangan menambahkan font/dependency baru tanpa konfirmasi.
+
+Baseline sementara sebelum verifikasi:
 
 ```text
-Primary: Instrument Sans
-Fallback: ui-sans-serif, system-ui, sans-serif
+Primary fallback: Instrument Sans / geometric sans-serif
+Fallback system: ui-sans-serif, system-ui, sans-serif
 ```
-
-Alasan:
-
-- sudah selaras dengan current project baseline;
-- modern;
-- readable;
-- tidak perlu menambah dependency font hanya untuk membuat MVP berjalan.
-
-Jika kemudian stakeholder meminta font yang lebih playful, perubahan font harus menjadi design decision terpisah.
 
 ### Type Scale
 
@@ -171,9 +170,7 @@ Small           0.875rem
 Caption         0.75rem - 0.875rem
 ```
 
-Gunakan responsive/fluid sizing secara terkontrol.
-
-Jangan menggunakan ukuran font kecil hanya agar semua teks muat.
+Typography final wajib dibandingkan secara visual dengan referensi sebelum dianggap selesai.
 
 ---
 
@@ -268,46 +265,63 @@ Hindari arbitrary margin berbeda di setiap halaman tanpa alasan.
 
 ### Desktop
 
-Structure:
+Struktur final:
 
 ```text
 Top Info Bar
-└── Social | Phone/WhatsApp | Email
+├── Logo
+├── Social icon
+├── WhatsApp / phone
+└── Email
 
 Main Navigation
-├── Logo
-├── Home
-├── About Us
-├── Our School
-├── Berita
-├── Galeri
-└── Optional search / CTA
+├── Beranda
+├── Tentang Kami ▼
+│   ├── Sejarah
+│   ├── Visi & Misi
+│   └── Fasilitas
+├── Sekolah Kami ▼
+│   ├── PAUD
+│   └── TK
+└── Berita
 ```
 
-Top bar dapat dibuat ringan dan tidak mengambil terlalu banyak tinggi.
+Visual dropdown mengikuti referensi:
+
+- panel putih;
+- shadow lembut;
+- spacing lega;
+- pointer/triangle kecil di atas bila cocok;
+- divider tipis antar item;
+- radius ringan;
+- active/hover menggunakan brand color Harapan Mulia.
 
 ### Mobile
+
+Topbar desktop tidak dipaksakan penuh.
 
 Structure:
 
 ```text
-Logo                  Menu Button
+Logo                     Menu Button
+
+Menu
+├── Beranda
+├── Tentang Kami
+│   ├── Sejarah
+│   ├── Visi & Misi
+│   └── Fasilitas
+├── Sekolah Kami
+│   ├── PAUD
+│   └── TK
+└── Berita
 ```
 
-Menu membuka panel/dropdown.
-
-Contact/social dapat:
-
-- dipindahkan ke dalam mobile menu;
-- atau tampil ringkas pada bagian footer.
-
-Jangan memaksakan desktop topbar penuh pada layar kecil.
+Dropdown desktop berubah menjadi accordion/collapsible hierarchy pada mobile.
 
 ### Sticky
 
-Navbar dapat sticky setelah visual test.
-
-Jangan mengaktifkan sticky bila menyebabkan terlalu banyak layar mobile tertutup.
+Navbar boleh menjadi sticky setelah visual QA. Jangan membuat header terlalu tinggi pada mobile.
 
 ---
 
@@ -363,34 +377,43 @@ Gunakan:
 
 ## 10. Home Page Composition
 
-Recommended order:
+Urutan homepage dikunci mengikuti referensi:
 
 ```text
-1. Header / Navbar
-2. Hero
-3. School Highlights / Keunggulan
-4. Tentang Singkat
-5. Program / Aktivitas
-6. Fasilitas
-7. Berita Terbaru
-8. Galeri / Dokumentasi
-9. Optional Video Profile
+1. Header / Topbar
+2. Main Navigation
+3. Hero Image Carousel
+4. Highlight / Keunggulan
+5. Visi & Misi
+6. Profil Sekolah + Video/Gambar
+7. Unit Pendidikan
+   ├── PAUD
+   └── TK
+8. Testimonial
+9. Berita Terbaru
 10. Footer
 ```
 
 ### Highlight Cards
 
-3 card desktop, stack/scroll responsive di mobile.
+Desktop menggunakan tiga card seperti referensi. Isi final menyesuaikan keunggulan PAUD Harapan Mulia, bukan menyalin placeholder reference.
 
-Content example final harus berdasarkan sekolah:
+### Unit Pendidikan
+
+Section yang pada reference menggunakan konsep affiliation diadaptasi menjadi:
 
 ```text
-Pendidikan Islami
-Pembelajaran Menyenangkan
-Guru Berpengalaman
+Unit Pendidikan
+[ PAUD ] [ TK ]
 ```
 
-Final wording harus divalidasi.
+Masing-masing card/link menuju halaman unitnya sendiri.
+
+### Testimonial
+
+Section testimonial dipertahankan.
+
+Selama development boleh menggunakan placeholder/fiktif **dengan penanda internal yang jelas** agar layout dapat diuji. Placeholder wajib diganti atau section dinonaktifkan sebelum production bila pihak sekolah belum memberikan testimonial nyata.
 
 ---
 
@@ -412,18 +435,30 @@ Gunakan layout text + image bergantian untuk menghindari halaman berupa teks pan
 
 ---
 
-## 12. Our School
+## 12. Sekolah Kami
 
-Recommended:
+Dropdown dan halaman unit hanya mencakup:
 
 ```text
-Keunggulan
-Program/Kegiatan
-Fasilitas
-Dokumentasi terkait
+Sekolah Kami
+├── PAUD
+└── TK
 ```
 
-Kegiatan parenting dapat menjadi section/program jika stakeholder menyetujuinya.
+Setiap unit memiliki halaman sendiri.
+
+Baseline halaman unit:
+
+```text
+Page Hero
+Profil unit
+Program / pendekatan
+Dokumentasi aktivitas
+Informasi relevan unit
+CTA / kontak bila diperlukan
+```
+
+Tidak menyalin jenjang SD/SMP/SMA/SMK dari institusi referensi karena tidak sesuai scope PAUD Harapan Mulia.
 
 ---
 
@@ -471,46 +506,7 @@ Recommended text width:
 
 ---
 
-## 14. Gallery UI
-
-### Album Listing
-
-```text
-Cover
-Album title
-Photo count optional
-Description optional
-```
-
-Grid:
-
-```text
-Mobile: 1–2 columns depending content
-Tablet: 2–3
-Desktop: 3–4
-```
-
-### Album Detail
-
-Photo grid menggunakan consistent crop, tetapi full image dapat dilihat melalui modal/lightbox jika feature dipilih.
-
-Album cover default ratio:
-
-```text
-4:3
-```
-
-Gallery card dapat:
-
-```text
-4:3
-```
-
-Foto manusia tidak boleh dicrop terlalu agresif.
-
----
-
-## 15. Media Aspect Ratio Standard
+## 14. Media Aspect Ratio Standard
 
 Recommended standard untuk mengurangi layout inconsistency:
 
@@ -518,8 +514,6 @@ Recommended standard untuk mengurangi layout inconsistency:
 Hero desktop       16:7 / wide
 News card          16:9
 News detail        natural / max constrained
-Gallery album      4:3
-Gallery thumbnail  4:3
 Profile square     1:1
 Portrait feature   4:5
 Video landscape    16:9
@@ -530,7 +524,7 @@ Dataset saat ini memiliki video landscape sekitar 848×478 dan video portrait se
 
 ---
 
-## 16. Image Handling
+## 15. Image Handling
 
 Setiap image wajib punya purpose.
 
@@ -559,7 +553,7 @@ akhirussanah-paud-harapan-mulia-2026-01.jpg
 
 ---
 
-## 17. Footer
+## 16. Footer
 
 Mengikuti referensi:
 
@@ -593,7 +587,7 @@ Social media dapat ditambahkan dekat contact atau bottom footer.
 
 ---
 
-## 18. Buttons
+## 17. Buttons
 
 ### Primary
 
@@ -621,7 +615,7 @@ Gunakan red semantic untuk destructive action, bukan brand orange.
 
 ---
 
-## 19. CMS Admin Design
+## 18. CMS Admin Design
 
 Arah:
 
@@ -706,7 +700,7 @@ Destructive delete terpisah dan perlu confirmation.
 
 ---
 
-## 20. CMS Empty/Loading/Error States
+## 19. CMS Empty/Loading/Error States
 
 Setiap dynamic screen harus punya:
 
@@ -739,7 +733,7 @@ Jangan tampilkan raw stack trace kepada admin production.
 
 ---
 
-## 21. Form Rules
+## 20. Form Rules
 
 - label selalu terlihat;
 - placeholder bukan pengganti label;
@@ -751,7 +745,7 @@ Jangan tampilkan raw stack trace kepada admin production.
 
 ---
 
-## 22. Accessibility
+## 21. Accessibility
 
 Baseline:
 
@@ -769,7 +763,7 @@ Baseline:
 
 ---
 
-## 23. SEO-Aware Visual Rules
+## 22. SEO-Aware Visual Rules
 
 - H1 satu tujuan utama per halaman;
 - logo bukan pengganti page title;
@@ -781,7 +775,7 @@ Baseline:
 
 ---
 
-## 24. Animation
+## 23. Animation
 
 Motion ringan:
 
@@ -802,7 +796,7 @@ bila motion dibuat.
 
 ---
 
-## 25. Responsive Component Rules
+## 24. Responsive Component Rules
 
 ### Navbar
 
@@ -820,9 +814,7 @@ lg+: wide
 
 ### Cards
 
-```text
-1 col -> 2 col -> 3/4 col
-```
+Public cards menggunakan responsive grid sesuai kebutuhan konten.
 
 ### Footer
 
@@ -838,7 +830,7 @@ lg+: wide
 
 ---
 
-## 26. Design QA Matrix
+## 25. Design QA Matrix
 
 Setiap public page wajib dicek:
 
@@ -856,7 +848,7 @@ Tambahkan intermediate width bila content pecah.
 
 ---
 
-## 27. Asset Inventory Rules
+## 26. Asset Inventory Rules
 
 Sebelum implementasi final:
 
@@ -879,13 +871,12 @@ Aset dari WhatsApp tidak boleh langsung dijadikan public filename.
 
 ---
 
-## 28. Design Decisions Pending
+## 27. Design Decisions Pending
 
 Masih menunggu/opsional:
 
 1. referensi UI CMS WordPress-like dari user;
 2. logo final high-resolution;
-3. apakah Galeri menjadi top-level navbar atau submenu;
 4. final text highlight card;
 5. quote/kata perenungan final;
 6. hero slide copy;
@@ -895,7 +886,7 @@ Keputusan pending tidak menghalangi pembuatan layout foundation.
 
 ---
 
-## 29. Recommended First Design Implementation
+## 28. Recommended First Design Implementation
 
 Urutan:
 
@@ -916,7 +907,7 @@ Jangan mulai dari animation atau CMS editor.
 
 ---
 
-## 30. References
+## 29. References
 
 - Tailwind Responsive Design: https://tailwindcss.com/docs/responsive-design
 - web.dev Responsive Web Design: https://web.dev/articles/responsive-web-design-basics

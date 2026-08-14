@@ -1,7 +1,7 @@
 # ARCHITECTURE — Company Profile PAUD Harapan Mulia
 
 **Dokumen:** Software Architecture  
-**Versi:** 1.0 Draft Baseline  
+**Versi:** 1.1 Scope & UI Reference Update  
 **Tanggal:** 14 Agustus 2026  
 **Produk:** Company Profile PAUD Harapan Mulia
 
@@ -77,7 +77,7 @@ Authorization tetap dapat menggunakan middleware/policy bila resource membutuhka
 
 Profil, visi, misi, sejarah, tujuan, fasilitas, dan program pada MVP disimpan di Blade/config.
 
-Hanya berita dan galeri yang menjadi dynamic CMS content.
+Hanya berita yang menjadi dynamic CMS content pada MVP.
 
 ### ADR-005 — Filesystem for Media
 
@@ -372,69 +372,28 @@ published
 
 Gunakan enum jika project memutuskan konsisten menggunakan enum untuk state.
 
-### 7.3 GalleryAlbum
-
-```text
-gallery_albums
-```
-
-Fields:
-
-```text
-id
-title
-slug unique
-description nullable
-cover_image_path nullable
-cover_alt_text nullable
-published_at nullable
-created_at
-updated_at
-deleted_at nullable
-```
-
-### 7.4 GalleryImage
-
-```text
-gallery_images
-```
-
-Fields:
-
-```text
-id
-gallery_album_id         FK
-image_path
-alt_text nullable
-caption nullable
-sort_order integer default 0
-created_at
-updated_at
-```
-
-Foreign key delete behavior harus diputuskan eksplisit pada migration.
-
-Untuk image anak album, cascade dapat dipertimbangkan tetapi file fisik tetap harus dibersihkan secara eksplisit.
-
 ---
 
 ## 8. Route Architecture
 
 ### Public Routes
 
-Candidate:
+Candidate final route structure:
 
 ```text
-GET  /                         home
-GET  /tentang-kami             about
-GET  /sekolah-kami             school
-GET  /berita                   news.index
-GET  /berita/{newsPost:slug}   news.show
-GET  /galeri                   gallery.index
-GET  /galeri/{album:slug}      gallery.show
+GET  /                                      beranda
+GET  /tentang-kami/sejarah                  about.history
+GET  /tentang-kami/visi-misi                about.vision-mission
+GET  /tentang-kami/fasilitas                about.facilities
+GET  /sekolah/paud                          school.paud
+GET  /sekolah/tk                            school.tk
+GET  /berita                                news.index
+GET  /berita/{newsPost:slug}                news.show
 ```
 
-Gunakan named route.
+Gunakan named route dan slug untuk detail berita.
+
+Tidak ada route Galeri pada MVP.
 
 ### Admin Routes
 
@@ -455,12 +414,9 @@ Candidate:
 ```text
 GET       /admin
 resource  /admin/berita
-resource  /admin/galeri
-POST      /admin/galeri/{album}/images
-PATCH     /admin/galeri/{album}/images/reorder
 ```
 
-Exact route tidak dikunci sebelum implementation.
+Exact route dikunci saat implementation dan harus mengikuti kebutuhan nyata CMS.
 
 ---
 
@@ -554,10 +510,8 @@ Recommended logical path:
 
 ```text
 storage/app/public/
-├── news/
-│   └── featured/
-└── gallery/
-    └── {album-id-or-slug}/
+└── news/
+    └── featured/
 ```
 
 ### Upload Rules
@@ -598,7 +552,7 @@ dan diproses Vite jika sesuai.
 
 ### User-uploaded CMS Media
 
-Gunakan filesystem public disk.
+Pada MVP hanya featured image/media berita yang dikelola melalui CMS. Gunakan filesystem public disk.
 
 ### Dataset Existing
 
@@ -640,7 +594,6 @@ Candidate reusable components:
 <x-site.section-heading />
 <x-site.feature-card />
 <x-site.news-card />
-<x-site.gallery-card />
 <x-site.footer />
 <x-ui.button />
 <x-ui.input />
@@ -649,6 +602,27 @@ Candidate reusable components:
 ```
 
 Jangan memecah component terlalu granular tanpa manfaat.
+
+
+### Final Public Navigation
+
+```text
+Beranda
+
+Tentang Kami
+├── Sejarah
+├── Visi & Misi
+└── Fasilitas
+
+Sekolah Kami
+├── PAUD
+└── TK
+
+Berita
+```
+
+Desktop menggunakan dropdown untuk `Tentang Kami` dan `Sekolah Kami`.
+Mobile menggunakan menu collapsible/accordion dengan hierarchy yang sama.
 
 ### CSS
 
@@ -961,18 +935,7 @@ Deliverables:
 - public listing/detail;
 - tests.
 
-### Phase 4 — Gallery
-
-Deliverables:
-
-- albums;
-- images;
-- upload;
-- reorder;
-- public gallery;
-- tests.
-
-### Phase 5 — SEO/Performance/A11y
+### Phase 4 — SEO/Performance/A11y
 
 Deliverables:
 
@@ -985,7 +948,7 @@ Deliverables:
 - CWV optimization;
 - accessibility review.
 
-### Phase 6 — Production
+### Phase 5 — Production
 
 Deliverables:
 

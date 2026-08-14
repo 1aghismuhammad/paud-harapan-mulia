@@ -20,8 +20,6 @@ Baseline produk, arsitektur, desain, dan standar AI/development sudah tersedia. 
 - Our School / Sekolah Kami
 - Berita
 - Detail Berita
-- Galeri
-- Detail Album
 - Informasi kontak
 - Responsive navigation
 - Hero/banner
@@ -38,8 +36,6 @@ Baseline produk, arsitektur, desain, dan standar AI/development sudah tersedia. 
 - Draft / publish berita
 - Featured image
 - SEO metadata berita
-- CRUD album galeri
-- Upload dan pengelolaan foto galeri
 
 ## Out of Scope MVP
 
@@ -270,12 +266,9 @@ Phase 3
 Admin Authentication & News CMS
         ↓
 Phase 4
-Gallery CMS
-        ↓
-Phase 5
 SEO, Performance, Accessibility & Hardening
         ↓
-Phase 6
+Phase 5
 UAT & Production Deployment
 ```
 
@@ -292,7 +285,7 @@ Prioritas terdekat:
 1. Menutup keputusan pending Phase 0.
 2. Inventaris dan klasifikasi aset sekolah.
 3. Finalisasi referensi CMS berita.
-4. Mulai Phase 1:
+4. Jalankan Phase 1 berdasarkan kontrak UI reference yang telah disetujui:
    - brand tokens;
    - global container;
    - topbar;

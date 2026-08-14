@@ -78,8 +78,6 @@ Single Institution Company Profile
 Public Website
 +
 News CMS
-+
-Gallery CMS
 ```
 
 MVP tidak mencakup sistem akademik.
@@ -111,9 +109,7 @@ Static di Blade/config:
 Dynamic di database:
 
 - admin/user;
-- berita;
-- album galeri;
-- foto galeri.
+- berita.
 
 File media disimpan pada filesystem, bukan binary database.
 
@@ -164,7 +160,7 @@ Brand direction:
 - [ ] Kelompokkan aset per section/album.
 - [ ] Rename aset dengan nama bersih.
 - [ ] Tentukan hero candidate.
-- [ ] Tentukan cover candidate untuk berita/galeri.
+- [ ] Tentukan cover candidate untuk berita.
 - [ ] Tentukan logo final/high-resolution bila tersedia.
 
 ### CMS
@@ -180,7 +176,12 @@ Brand direction:
 
 ### Navigation
 
-- [ ] Kunci apakah `Galeri` menjadi menu utama atau berada di bawah `Our School`.
+- [x] Navigasi utama dikunci:
+  - Beranda
+  - Tentang Kami → Sejarah, Visi & Misi, Fasilitas
+  - Sekolah Kami → PAUD, TK
+  - Berita
+- [x] Modul dan menu Galeri dihapus dari MVP.
 
 ---
 
@@ -308,7 +309,7 @@ Pending decision yang dapat memengaruhi implementasi:
 2. rich text editor;
 3. asset inventory;
 4. final hero content;
-5. posisi menu Galeri.
+5. exact font-family dari referensi.
 
 Pending tersebut tidak menghalangi pekerjaan awal Phase 1 untuk:
 
@@ -361,6 +362,26 @@ CMS mengambil pola familiar WordPress tetapi tidak menjadi clone WordPress.
 ### D-010
 
 Setiap phase wajib memiliki progress report.
+
+### D-011
+
+Modul Galeri dihapus dari MVP agar scope lebih fokus. Dokumentasi kegiatan tetap dapat digunakan sebagai static content/visual pada halaman company profile, unit pendidikan, fasilitas, testimonial, atau berita.
+
+### D-012
+
+Navigasi publik menggunakan Bahasa Indonesia secara konsisten.
+
+### D-013
+
+Hero homepage menggunakan image carousel mengikuti referensi UI.
+
+### D-014
+
+Section testimonial dipertahankan. Data placeholder boleh digunakan selama development, tetapi tidak boleh dianggap sebagai testimoni nyata pada production.
+
+### D-015
+
+Unit Pendidikan terdiri dari PAUD dan TK, masing-masing menuju halaman unit tersendiri.
 
 ---
 

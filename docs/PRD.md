@@ -3,7 +3,7 @@
 **Dokumen:** Product Requirements Document  
 **Produk:** Company Profile PAUD Harapan Mulia  
 **Institusi:** PAUD (KB & TK) Islam Terpadu Harapan Mulia  
-**Versi:** 1.0 Draft Baseline  
+**Versi:** 1.1 Scope & UI Reference Update  
 **Tanggal:** 14 Agustus 2026  
 **Status:** Siap digunakan sebagai baseline development
 
@@ -19,7 +19,7 @@ Produk ini berfokus pada:
 2. menyajikan informasi profil sekolah secara terstruktur;
 3. menampilkan dokumentasi kegiatan dan fasilitas;
 4. menyediakan berita sekolah yang dapat diperbarui melalui CMS;
-5. menyediakan galeri foto berbasis album;
+5. menampilkan dokumentasi sekolah sebagai bagian dari halaman company profile;
 6. meningkatkan discoverability melalui SEO dan desain responsive mobile-first.
 
 Website ini adalah **single institution website**, bukan SaaS dan bukan sistem informasi akademik.
@@ -48,7 +48,6 @@ Masalah yang diselesaikan produk ini bukan pengelolaan akademik internal, melain
 - Membantu masyarakat memahami identitas dan karakter sekolah.
 - Menampilkan kegiatan, fasilitas, dan dokumentasi sekolah.
 - Memberikan CMS sederhana dan nyaman untuk mengelola berita.
-- Memberikan modul galeri berbasis album.
 - Menjadi fondasi digital untuk pengembangan fitur lain pada fase berikutnya.
 
 ### 3.2 Sasaran Keberhasilan
@@ -58,7 +57,6 @@ Produk dianggap berhasil apabila:
 - pengunjung dapat memahami profil sekolah tanpa perlu login;
 - halaman utama bekerja dengan baik di mobile, tablet, dan desktop;
 - admin dapat login dan mengelola berita;
-- admin dapat mengelola album galeri dan foto;
 - berita memiliki URL yang bersih dan dapat dibagikan;
 - website memiliki metadata SEO, sitemap, robots, canonical, Open Graph, dan struktur semantic HTML;
 - gambar dapat ditampilkan dengan performa yang memadai;
@@ -77,8 +75,6 @@ Produk dianggap berhasil apabila:
 - Our School / Sekolah Kami
 - Berita
 - Detail Berita
-- Galeri
-- Detail Album
 - Contact information pada header/footer
 - Responsive navigation
 - Hero/banner carousel
@@ -95,7 +91,6 @@ Produk dianggap berhasil apabila:
 - Login admin
 - Dashboard admin
 - Manajemen berita
-- Manajemen galeri
 - Upload gambar
 - Draft/publish berita
 - Preview berita sebelum publish
@@ -134,7 +129,6 @@ Kebutuhan utama:
 
 - melihat informasi sekolah;
 - membaca berita;
-- melihat galeri;
 - mendapatkan alamat/kontak;
 - membuka media sosial;
 - mengenal program dan karakter sekolah.
@@ -152,8 +146,6 @@ Admin dapat:
 - menyimpan berita sebagai draft;
 - mempublikasikan berita;
 - menghapus/memulihkan berita bila soft delete digunakan;
-- membuat album galeri;
-- mengunggah foto ke album;
 - mengedit metadata konten.
 
 Tidak ada Super Admin pada MVP.
@@ -162,41 +154,65 @@ Tidak ada Super Admin pada MVP.
 
 ## 6. Struktur Informasi Website
 
-Struktur utama mengikuti referensi visual yang diberikan.
+Struktur navigasi MVP telah dikunci berdasarkan referensi UI dan keputusan project.
+
+### 6.1 Navigasi Utama
 
 ```text
-Home
-├── Hero / Banner
-├── Keunggulan
-├── Tentang Singkat
-├── Program / Kegiatan
-├── Fasilitas
-├── Berita Terbaru
-├── Galeri
-└── Footer
+Beranda
 
-About Us
-├── Profil
+Tentang Kami
 ├── Sejarah
-├── Visi
-├── Misi
-└── Tujuan
+├── Visi & Misi
+└── Fasilitas
 
-Our School
-├── Program / Kegiatan
-├── Fasilitas
-└── Keunggulan Sekolah
+Sekolah Kami
+├── PAUD
+└── TK
+
+Berita
+```
+
+Tidak ada menu atau modul Galeri pada MVP.
+
+### 6.2 Struktur Beranda
+
+```text
+Beranda
+├── Header / Topbar
+├── Navigation
+├── Hero Image Carousel
+├── Highlight / Keunggulan
+├── Visi & Misi
+├── Profil Sekolah + Video/Gambar
+├── Unit Pendidikan
+│   ├── PAUD
+│   └── TK
+├── Testimonial
+├── Berita Terbaru
+└── Footer
+```
+
+### 6.3 Halaman Publik
+
+```text
+Tentang Kami
+├── Sejarah
+├── Visi & Misi
+└── Fasilitas
+
+Sekolah Kami
+├── PAUD
+└── TK
 
 Berita
 ├── Daftar Berita
 └── Detail Berita
-
-Galeri
-├── Daftar Album
-└── Detail Album
 ```
 
-Kontak tidak wajib memiliki halaman terpisah pada MVP. Kontak utama ditampilkan di header/footer sesuai referensi desain.
+Kontak tidak memerlukan halaman terpisah pada MVP. Informasi kontak ditampilkan pada header/footer sesuai referensi desain.
+
+Dokumentasi foto kegiatan tetap dapat digunakan pada section company profile, unit pendidikan, fasilitas, testimonial, atau berita, tetapi **bukan sebagai modul galeri tersendiri**.
 
 ---
 
@@ -263,11 +279,13 @@ Data yang dikelola melalui database:
 
 - users/admin;
 - berita;
-- galeri album;
-- galeri image;
 - metadata terkait konten dynamic.
 
-File image **tidak disimpan sebagai binary di database**. Database hanya menyimpan path, filename, metadata, alt text, dan relasi.
+File image **tidak disimpan sebagai binary di database**. Database hanya menyimpan path, filename, metadata, dan alt text yang relevan.
+
+### 8.3 Testimonial pada Development
+
+Section testimonial dipertahankan mengikuti referensi UI. Selama development boleh menggunakan **data placeholder/fiktif yang diberi penanda jelas sebagai placeholder**. Data tersebut tidak boleh dianggap sebagai testimoni nyata dan wajib diganti atau dinonaktifkan sebelum production release apabila pihak sekolah belum memberikan testimoni yang sah.
 
 ---
 
@@ -391,7 +409,7 @@ Nama album final harus mengikuti persetujuan pihak sekolah.
 
 Website harus menggunakan pendekatan **people-first + search-friendly**, bukan keyword stuffing.
 
-### 11.1 SEO Teknis
+### 10.1 SEO Teknis
 
 Wajib:
 
@@ -413,7 +431,7 @@ Wajib:
 - redirect permanent bila slug berubah dan fitur tersebut dibuat;
 - HTTPS di production.
 
-### 11.2 Structured Data
+### 10.2 Structured Data
 
 Baseline:
 
@@ -424,13 +442,13 @@ Baseline:
 
 Structured data harus sama dengan konten yang terlihat pada halaman.
 
-### 11.3 Mobile SEO
+### 10.3 Mobile SEO
 
 Website menggunakan URL dan HTML yang sama untuk semua perangkat melalui responsive design.
 
 Konten penting tidak boleh hilang di mobile.
 
-### 11.4 Image SEO
+### 10.4 Image SEO
 
 - image relevan dengan konteks halaman;
 - alt text deskriptif;
@@ -442,7 +460,7 @@ Konten penting tidak boleh hilang di mobile.
 
 ---
 
-## 12. Performance Requirements
+## 11. Performance Requirements
 
 Target baseline:
 
@@ -459,7 +477,7 @@ Target baseline:
 
 ---
 
-## 13. Responsive Requirements
+## 12. Responsive Requirements
 
 Responsive implementation bersifat **content-driven**, bukan mengunci diri pada nama perangkat tertentu.
 
@@ -496,7 +514,7 @@ Breakpoint tidak boleh ditentukan berdasarkan merek perangkat.
 
 ---
 
-## 14. Acceptance Criteria MVP
+## 13. Acceptance Criteria MVP
 
 ### Public
 
@@ -506,7 +524,6 @@ Breakpoint tidak boleh ditentukan berdasarkan merek perangkat.
 - [ ] Profil, visi, misi, tujuan, dan sejarah tersedia.
 - [ ] Berita dapat dilihat publik.
 - [ ] Detail berita menggunakan slug.
-- [ ] Galeri album dapat dilihat publik.
 - [ ] Kontak dan sosial media tampil.
 - [ ] Metadata SEO tersedia.
 - [ ] Tidak ada konten utama desktop yang hilang pada mobile.
@@ -518,8 +535,6 @@ Breakpoint tidak boleh ditentukan berdasarkan merek perangkat.
 - [ ] Admin dapat CRUD berita.
 - [ ] Admin dapat upload featured image.
 - [ ] Admin dapat draft/publish.
-- [ ] Admin dapat CRUD album.
-- [ ] Admin dapat upload/hapus/reorder foto album.
 - [ ] Validation berjalan.
 - [ ] Upload file dibatasi tipe dan ukuran.
 - [ ] Error ditampilkan dengan aman.
@@ -529,13 +544,13 @@ Breakpoint tidak boleh ditentukan berdasarkan merek perangkat.
 - [ ] Feature test penting lulus.
 - [ ] Tidak ada secret masuk Git.
 - [ ] Tidak ada broken route.
-- [ ] Tidak ada N+1 yang diketahui pada list berita/galeri.
+- [ ] Tidak ada N+1 yang diketahui pada list berita.
 - [ ] Production build berhasil.
 - [ ] Smoke test production berhasil.
 
 ---
 
-## 15. Development Phases
+## 14. Development Phases
 
 ### Phase 0 — Foundation & Documentation
 
@@ -591,16 +606,7 @@ Output:
 - SEO metadata berita;
 - public news listing/detail.
 
-### Phase 4 — Gallery CMS
-
-- album schema;
-- gallery image schema;
-- admin CRUD;
-- upload multiple image;
-- reorder;
-- public album/gallery.
-
-### Phase 5 — SEO, Performance, Accessibility & Hardening
+### Phase 4 — SEO, Performance, Accessibility & Hardening
 
 - sitemap;
 - robots;
@@ -613,7 +619,7 @@ Output:
 - keyboard/focus/accessibility checks;
 - security review.
 
-### Phase 6 — UAT, Deployment & Production
+### Phase 5 — UAT, Deployment & Production
 
 - content final;
 - backup;
@@ -629,7 +635,7 @@ Output:
 
 ---
 
-## 16. Progress Reporting
+## 15. Progress Reporting
 
 Setiap fase wajib memiliki progress report di:
 
@@ -699,7 +705,7 @@ Perubahan kode individual tetap mengikuti Change Log yang sudah ditentukan di `.
 
 ---
 
-## 17. Prioritas Mulai Development
+## 16. Prioritas Mulai Development
 
 Urutan pertama yang direkomendasikan:
 
@@ -717,7 +723,7 @@ Alasan: public design perlu dikunci lebih dulu agar CMS nantinya menghasilkan ko
 
 ---
 
-## 18. Risiko dan Mitigasi
+## 17. Risiko dan Mitigasi
 
 ### Scope Creep
 
@@ -753,7 +759,7 @@ uji deployment sebelum UAT final dan dokumentasikan langkah production.
 
 ---
 
-## 19. Backlog Future
+## 18. Backlog Future
 
 Candidate pengembangan berikutnya:
 
@@ -774,7 +780,7 @@ Tidak masuk MVP tanpa perubahan PRD.
 
 ---
 
-## 20. Referensi Teknis
+## 19. Referensi Teknis
 
 - Repository project: https://github.com/1aghismuhammad/paud-harapan-mulia
 - Tailwind responsive design: https://tailwindcss.com/docs/responsive-design

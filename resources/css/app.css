@@ -4,8 +4,7 @@
 @source '../../storage/framework/views/*.php';
 
 @theme {
-    --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
-
+    --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
     --color-brand-green-950: #1d4f30;
     --color-brand-green-900: #29693e;
     --color-brand-green-700: #3e7f45;
@@ -15,60 +14,95 @@
     --color-brand-orange-400: #f09712;
     --color-brand-yellow-400: #f4c90f;
     --color-site-surface: #f8faf8;
-    --color-site-text: #17201a;
-    --color-site-muted: #667269;
-    --color-site-border: #e4e9e5;
-
-    --shadow-soft: 0 18px 45px rgb(23 32 26 / 0.08);
-    --shadow-card: 0 12px 30px rgb(23 32 26 / 0.07);
+    --color-site-text: #20232d;
+    --color-site-muted: #737784;
+    --color-site-border: #e7e8ec;
 }
 
 @layer base {
-    html {
-        scroll-behavior: smooth;
-    }
-
-    body {
-        @apply bg-white font-sans text-site-text antialiased;
-    }
-
+    html { scroll-behavior: smooth; }
+    body { @apply bg-white font-sans text-site-text antialiased; }
     button,
-    a {
-        -webkit-tap-highlight-color: transparent;
-    }
-
-    :focus-visible {
-        @apply outline-2 outline-offset-4 outline-brand-orange-500;
-    }
+    a { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { @apply outline-2 outline-offset-4 outline-brand-orange-500; }
 }
 
 @layer components {
+    /* Shared width system based on the supplied reference screenshots. */
+    .header-container {
+        @apply mx-auto w-full max-w-[1120px] px-5 sm:px-6;
+    }
+
     .site-container {
-        @apply mx-auto w-full max-w-[1180px] px-4 sm:px-6 lg:px-8;
+        @apply mx-auto w-full max-w-[1180px] px-5 sm:px-6 lg:px-0;
+    }
+
+    .content-container {
+        @apply mx-auto w-full max-w-[1080px] px-5 sm:px-6 lg:px-0;
+    }
+
+    .inner-content-container {
+        @apply mx-auto w-full max-w-[1160px] px-5 sm:px-6 lg:px-0;
+    }
+
+    .article-container {
+        @apply mx-auto w-full max-w-[1120px] px-5 sm:px-6 lg:px-0;
+    }
+
+    .reference-frame {
+        @apply mx-auto w-full lg:max-w-[1880px];
+    }
+
+    .reference-hero-container {
+        @apply mx-auto w-full max-w-[1560px] px-0;
+    }
+
+    .unit-hero-container {
+        @apply mx-auto w-full max-w-[1660px] px-0;
+    }
+
+    .footer-container {
+        @apply mx-auto w-full max-w-[1120px] px-5 sm:px-6 lg:px-0;
     }
 
     .section-space {
-        @apply py-14 md:py-20 lg:py-24;
+        @apply py-16 md:py-20 lg:py-24;
+    }
+
+    .page-section-space {
+        @apply py-12 md:py-16 lg:py-20;
     }
 
     .eyebrow {
-        @apply text-xs font-semibold tracking-[0.14em] text-brand-green-600 uppercase;
+        @apply text-[11px] font-medium tracking-[0.02em] text-brand-green-600;
     }
 
     .section-title {
-        @apply mt-2 text-3xl leading-tight font-semibold tracking-[-0.03em] text-site-text md:text-4xl;
+        @apply mt-2 text-[30px] leading-[1.18] font-semibold tracking-[-0.035em] text-site-text md:text-[38px];
+    }
+
+    .page-title {
+        @apply text-[30px] leading-tight font-semibold tracking-[-0.035em] text-site-text md:text-[38px];
     }
 
     .section-copy {
-        @apply mt-5 text-sm leading-7 text-site-muted md:text-[15px];
+        @apply mt-5 text-[14px] leading-7 text-site-muted;
+    }
+
+    .reference-body-copy {
+        @apply text-[13px] leading-[1.9] text-site-muted md:text-[14px];
+    }
+
+    .reference-card {
+        @apply border border-[#e8e9ed] bg-white shadow-[0_12px_35px_rgba(17,24,39,0.06)];
     }
 
     .soft-card {
-        @apply rounded-xl border border-site-border bg-white shadow-card;
+        @apply rounded-[5px] border border-site-border bg-white shadow-[0_10px_30px_rgba(17,24,39,0.05)];
     }
 
     .nav-link {
-        @apply inline-flex items-center gap-1.5 px-4 py-4 text-[14px] font-normal text-slate-500 transition hover:text-brand-green-700;
+        @apply inline-flex h-[86px] items-center gap-1.5 px-5 text-[15px] font-normal text-[#747784] transition hover:text-brand-green-700;
     }
 
     .nav-link-active {
@@ -76,7 +110,7 @@
     }
 
     .dropdown-panel {
-        @apply invisible absolute top-[calc(100%+12px)] left-0 z-50 w-64 translate-y-2 rounded-lg border border-slate-100 bg-white p-3 opacity-0 shadow-soft transition duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100;
+        @apply invisible absolute top-[calc(100%+14px)] left-0 z-50 w-[278px] translate-y-2 rounded-lg border border-slate-100 bg-white px-5 py-3 opacity-0 shadow-[0_18px_45px_rgba(25,32,46,0.12)] transition duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100;
     }
 
     .dropdown-panel::before {
@@ -85,25 +119,75 @@
     }
 
     .dropdown-item {
-        @apply block border-b border-slate-200 px-2 py-3 text-[15px] text-slate-500 transition last:border-b-0 hover:text-brand-green-700;
+        @apply block border-b border-[#dadce2] py-4 text-[15px] font-normal text-[#777b88] transition last:border-b-0 hover:text-brand-green-700;
     }
 
     .icon-pill {
-        @apply inline-flex h-9 w-9 items-center justify-center rounded-full border border-site-border text-brand-green-700 transition hover:border-brand-green-300 hover:bg-brand-green-300/10;
+        @apply inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#eaebef] text-brand-green-700 transition hover:bg-brand-green-300/10;
+    }
+
+    /* Inner page hero based on Sejarah / Visi Misi / Fasilitas references. */
+    .inner-page-hero {
+        @apply relative mx-auto w-full overflow-visible bg-brand-green-900 text-white lg:max-w-[1880px];
+    }
+
+    .inner-page-hero-inner {
+        @apply relative mx-auto flex min-h-[190px] w-full max-w-[1160px] items-center px-5 sm:px-6 lg:min-h-[255px] lg:px-0;
+    }
+
+    .inner-page-breadcrumb {
+        @apply absolute right-5 -bottom-px rounded-t-[6px] bg-white px-7 py-5 text-[10px] font-semibold text-site-text shadow-[0_-2px_8px_rgba(17,24,39,0.02)] sm:right-6 lg:right-0;
+    }
+
+    /* Reusable media cards for Fasilitas / Unit pages. */
+    .reference-media-card {
+        @apply relative overflow-hidden rounded-[5px] bg-slate-100 shadow-[0_10px_25px_rgba(17,24,39,0.06)];
+    }
+
+    .reference-media-card img {
+        @apply h-full w-full object-cover;
+    }
+
+    .reference-media-overlay {
+        @apply absolute inset-0 flex items-center justify-center bg-slate-950/45 px-5 text-center text-[15px] font-medium leading-6 text-white;
+    }
+
+    .reference-arrow {
+        @apply inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#f3f5f7] text-[18px] text-[#69707d] shadow-[0_8px_20px_rgba(17,24,39,0.08)];
+    }
+
+    /* Unit page row mimics the category + 3 images composition in reference. */
+    .unit-showcase-row {
+        @apply grid items-center gap-5 md:grid-cols-[180px_1fr] lg:grid-cols-[210px_1fr];
+    }
+
+    .unit-showcase-label {
+        @apply relative flex min-h-[132px] items-end justify-end overflow-hidden rounded-[5px] px-5 pb-4 text-right text-[11px] font-semibold;
+    }
+
+    /* Reference-sized news card. */
+    .news-reference-card {
+        @apply relative overflow-hidden rounded-[4px] border border-[#e3e5e9] bg-white shadow-[0_10px_28px_rgba(17,24,39,0.045)];
+    }
+
+    .news-meta-strip {
+        @apply absolute right-5 left-5 z-10 flex min-h-9 -translate-y-1/2 items-center justify-center gap-4 rounded-[6px] border border-[#e4e6ea] bg-white px-3 text-[9px] text-[#777b88] shadow-[0_5px_15px_rgba(17,24,39,0.04)];
+    }
+}
+
+@media (max-width: 1023px) {
+    .reference-hero-container,
+    .unit-hero-container {
+        @apply px-4 sm:px-6;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto;
-    }
-
-    *,
-    *::before,
-    *::after {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
         scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
     }
 }

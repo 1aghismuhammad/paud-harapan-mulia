@@ -1,39 +1,48 @@
 @extends('layouts.public')
+
 @section('title', 'Visi & Misi — PAUD Harapan Mulia')
+@section('meta_description', 'Visi, misi, dan arah pendidikan PAUD Islam Terpadu Harapan Mulia.')
+
 @section('content')
-    <x-site.page-hero title="Visi & Misi" description="Arah pendidikan PAUD Islam Terpadu Harapan Mulia." />
+    <x-site.page-hero title="Visi & Misi" breadcrumb="Visi & Misi" />
 
-    <section class="section-space">
-        <div class="site-container">
-            <div class="grid gap-8 lg:grid-cols-2">
-                <article class="soft-card p-7 md:p-9">
-                    <p class="eyebrow">Visi</p>
-                    <h2 class="mt-4 text-2xl font-semibold leading-10 text-site-text">Mewujudkan Generasi Islam yang Sehat, Mandiri, Kreatif, Berakhlak Mulia dan Berjiwa Pancasila.</h2>
-                </article>
-                <article class="soft-card p-7 md:p-9">
-                    <p class="eyebrow">Misi</p>
-                    <ol class="mt-5 space-y-4 text-sm leading-7 text-site-muted">
-                        <li>1. Menciptakan lingkungan yang sehat, bersih, tertib, aman dan nyaman.</li>
-                        <li>2. Menanamkan sikap mandiri pada peserta didik.</li>
-                        <li>3. Menciptakan pembelajaran yang kreatif dan menyenangkan.</li>
-                        <li>4. Membiasakan berperilaku Islami dengan meneladani sikap Rasulullah.</li>
-                        <li>5. Menerapkan pembelajaran yang mendukung perwujudan Profil Pelajar Pancasila.</li>
-                    </ol>
-                </article>
-            </div>
+    <section class="page-section-space">
+        <div class="article-container">
+            <h2 class="page-title">Visi & Misi</h2>
 
-            <div class="mt-10 grid items-center gap-10 lg:grid-cols-2">
-                <img src="{{ asset('images/paud/visi-kegiatan.jpeg') }}" alt="Kegiatan belajar PAUD Harapan Mulia" class="aspect-[4/3] w-full rounded-xl object-cover shadow-soft">
-                <div>
-                    <x-site.section-heading eyebrow="Tujuan" title="Lingkungan belajar yang bertumbuh" />
-                    <ul class="mt-6 space-y-3 text-sm leading-7 text-site-muted">
+            <div class="mt-8 space-y-7 reference-body-copy">
+                <p>
+                    Visi dan misi menjadi arah pengembangan layanan pendidikan PAUD Harapan Mulia dalam membangun lingkungan belajar yang sehat, aman, kreatif, Islami, dan mendukung tumbuh kembang peserta didik.
+                </p>
+
+                <section>
+                    <h3 class="mb-4 text-[12px] font-semibold tracking-[0.02em] text-site-text uppercase">Visi</h3>
+                    <p class="font-medium text-site-text">
+                        “Mewujudkan Generasi Islam yang Sehat, Mandiri, Kreatif, Berakhlak Mulia dan Berjiwa Pancasila.”
+                    </p>
+                </section>
+
+                <section>
+                    <h3 class="mb-4 text-[12px] font-semibold tracking-[0.02em] text-site-text uppercase">Misi</h3>
+                    <ul class="space-y-3">
+                        <li>• Menciptakan lingkungan yang sehat, bersih, tertib, aman dan nyaman.</li>
+                        <li>• Menanamkan sikap mandiri pada peserta didik.</li>
+                        <li>• Menciptakan pembelajaran yang kreatif dan menyenangkan.</li>
+                        <li>• Membiasakan berperilaku Islami dengan meneladani sikap Rasulullah.</li>
+                        <li>• Menerapkan pembelajaran yang mendukung perwujudan Profil Pelajar Pancasila.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3 class="mb-4 text-[12px] font-semibold tracking-[0.02em] text-site-text uppercase">Tujuan</h3>
+                    <ul class="space-y-3">
                         <li>• Menciptakan suasana sekolah yang bernuansa agamis, bersih, dan sehat.</li>
                         <li>• Mengembangkan kurikulum yang berlandaskan Al-Qur’an dan As-Sunnah.</li>
                         <li>• Mengembangkan pembelajaran yang mandiri, kreatif, dan inovatif.</li>
                         <li>• Meningkatkan kualitas sarana prasarana dan profesionalisme tenaga pendidik.</li>
                         <li>• Menjalin kerja sama yang harmonis dengan stakeholder terkait.</li>
                     </ul>
-                </div>
+                </section>
             </div>
         </div>
     </section>

@@ -1,4 +1,4 @@
-<div class="bg-white">
+<div class="hidden bg-white lg:block">
     <div class="site-container flex min-h-24 items-center justify-between gap-8 py-5 lg:min-h-32">
         <a href="{{ route('home') }}" class="flex min-w-0 items-center gap-3" aria-label="PAUD Harapan Mulia - Beranda">
             <img

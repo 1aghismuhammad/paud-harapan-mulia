@@ -28,7 +28,6 @@
 }
 
 @layer components {
-    /* Shared width system based on the supplied reference screenshots. */
     .header-container {
         @apply mx-auto w-full max-w-[1120px] px-5 sm:px-6;
     }
@@ -63,6 +62,22 @@
 
     .footer-container {
         @apply mx-auto w-full max-w-[1120px] px-5 sm:px-6 lg:px-0;
+    }
+
+    .home-main-container {
+        @apply mx-auto w-full max-w-[1080px] px-5 sm:px-6 lg:max-w-[1220px] lg:px-0;
+    }
+
+    .home-feature-container {
+        @apply mx-auto grid w-[calc(100%-40px)] max-w-[820px] gap-3 md:grid-cols-3 lg:max-w-[980px] lg:gap-4;
+    }
+
+    .home-testimonial-container {
+        @apply mx-auto w-full max-w-[1080px] px-5 sm:px-6 lg:max-w-[1180px] lg:px-0;
+    }
+
+    .home-news-container {
+        @apply mx-auto w-full max-w-[1080px] px-5 sm:px-6 lg:max-w-[1180px] lg:px-0;
     }
 
     .section-space {
@@ -126,7 +141,6 @@
         @apply inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#eaebef] text-brand-green-700 transition hover:bg-brand-green-300/10;
     }
 
-    /* Inner page hero based on Sejarah / Visi Misi / Fasilitas references. */
     .inner-page-hero {
         @apply relative mx-auto w-full overflow-visible bg-brand-green-900 text-white lg:max-w-[1880px];
     }
@@ -139,7 +153,6 @@
         @apply absolute right-5 -bottom-px rounded-t-[6px] bg-white px-7 py-5 text-[10px] font-semibold text-site-text shadow-[0_-2px_8px_rgba(17,24,39,0.02)] sm:right-6 lg:right-0;
     }
 
-    /* Reusable media cards for Fasilitas / Unit pages. */
     .reference-media-card {
         @apply relative overflow-hidden rounded-[5px] bg-slate-100 shadow-[0_10px_25px_rgba(17,24,39,0.06)];
     }
@@ -156,7 +169,6 @@
         @apply inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#f3f5f7] text-[18px] text-[#69707d] shadow-[0_8px_20px_rgba(17,24,39,0.08)];
     }
 
-    /* Unit page row mimics the category + 3 images composition in reference. */
     .unit-showcase-row {
         @apply grid items-center gap-5 md:grid-cols-[180px_1fr] lg:grid-cols-[210px_1fr];
     }
@@ -165,7 +177,6 @@
         @apply relative flex min-h-[132px] items-end justify-end overflow-hidden rounded-[5px] px-5 pb-4 text-right text-[11px] font-semibold;
     }
 
-    /* Reference-sized news card. */
     .news-reference-card {
         @apply relative overflow-hidden rounded-[4px] border border-[#e3e5e9] bg-white shadow-[0_10px_28px_rgba(17,24,39,0.045)];
     }

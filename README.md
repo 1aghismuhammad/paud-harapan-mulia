@@ -1,58 +1,312 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# PAUD Harapan Mulia
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Website **Company Profile PAUD (KB & TK) Islam Terpadu Harapan Mulia** yang dibangun menggunakan Laravel.
 
-## About Laravel
+Project ini berfokus pada website publik sekolah dengan CMS sederhana untuk mengelola **berita** dan **galeri**, dengan pendekatan **mobile-first responsive**, SEO-friendly, dan deployment ke shared hosting/cPanel.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Status Project
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**Current Phase:** Phase 0 — Foundation & Documentation  
+**Status:** IN PROGRESS
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Baseline produk, arsitektur, desain, dan standar AI/development sudah tersedia. Development UI publik dimulai setelah keputusan foundation yang masih pending ditutup.
 
-## Learning Laravel
+## Scope MVP
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Public Website
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Home
+- About Us / Tentang Kami
+- Our School / Sekolah Kami
+- Berita
+- Detail Berita
+- Galeri
+- Detail Album
+- Informasi kontak
+- Responsive navigation
+- Hero/banner
+- Profil, sejarah, visi, misi, tujuan
+- Program/kegiatan
+- Fasilitas
+- SEO baseline
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### Admin CMS
 
-## Agentic Development
+- Login admin
+- Dashboard
+- CRUD berita
+- Draft / publish berita
+- Featured image
+- SEO metadata berita
+- CRUD album galeri
+- Upload dan pengelolaan foto galeri
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Out of Scope MVP
 
-```bash
-composer require laravel/boost --dev
+Belum termasuk:
 
-php artisan boost:install
+- akun orang tua;
+- data siswa;
+- absensi;
+- pembayaran/SPP;
+- rapor;
+- pendaftaran siswa;
+- portal guru;
+- multi-role kompleks;
+- aplikasi mobile native;
+- payment gateway;
+- sistem akademik.
+
+## Tech Stack
+
+```text
+Backend
+├── PHP ^8.3
+├── Laravel ^13.17
+└── Blade
+
+Frontend
+├── Tailwind CSS ^4
+├── Vite ^8
+└── JavaScript secukupnya
+
+Testing
+└── Pest ^4
+
+Database
+└── MySQL / MariaDB
+
+Local Development
+├── PHP 8.3
+├── Laragon MySQL
+└── php artisan serve
+
+Production Target
+├── cPanel
+├── ea-php83
+├── PHP-FPM
+├── MySQL / MariaDB
+└── HTTPS
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## Development Documentation
 
-## Contributing
+Dokumen utama project berada di folder [`docs/`](docs/).
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+| Dokumen | Fungsi |
+|---|---|
+| [`docs/PRD.md`](docs/PRD.md) | Scope produk, requirement, user, modul, roadmap |
+| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Architecture, data model, route, storage, security, deployment |
+| [`docs/DESIGN.md`](docs/DESIGN.md) | UI/UX, responsive rules, design system, CMS design |
+| [`docs/progress/`](docs/progress/) | Laporan progres pengembangan per phase |
+| [`AGENTS.md`](AGENTS.md) | Instruksi global untuk AI coding agent |
+| [`.agents/`](.agents/) | Development skills dan project coding standards |
 
-## Code of Conduct
+## AI-Assisted Development
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Project menggunakan Laravel Boost dan project-specific agent standards.
 
-## Security Vulnerabilities
+AI/developer wajib mengikuti:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```text
+Pahami
+  ↓
+Cross-check
+  ↓
+Ubah Minimum
+  ↓
+Verifikasi
+  ↓
+Catat
+```
 
-## License
+Aturan detail tersedia pada:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```text
+AGENTS.md
+.agents/skills/paud-project-standards/
+```
+
+Prinsip utama:
+
+- jangan mengubah bagian di luar scope;
+- jangan melakukan hidden refactor;
+- ikuti architecture existing;
+- validasi melalui Form Request jika relevan;
+- business logic tidak ditumpuk di Controller;
+- Repository hanya digunakan jika memang justified;
+- test behavior penting;
+- setiap perubahan memiliki Change Log;
+- setiap phase memiliki Progress Report.
+
+## Local Development
+
+### Requirements
+
+Pastikan tersedia:
+
+```text
+PHP 8.3+
+Composer 2.x
+Node.js kompatibel dengan Vite 8
+npm
+MySQL / MariaDB
+```
+
+### Setup
+
+Clone repository:
+
+```bash
+git clone https://github.com/1aghismuhammad/paud-harapan-mulia.git
+cd paud-harapan-mulia
+```
+
+Install PHP dependencies:
+
+```bash
+composer install
+```
+
+Buat environment file:
+
+```bash
+copy .env.example .env
+```
+
+Generate application key:
+
+```bash
+php artisan key:generate
+```
+
+Atur database pada `.env`:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=paud_harapan_mulia
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Buat database terlebih dahulu, kemudian:
+
+```bash
+php artisan migrate
+```
+
+Install frontend dependencies:
+
+```bash
+npm install
+```
+
+Jalankan development:
+
+**Terminal 1**
+
+```bash
+php artisan serve
+```
+
+**Terminal 2**
+
+```bash
+npm run dev
+```
+
+Jika menggunakan Laragon, MySQL harus dalam kondisi aktif.
+
+## Testing
+
+Jalankan:
+
+```bash
+php artisan test
+```
+
+atau sesuai project conventions:
+
+```bash
+php artisan test --compact
+```
+
+Sebelum merge atau menandai phase selesai, test relevan wajib diperiksa.
+
+## Production Build
+
+Build frontend assets:
+
+```bash
+npm run build
+```
+
+Production deployment harus mengikuti [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), termasuk:
+
+- `APP_DEBUG=false`;
+- HTTPS;
+- production `.env`;
+- database migration;
+- `storage:link`;
+- correct document root ke folder `public`;
+- permission `storage` dan `bootstrap/cache`;
+- smoke test setelah deploy.
+
+## Development Phases
+
+```text
+Phase 0
+Foundation & Documentation
+        ↓
+Phase 1
+Design System & Global Layout
+        ↓
+Phase 2
+Public Company Profile
+        ↓
+Phase 3
+Admin Authentication & News CMS
+        ↓
+Phase 4
+Gallery CMS
+        ↓
+Phase 5
+SEO, Performance, Accessibility & Hardening
+        ↓
+Phase 6
+UAT & Production Deployment
+```
+
+Progress setiap phase dicatat pada:
+
+```text
+docs/progress/
+```
+
+## Current Next Steps
+
+Prioritas terdekat:
+
+1. Menutup keputusan pending Phase 0.
+2. Inventaris dan klasifikasi aset sekolah.
+3. Finalisasi referensi CMS berita.
+4. Mulai Phase 1:
+   - brand tokens;
+   - global container;
+   - topbar;
+   - navbar desktop/mobile;
+   - footer;
+   - hero statis;
+   - responsive QA.
+
+## Repository
+
+```text
+https://github.com/1aghismuhammad/paud-harapan-mulia
+```
+
+---
+
+Project ini dikembangkan secara bertahap dengan fokus pada perubahan yang **minimal, predictable, consistent, traceable, reversible, dan testable**.

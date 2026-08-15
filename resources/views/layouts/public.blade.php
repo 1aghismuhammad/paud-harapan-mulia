@@ -7,10 +7,21 @@
         <meta name="theme-color" content="#29693E">
 
         <title>@yield('title', 'PAUD Harapan Mulia')</title>
-
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+        <script>
+            document.documentElement.classList.add('js');
+
+            window.addEventListener('load', () => {
+                window.setTimeout(() => {
+                    if (!document.documentElement.classList.contains('motion-ready')) {
+                        document.documentElement.classList.remove('js');
+                    }
+                }, 500);
+            });
+        </script>
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @stack('head')
@@ -28,7 +39,6 @@
         <main id="main-content">
             @yield('content')
         </main>
-
         <x-site.footer />
 
         @stack('scripts')

@@ -140,13 +140,13 @@
             </div>
 
             <div class="mt-10 flex flex-wrap justify-center gap-6 lg:mt-12 lg:gap-8">
-                <a href="{{ route('school.paud') }}" class="group relative h-[180px] w-[180px] overflow-hidden rounded-[4px] bg-brand-green-950 text-white shadow-[0_18px_40px_rgba(17,24,39,0.12)] transition hover:-translate-y-1 lg:h-[260px] lg:w-[260px]">
+                <a href="{{ route('school.paud') }}" data-motion-unit-card class="group relative h-[180px] w-[180px] overflow-hidden rounded-[4px] bg-brand-green-950 text-white shadow-[0_18px_40px_rgba(17,24,39,0.12)] transition hover:-translate-y-1 lg:h-[260px] lg:w-[260px]">
                     <img src="{{ asset('images/paud/unit-paud.jpeg') }}" alt="Unit PAUD Harapan Mulia" class="h-full w-full object-cover opacity-50 transition duration-300 group-hover:scale-105 group-hover:opacity-60">
                     <div class="absolute inset-0 bg-gradient-to-t from-brand-green-950/40 via-brand-green-950/10 to-brand-green-950/20"></div>
                     <span class="absolute inset-0 flex items-center justify-center text-[32px] font-medium tracking-[0.02em] lg:text-[44px]">PAUD</span>
                 </a>
 
-                <a href="{{ route('school.tk') }}" class="group relative h-[180px] w-[180px] overflow-hidden rounded-[4px] bg-brand-green-950 text-white shadow-[0_18px_40px_rgba(17,24,39,0.12)] transition hover:-translate-y-1 lg:h-[260px] lg:w-[260px]">
+                <a href="{{ route('school.tk') }}" data-motion-unit-card class="group relative h-[180px] w-[180px] overflow-hidden rounded-[4px] bg-brand-green-950 text-white shadow-[0_18px_40px_rgba(17,24,39,0.12)] transition hover:-translate-y-1 lg:h-[260px] lg:w-[260px]">
                     <img src="{{ asset('images/paud/unit-tk.jpeg') }}" alt="Unit TK Harapan Mulia" class="h-full w-full object-cover opacity-50 transition duration-300 group-hover:scale-105 group-hover:opacity-60">
                     <div class="absolute inset-0 bg-gradient-to-t from-brand-green-950/40 via-brand-green-950/10 to-brand-green-950/20"></div>
                     <span class="absolute inset-0 flex items-center justify-center text-[32px] font-medium tracking-[0.02em] lg:text-[44px]">TK</span>

@@ -193,21 +193,23 @@
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after {
-        scroll-behavior: auto !important;
-        transition-duration: .01ms !important;
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-    }
-}
-
 /* =========================================================
-   Phase 1I — Soft Educational Motion System
-   Lightweight: opacity + transform/translate/scale only.
+   Phase 1I — Motion System V2
+   Reference direction: soft, visible, educational, lightweight.
    ========================================================= */
 
+:root {
+    --motion-fast: 200ms;
+    --motion-normal: 300ms;
+    --motion-medium: 450ms;
+    --motion-reveal: 600ms;
+    --motion-slow: 900ms;
+
+    --ease-standard: ease;
+    --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Native MPA enhancement only. Laravel navigation remains normal. */
 @view-transition {
     navigation: auto;
 }
@@ -228,10 +230,10 @@
     }
 }
 
-@keyframes motion-hero-in {
+@keyframes motion-hero-enter {
     from {
         opacity: 0;
-        transform: translateY(8px);
+        transform: translateY(16px);
     }
 
     to {
@@ -241,85 +243,92 @@
 }
 
 ::view-transition-old(root) {
-    animation: 160ms ease-out both motion-page-out;
+    animation: 180ms ease-out both motion-page-out;
 }
 
 ::view-transition-new(root) {
-    animation: 240ms ease-out both motion-page-in;
+    animation: 300ms ease-out both motion-page-in;
+}
+
+/*
+ * Progressive reveal targets.
+ * Hidden state only applies when the inline layout bootstrap has added `.js`.
+ * If JavaScript is disabled, these selectors never hide content.
+ */
+.js .home-feature-container > *,
+.js .home-main-container > *,
+.js [data-motion-unit-card],
+.js [data-testimonial-slider],
+.js .home-news-container > .text-center,
+.js .news-reference-card,
+.js .page-section-space > *,
+.js .inner-page-hero-inner > *,
+.js .reference-media-card,
+.js .unit-showcase-row {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+        opacity var(--motion-reveal) var(--ease-smooth),
+        transform var(--motion-reveal) var(--ease-smooth);
+    transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js .motion-visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
 }
 
 @layer components {
-    /* Scroll reveal. JS only adds these classes when motion is supported. */
-    .motion-reveal {
-        opacity: 0;
-        transform: translateY(12px);
+    /* Navbar indicator inspired by the reference's restrained interaction. */
+    .nav-link {
+        @apply relative;
         transition:
-            opacity 460ms cubic-bezier(.2, .75, .3, 1),
-            transform 460ms cubic-bezier(.2, .75, .3, 1);
-        transition-delay: var(--motion-delay, 0ms);
-        will-change: opacity, transform;
+            color 220ms var(--ease-standard),
+            background-color 220ms var(--ease-standard);
     }
 
-    .motion-reveal.motion-visible {
-        opacity: 1;
-        transform: translateY(0);
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        right: 1.25rem;
+        bottom: 17px;
+        left: 1.25rem;
+        height: 2px;
+        border-radius: 999px;
+        background: var(--color-brand-green-600);
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform 220ms var(--ease-smooth);
     }
 
-    .motion-reveal-small {
-        transform: translateY(8px);
+    .nav-link:hover::after,
+    .nav-link:focus-visible::after,
+    .nav-link-active::after {
+        transform: scaleX(1);
     }
 
-    /* Cards get feedback without changing layout. */
-    .reference-card,
-    .soft-card,
-    .news-reference-card,
-    .reference-media-card {
+    .dropdown-panel {
         transition:
-            transform 280ms cubic-bezier(.2, .75, .3, 1),
-            box-shadow 280ms ease,
-            border-color 220ms ease;
+            opacity 200ms var(--ease-standard),
+            transform 200ms var(--ease-smooth),
+            visibility 200ms var(--ease-standard);
     }
 
-    .reference-media-card img,
-    .news-reference-card img,
-    .soft-card img {
+    .dropdown-item {
         transition:
-            transform 420ms cubic-bezier(.2, .75, .3, 1),
-            opacity 260ms ease;
+            color 200ms var(--ease-standard),
+            transform 200ms var(--ease-smooth);
     }
 
-    .nav-link,
-    .dropdown-item,
-    .icon-pill,
-    footer a {
-        transition:
-            color 200ms ease,
-            background-color 200ms ease,
-            opacity 200ms ease,
-            translate 200ms ease,
-            scale 200ms ease;
-    }
-
-    [data-carousel-prev],
-    [data-carousel-next],
-    [data-carousel-dot],
-    [data-testimonial-dot] {
-        transition:
-            background-color 200ms ease,
-            opacity 200ms ease,
-            scale 200ms ease,
-            box-shadow 200ms ease;
-    }
-
-    /* Mobile drawer uses attributes instead of abruptly switching visibility. */
+    /* Mobile drawer: preserve existing left-side direction, smooth the motion. */
     [data-mobile-menu] [data-mobile-menu-overlay] {
         opacity: 0;
-        transition: opacity 280ms ease;
+        transition: opacity 260ms var(--ease-standard);
     }
 
     [data-mobile-menu] > aside {
         transform: translateX(-100%);
-        transition: transform 300ms cubic-bezier(.22, .78, .25, 1);
+        transition: transform 300ms var(--ease-smooth);
         will-change: transform;
     }
 
@@ -331,8 +340,106 @@
         transform: translateX(0);
     }
 
-    .motion-enabled [data-carousel] {
-        animation: motion-hero-in 420ms cubic-bezier(.2, .75, .3, 1) both;
+    /* Initial hero entrance. */
+    .motion-ready [data-carousel] {
+        animation: motion-hero-enter 600ms var(--ease-smooth) both;
+    }
+
+    /*
+     * Hero crossfade:
+     * JS removes `hidden`, then state is controlled by `.is-active`.
+     * Without JS, the original Blade `hidden` behavior remains intact.
+     */
+    [data-carousel].is-enhanced [data-carousel-slide] {
+        display: block;
+        z-index: 0;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 900ms var(--ease-standard);
+    }
+
+    [data-carousel].is-enhanced [data-carousel-slide].is-active {
+        z-index: 1;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    [data-carousel].is-enhanced [data-carousel-slide] img {
+        transform: scale(1.03);
+        transition: transform 5000ms ease-out;
+        will-change: transform;
+    }
+
+    [data-carousel].is-enhanced [data-carousel-slide].is-active img {
+        transform: scale(1);
+    }
+
+    /* Shared card motion language. */
+    .reference-card,
+    .soft-card,
+    .news-reference-card,
+    .reference-media-card,
+    [data-motion-unit-card] {
+        transition:
+            transform 250ms var(--ease-standard),
+            box-shadow 250ms var(--ease-standard),
+            border-color 250ms var(--ease-standard);
+    }
+
+    .reference-media-card img,
+    .news-reference-card img,
+    .soft-card img,
+    [data-motion-unit-card] img {
+        transition:
+            transform 450ms var(--ease-smooth),
+            opacity 250ms var(--ease-standard);
+    }
+
+    /* News-specific interaction. */
+    .news-reference-card h3 {
+        transition: color 200ms var(--ease-standard);
+    }
+
+    .news-reference-card [aria-hidden='true'] {
+        display: inline-block;
+        transition: transform 220ms var(--ease-smooth);
+    }
+
+    /* CTA / control consistency. */
+    #main-content a[class*='bg-brand-green-600'],
+    #main-content button[class*='bg-brand-green-600'],
+    .icon-pill,
+    [data-carousel-prev],
+    [data-carousel-next],
+    [data-carousel-dot],
+    [data-testimonial-dot] {
+        transition:
+            color 220ms var(--ease-standard),
+            background-color 220ms var(--ease-standard),
+            border-color 220ms var(--ease-standard),
+            box-shadow 220ms var(--ease-standard),
+            transform 220ms var(--ease-smooth),
+            opacity 220ms var(--ease-standard);
+    }
+
+    /* Testimonial movement follows the V2 550ms baseline. */
+    [data-testimonial-track] {
+        transition: transform 550ms var(--ease-smooth) !important;
+        will-change: transform;
+    }
+
+    [data-testimonial-slider] article {
+        transition:
+            transform 250ms var(--ease-standard),
+            box-shadow 250ms var(--ease-standard),
+            border-color 250ms var(--ease-standard);
+    }
+
+    footer a {
+        transition:
+            color 200ms var(--ease-standard),
+            opacity 200ms var(--ease-standard),
+            transform 200ms var(--ease-smooth);
     }
 }
 
@@ -340,67 +447,124 @@
     .reference-card:hover,
     .soft-card:hover,
     .news-reference-card:hover,
-    .reference-media-card:hover {
+    .reference-media-card:hover,
+    [data-motion-unit-card]:hover {
         transform: translateY(-4px);
-        box-shadow: 0 18px 42px rgba(17, 24, 39, 0.10);
+        box-shadow: 0 17px 38px rgba(17, 24, 39, 0.09);
     }
 
     .reference-media-card:hover img,
+    .soft-card:hover img,
     .news-reference-card:hover img,
-    .soft-card:hover img {
-        transform: scale(1.035);
+    [data-motion-unit-card]:hover img {
+        transform: scale(1.04);
     }
 
-    .nav-link:hover {
-        translate: 0 -1px;
+    .news-reference-card:hover h3 {
+        color: var(--color-brand-green-700);
+    }
+
+    .news-reference-card:hover [aria-hidden='true'] {
+        transform: translateX(3px);
     }
 
     .dropdown-item:hover {
-        translate: 3px 0;
+        transform: translateX(3px);
+    }
+
+    #main-content a[class*='bg-brand-green-600']:hover,
+    #main-content button[class*='bg-brand-green-600']:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 24px rgba(41, 105, 62, 0.16);
     }
 
     .icon-pill:hover,
     [data-carousel-prev]:hover,
     [data-carousel-next]:hover {
-        scale: 1.05;
+        transform: translateY(-1px);
     }
 
     [data-carousel-dot]:hover,
     [data-testimonial-dot]:hover {
-        scale: 1.22;
+        transform: scale(1.18);
+    }
+
+    [data-testimonial-slider] article:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 34px rgba(17, 24, 39, 0.085);
     }
 
     footer a:hover {
-        translate: 2px 0;
+        transform: translateY(-2px);
     }
+}
 
-    a[class*='bg-brand-green-600']:hover,
-    button[class*='bg-brand-green-600']:hover {
-        translate: 0 -1px;
-        box-shadow: 0 10px 24px rgba(41, 105, 62, .18);
+@media (max-width: 767px) {
+    /*
+     * Mobile keeps the same motion language, but avoids unnecessary
+     * hover-oriented transforms and limits reveal distance.
+     */
+    .js .home-feature-container > *,
+    .js .home-main-container > *,
+    .js [data-motion-unit-card],
+    .js [data-testimonial-slider],
+    .js .home-news-container > .text-center,
+    .js .news-reference-card,
+    .js .page-section-space > *,
+    .js .inner-page-hero-inner > *,
+    .js .reference-media-card,
+    .js .unit-showcase-row {
+        transform: translateY(16px);
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
     ::view-transition-old(root),
     ::view-transition-new(root) {
         animation: none !important;
     }
 
-    .motion-reveal,
-    .motion-reveal.motion-visible {
+    .js .home-feature-container > *,
+    .js .home-main-container > *,
+    .js [data-motion-unit-card],
+    .js [data-testimonial-slider],
+    .js .home-news-container > .text-center,
+    .js .news-reference-card,
+    .js .page-section-space > *,
+    .js .inner-page-hero-inner > *,
+    .js .reference-media-card,
+    .js .unit-showcase-row,
+    .motion-visible {
         opacity: 1 !important;
         transform: none !important;
         transition: none !important;
-        will-change: auto;
     }
 
-    .motion-enabled [data-carousel] {
-        animation: none !important;
+    [data-carousel].is-enhanced [data-carousel-slide] {
+        transition: none !important;
+    }
+
+    [data-carousel].is-enhanced [data-carousel-slide] img {
+        transform: none !important;
+        transition: none !important;
     }
 
     [data-mobile-menu] [data-mobile-menu-overlay],
-    [data-mobile-menu] > aside {
+    [data-mobile-menu] > aside,
+    [data-testimonial-track] {
         transition: none !important;
     }
 }

@@ -10,7 +10,7 @@ const ready = (callback) => {
 const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 const prefersReducedMotion = () => reducedMotionQuery.matches;
 
-document.documentElement.classList.add('motion-ready');
+document.documentElement.classList.add('js', 'motion-ready');
 
 ready(() => {
     // ---------------------------------------------------------
@@ -400,7 +400,15 @@ ready(() => {
         },
     );
 
-    uniqueRevealElements.forEach((element) => {
-        observer.observe(element);
+    const startRevealObserver = () => {
+        uniqueRevealElements.forEach((element) => {
+            observer.observe(element);
+        });
+    };
+
+    // Two animation frames ensure the initial opacity/translate state
+    // has been painted before an already-visible element is revealed.
+    requestAnimationFrame(() => {
+        requestAnimationFrame(startRevealObserver);
     });
 });

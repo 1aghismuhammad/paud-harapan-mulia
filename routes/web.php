@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'public.home.index')->name('home');
@@ -16,3 +18,15 @@ Route::prefix('sekolah')->name('school.')->group(function (): void {
 });
 
 Route::view('/berita', 'public.news.index')->name('news.index');
+
+Route::prefix('admin')->name('admin.')->group(function (): void {
+    Route::middleware('guest')->group(function (): void {
+        Route::get('/login', [AuthController::class, 'create'])->name('login');
+        Route::post('/login', [AuthController::class, 'store'])->name('login.store');
+    });
+
+    Route::middleware('auth')->group(function (): void {
+        Route::get('/', DashboardController::class)->name('dashboard');
+        Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
+    });
+});

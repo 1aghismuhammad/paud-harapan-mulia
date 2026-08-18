@@ -45,35 +45,69 @@
 
     <x-site.hero />
 
-    <section class="relative z-10 -mt-8 md:-mt-11 lg:-mt-12">
+    <section class="relative z-10 mt-12 md:mt-14 lg:mt-16">
         <div class="home-feature-container">
             @foreach ([
-                ['title' => 'Lingkungan Islami', 'copy' => 'Pembiasaan doa, ibadah, dan pengenalan Al-Qur’an.', 'icon' => '✦'],
-                ['title' => 'Pembelajaran Menyenangkan', 'copy' => 'Kegiatan kreatif yang mendukung kemandirian anak.', 'icon' => '▣'],
-                ['title' => 'Pendampingan Orang Tua', 'copy' => 'Program parenting untuk menguatkan kolaborasi keluarga.', 'icon' => '◎'],
+                [
+                    'title' => 'Lingkungan Islami',
+                    'copy' => 'Pembiasaan doa, ibadah, dan pengenalan Al-Qur’an.',
+                    'icon' => 'images/icons/home-features/environment.png',
+                    'icon_hover' => 'images/icons/home-features/environment-green.png',
+                ],
+                [
+                    'title' => 'Pembelajaran Menyenangkan',
+                    'copy' => 'Kegiatan kreatif yang mendukung kemandirian anak.',
+                    'icon' => 'images/icons/home-features/learning.png',
+                    'icon_hover' => 'images/icons/home-features/learning-green.png',
+                ],
+                [
+                    'title' => 'Pendampingan Orang Tua',
+                    'copy' => 'Program parenting untuk menguatkan kolaborasi keluarga.',
+                    'icon' => 'images/icons/home-features/parenting.png',
+                    'icon_hover' => 'images/icons/home-features/parenting-green.png',
+                ],
             ] as $item)
-                <div class="reference-card flex min-h-[104px] items-center gap-4 rounded-[4px] px-5 py-4 lg:min-h-[122px] lg:gap-5 lg:px-6">
-                    <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-brand-green-300/15 text-lg text-brand-green-700 lg:h-11 lg:w-11">
-                        {{ $item['icon'] }}
+                <div class="home-feature-card">
+                    <span class="home-feature-icon" aria-hidden="true">
+                        <img
+                            src="{{ asset($item['icon']) }}"
+                            alt=""
+                            class="home-feature-icon-default"
+                        >
+                        <img
+                            src="{{ asset($item['icon_hover']) }}"
+                            alt=""
+                            class="home-feature-icon-hover"
+                        >
                     </span>
+
                     <div>
-                        <h2 class="text-[13px] leading-[1.35] font-semibold lg:text-[14px]">{{ $item['title'] }}</h2>
-                        <p class="mt-1 text-[10px] leading-[1.7] text-site-muted lg:text-[11px]">{{ $item['copy'] }}</p>
+                        <h2 class="home-feature-title">{{ $item['title'] }}</h2>
+                        <p class="home-feature-copy">{{ $item['copy'] }}</p>
                     </div>
                 </div>
             @endforeach
         </div>
     </section>
 
-    <section class="pt-24 pb-20 md:pt-28 md:pb-24 lg:pt-36 lg:pb-32">
+    <section class="pt-20 pb-20 md:pt-24 md:pb-24 lg:pt-28 lg:pb-32">
         <div class="home-main-container grid items-center gap-14 lg:grid-cols-[1.02fr_0.98fr] lg:gap-24">
             <div class="mx-auto w-full max-w-[460px] lg:max-w-[550px]">
                 <div class="grid grid-cols-2 gap-3 lg:gap-4">
-                    <div class="mt-6 overflow-hidden rounded-[5px] shadow-[0_15px_35px_rgba(20,30,40,.08)] lg:mt-8">
-                        <img src="{{ asset('images/paud/visi-anak.jpeg') }}" alt="Kegiatan siswa PAUD Harapan Mulia" class="aspect-[4/5] w-full object-cover">
+                    <div class="home-vision-photo mt-6 lg:mt-8">
+                        <img
+                            src="{{ asset('images/paud/visi-anak.jpeg') }}"
+                            alt="Kegiatan siswa PAUD Harapan Mulia"
+                            class="aspect-[4/5] w-full object-cover"
+                        >
                     </div>
-                    <div class="overflow-hidden rounded-[5px] shadow-[0_15px_35px_rgba(20,30,40,.08)]">
-                        <img src="{{ asset('images/paud/visi-kegiatan.jpeg') }}" alt="Kegiatan belajar PAUD Harapan Mulia" class="aspect-[4/5] w-full object-cover">
+
+                    <div class="home-vision-photo">
+                        <img
+                            src="{{ asset('images/paud/visi-kegiatan.jpeg') }}"
+                            alt="Kegiatan belajar PAUD Harapan Mulia"
+                            class="aspect-[4/5] w-full object-cover"
+                        >
                     </div>
                 </div>
             </div>
@@ -123,33 +157,46 @@
                 </a>
             </div>
 
-            <div class="relative overflow-hidden rounded-[5px] bg-brand-green-900">
-                <img src="{{ asset('images/paud/profile-sekolah.jpeg') }}" alt="Dokumentasi PAUD Harapan Mulia" class="aspect-[4/3] w-full object-cover opacity-90 lg:aspect-[1.34/1]">
-                <div class="absolute inset-0 bg-gradient-to-r from-brand-green-900/25 to-transparent"></div>
-                <span class="absolute left-0 top-1/2 -translate-y-1/2 -rotate-90 bg-brand-green-600 px-5 py-2 text-[9px] tracking-[.16em] text-white uppercase lg:px-7 lg:py-3">Harapan Mulia</span>
-                <span class="absolute bottom-7 left-10 text-[26px] font-normal text-white lg:bottom-10 lg:left-14 lg:text-[30px]">Video / Gambar</span>
+            <div class="group relative isolate overflow-hidden rounded-[8px] bg-brand-green-950 shadow-[0_20px_55px_rgba(17,24,39,0.12)] transition-[transform,box-shadow] duration-700 ease-out hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(41,105,62,0.22)]">
+                <img
+                    src="{{ asset('images/paud/profile-sekolah.jpeg') }}"
+                    alt="Dokumentasi PAUD Harapan Mulia"
+                    class="aspect-[4/3] w-full object-cover opacity-95 transition-[transform,filter,opacity] duration-[1200ms] ease-out group-hover:scale-[1.055] group-hover:brightness-[1.04] group-hover:saturate-[1.08] group-hover:opacity-100 lg:aspect-[1.34/1]"
+                >
+
+                {{-- Overlay dibuat ringan agar foto tetap menjadi fokus utama. --}}
+                <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-brand-green-950/30 via-transparent to-white/5 transition-opacity duration-700 group-hover:opacity-70"></div>
+                <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-80 transition-opacity duration-700 group-hover:opacity-45"></div>
+
+                {{-- Highlight sweep saat hover: memberi kesan polished tanpa mengganggu foto. --}}
+                <div class="pointer-events-none absolute inset-y-[-25%] -left-[28%] w-[18%] -skew-x-12 bg-white/25 opacity-0 blur-xl transition-[left,opacity] duration-[1350ms] ease-out group-hover:left-[118%] group-hover:opacity-100"></div>
+
+                {{-- Inner frame muncul halus saat hover. --}}
+                <div class="pointer-events-none absolute inset-3 rounded-[5px] border border-white/0 transition-colors duration-700 group-hover:border-white/35 lg:inset-4"></div>
+
+                <span class="absolute left-0 top-1/2 -translate-y-1/2 -rotate-90 bg-brand-green-600 px-5 py-2 text-[9px] tracking-[.16em] text-white uppercase shadow-[0_8px_20px_rgba(0,0,0,0.12)] transition-[background-color,transform] duration-500 group-hover:bg-brand-green-700 group-hover:-translate-y-[52%] lg:px-7 lg:py-3">Harapan Mulia</span>
             </div>
         </div>
     </section>
 
     {{-- Unit pendidikan dibuat lebih besar --}}
-    <section class="border-t border-site-border py-16 lg:py-24">
+    <section class="border-t border-site-border py-16 lg:py-28">
         <div class="mx-auto w-full max-w-[1320px] px-5 sm:px-6 lg:px-0">
             <div class="text-center">
                 <p class="text-[10px] tracking-[.24em] text-site-muted uppercase lg:text-[11px]">Unit Pendidikan</p>
             </div>
 
-            <div class="mt-10 flex flex-wrap justify-center gap-6 lg:mt-12 lg:gap-8">
-                <a href="{{ route('school.paud') }}" data-motion-unit-card class="group relative h-[180px] w-[180px] overflow-hidden rounded-[4px] bg-brand-green-950 text-white shadow-[0_18px_40px_rgba(17,24,39,0.12)] transition hover:-translate-y-1 lg:h-[260px] lg:w-[260px]">
+            <div class="mt-10 flex flex-wrap justify-center gap-6 md:gap-8 lg:mt-14 lg:gap-10">
+                <a href="{{ route('school.paud') }}" data-motion-unit-card class="group relative h-[190px] w-[190px] overflow-hidden rounded-[5px] bg-brand-green-950 text-white shadow-[0_20px_46px_rgba(17,24,39,0.14)] transition hover:-translate-y-1 md:h-[250px] md:w-[250px] lg:h-[330px] lg:w-[330px]">
                     <img src="{{ asset('images/paud/unit-paud.jpeg') }}" alt="Unit PAUD Harapan Mulia" class="h-full w-full object-cover opacity-50 transition duration-300 group-hover:scale-105 group-hover:opacity-60">
                     <div class="absolute inset-0 bg-gradient-to-t from-brand-green-950/40 via-brand-green-950/10 to-brand-green-950/20"></div>
-                    <span class="absolute inset-0 flex items-center justify-center text-[32px] font-medium tracking-[0.02em] lg:text-[44px]">PAUD</span>
+                    <span class="absolute inset-0 flex items-center justify-center text-[32px] font-medium tracking-[0.02em] md:text-[42px] lg:text-[54px]">PAUD</span>
                 </a>
 
-                <a href="{{ route('school.tk') }}" data-motion-unit-card class="group relative h-[180px] w-[180px] overflow-hidden rounded-[4px] bg-brand-green-950 text-white shadow-[0_18px_40px_rgba(17,24,39,0.12)] transition hover:-translate-y-1 lg:h-[260px] lg:w-[260px]">
+                <a href="{{ route('school.tk') }}" data-motion-unit-card class="group relative h-[190px] w-[190px] overflow-hidden rounded-[5px] bg-brand-green-950 text-white shadow-[0_20px_46px_rgba(17,24,39,0.14)] transition hover:-translate-y-1 md:h-[250px] md:w-[250px] lg:h-[330px] lg:w-[330px]">
                     <img src="{{ asset('images/paud/unit-tk.jpeg') }}" alt="Unit TK Harapan Mulia" class="h-full w-full object-cover opacity-50 transition duration-300 group-hover:scale-105 group-hover:opacity-60">
                     <div class="absolute inset-0 bg-gradient-to-t from-brand-green-950/40 via-brand-green-950/10 to-brand-green-950/20"></div>
-                    <span class="absolute inset-0 flex items-center justify-center text-[32px] font-medium tracking-[0.02em] lg:text-[44px]">TK</span>
+                    <span class="absolute inset-0 flex items-center justify-center text-[32px] font-medium tracking-[0.02em] md:text-[42px] lg:text-[54px]">TK</span>
                 </a>
             </div>
         </div>

@@ -146,8 +146,9 @@
         </div>
 
         {{-- Back to top, mengikuti reference --}}
-        <a
-            href="#"
+        <button
+            type="button"
+            data-back-to-top
             class="absolute right-7 top-1/2 hidden h-11 w-11 -translate-y-1/2 items-center justify-center bg-white/15 text-white transition hover:bg-white/25 lg:inline-flex"
             aria-label="Kembali ke atas"
         >
@@ -155,6 +156,6 @@
                 <circle cx="12" cy="12" r="8"/>
                 <path d="m8.5 13 3.5-3.5 3.5 3.5M12 9.5V16"/>
             </svg>
-        </a>
+        </button>
     </div>
 </footer>

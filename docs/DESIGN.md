@@ -159,15 +159,36 @@ Bottom bar
 
 ## 12. Responsive
 
-Mobile-first.
+Mobile-first dengan breakpoint project:
+
+```text
+base < 576px
+sm   >= 576px
+md   >= 768px
+lg   >= 992px
+xl   >= 1200px
+2xl  >= 1400px
+```
 
 Representative QA:
 
 ```text
 390 × 844
 768 × 1024
+992 × 900
+1200 × 900
 1440 × 900
 1920 × 1080
+```
+
+Boundary QA:
+
+```text
+575 / 576
+767 / 768
+991 / 992
+1199 / 1200
+1399 / 1400
 ```
 
 Rule:

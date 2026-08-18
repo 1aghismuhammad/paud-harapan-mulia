@@ -7,6 +7,7 @@
         <meta name="theme-color" content="#29693E">
 
         <title>@yield('title', 'PAUD Harapan Mulia')</title>
+        <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -41,6 +42,7 @@
         </main>
         <x-site.footer />
 
+        <script src="{{ asset('js/back-to-top.js') }}" defer></script>
         @stack('scripts')
     </body>
 </html>

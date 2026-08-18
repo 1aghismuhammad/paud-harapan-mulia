@@ -8,12 +8,14 @@ Produk ini adalah website publik single institution dengan CMS berita pada fase 
 
 ```text
 Phase 0  Foundation & Documentation         DONE
-Phase 1  Design System & Public UI          IN PROGRESS / REVIEW
+Phase 1  Design System & Public UI          REVIEW / CLOSURE QA
 Phase 2  Static Content Finalization        NOT STARTED
 Phase 3  Admin Authentication & News CMS    NOT STARTED
 Phase 4  SEO / Performance / A11y           NOT STARTED
 Phase 5  UAT & Production Deployment        NOT STARTED
 ```
+
+Phase 1 sudah masuk tahap closure QA. Visual detailing dibekukan sementara; perubahan berikutnya hanya untuk regression, verification, dan dokumentasi closure sebelum status resmi `DONE`. Lihat [`docs/progress/2026-08-18-phase-01-closure-review.md`](docs/progress/2026-08-18-phase-01-closure-review.md).
 
 ## Final MVP Navigation
 

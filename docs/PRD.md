@@ -180,24 +180,49 @@ Binary image tidak disimpan di database.
 
 Mobile-first.
 
-Baseline Tailwind:
+Breakpoint Tailwind project:
 
 ```text
-base < 640px
-sm   >= 640px
+base < 576px
+sm   >= 576px
 md   >= 768px
-lg   >= 1024px
-xl   >= 1280px
-2xl  >= 1536px
+lg   >= 992px
+xl   >= 1200px
+2xl  >= 1400px
 ```
+
+Interpretasi responsive:
+
+```text
+< 576px      Mobile / 1 kolom sebagai baseline
+576-767px    Small / landscape mobile; 1-2 kolom sesuai komponen
+768-991px    Tablet; umumnya 2 kolom
+992-1199px   Desktop; umumnya 3-4 kolom
+1200-1399px  Large desktop
+>= 1400px    Extra-large desktop
+```
+
+Jumlah kolom tidak dipaksakan secara global. Setiap section tetap mengikuti kebutuhan konten dan proporsi visualnya.
 
 QA representative viewport:
 
 ```text
 390 × 844
 768 × 1024
+992 × 900
+1200 × 900
 1440 × 900
 1920 × 1080
+```
+
+QA boundary wajib memeriksa perubahan tepat sebelum dan sesudah breakpoint utama:
+
+```text
+575 / 576
+767 / 768
+991 / 992
+1199 / 1200
+1399 / 1400
 ```
 
 ## 12. SEO Baseline

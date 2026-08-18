@@ -22,7 +22,13 @@
                 @endforeach
             </div>
 
-            <div class="absolute inset-x-0 bottom-0 flex h-11 items-center justify-center bg-black/22">
+            <div
+                data-carousel-fade-layer
+                class="pointer-events-none absolute inset-0 z-10 bg-white opacity-0"
+                aria-hidden="true"
+            ></div>
+
+            <div class="absolute inset-x-0 bottom-0 z-20 flex h-11 items-center justify-center bg-black/22">
                 <div class="flex gap-2">
                     @foreach ($slides as $index => $slide)
                         <button

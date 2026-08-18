@@ -1,24 +1,10 @@
 {
-  "node_check": {
-    "returncode": 0,
-    "stdout": "",
-    "stderr": ""
-  },
-  "css_braces": {
-    "open": 106,
-    "close": 106,
-    "balanced": true
-  },
-  "motion_values_present": true,
-  "unit_hooks": true,
-  "zip_integrity": true,
-  "zip_files": [
-    "APPLY-MOTION-SYSTEM-V2.md",
-    "resources/css/app.css",
-    "resources/js/app.js",
-    "resources/views/layouts/public.blade.php",
-    "resources/views/public/home/index.blade.php",
-    "docs/progress/2026-08-15-phase-01i-motion-system-v2.md",
-    "docs/phase-01/CHANGELOG-motion-system-v2.md"
-  ]
+  "single_runtime_file_changed": true,
+  "about_hover_bridge": true,
+  "school_hover_bridge": true,
+  "dropdown_top_3px": true,
+  "dropdown_width_300": true,
+  "larger_item_area": true,
+  "global_css_untouched": true,
+  "global_js_untouched": true
 }

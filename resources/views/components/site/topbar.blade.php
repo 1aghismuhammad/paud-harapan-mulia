@@ -2,9 +2,9 @@
     <div class="header-container flex min-h-[108px] items-center justify-between">
         <a href="{{ route('home') }}" class="flex items-center gap-3" aria-label="PAUD Harapan Mulia - Beranda">
             <img
-                src="{{ asset('images/paud/logo-temporary.jpeg') }}"
-                alt="Identitas sementara PAUD Harapan Mulia"
-                class="h-[58px] w-[92px] object-contain object-left"
+                src="{{ asset('images/paud/logo-official.webp') }}"
+                alt="Logo resmi PAUD IT Harapan Mulia"
+                class="h-[82px] w-[86px] shrink-0 object-contain object-left"
             >
             <span class="text-[12px] leading-[1.35] font-semibold text-brand-green-900">
                 PAUD IT<br>Harapan Mulia

@@ -4,7 +4,7 @@
     <aside class="relative z-10 flex h-dvh w-[82%] max-w-[22rem] flex-col overflow-y-auto bg-white shadow-2xl">
         <div class="flex min-h-20 items-stretch border-b border-site-border">
             <a href="{{ route('home') }}" class="flex min-w-0 flex-1 items-center gap-2.5 px-6">
-                <img src="{{ asset('images/paud/logo-temporary.jpeg') }}" alt="Identitas sementara PAUD Harapan Mulia" class="h-11 w-16 object-contain object-left">
+                <img src="{{ asset('images/paud/logo-official.webp') }}" alt="Logo resmi PAUD IT Harapan Mulia" class="h-12 w-12 shrink-0 object-contain object-left">
                 <span class="text-[10px] leading-4 font-semibold text-brand-green-900">PAUD IT<br>Harapan Mulia</span>
             </a>
             <button type="button" data-mobile-menu-close class="inline-flex w-16 items-center justify-center bg-brand-green-700 text-white" aria-label="Tutup navigasi">

@@ -42,7 +42,7 @@
 
         <nav class="flex-1 overflow-y-auto px-4 py-5" aria-label="Navigasi admin mobile">
             <p class="px-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#a1a5ad]">Utama</p>
-            <a href="{{ route('admin.dashboard') }}" class="mt-3 flex min-h-11 items-center gap-3 rounded-[10px] bg-brand-green-900 px-3.5 text-[13px] font-semibold text-white">
+            <a href="{{ route('admin.dashboard') }}" class="mt-3 flex min-h-11 items-center gap-3 rounded-[10px] px-3.5 text-[13px] font-semibold {{ request()->routeIs('admin.dashboard') ? 'bg-brand-green-900 text-white' : 'text-site-muted' }}">
                 <svg class="h-[18px] w-[18px] shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <path d="M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm10 0h6v-9h-6v9Zm0-16v5h6V4h-6Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
                 </svg>
@@ -50,14 +50,13 @@
             </a>
 
             <p class="mt-8 px-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#a1a5ad]">Konten</p>
-            <div class="mt-3 flex min-h-11 items-center gap-3 rounded-[10px] px-3.5 text-[13px] font-semibold text-[#a5a8ae]" aria-disabled="true">
+            <a href="{{ route('admin.news.index') }}" class="mt-3 flex min-h-11 items-center gap-3 rounded-[10px] px-3.5 text-[13px] font-semibold {{ request()->routeIs('admin.news.*') ? 'bg-brand-green-900 text-white' : 'text-site-muted' }}">
                 <svg class="h-[18px] w-[18px] shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <path d="M6 3.75h9.25L19 7.5v12.75H6V3.75Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
                     <path d="M15 3.75V7.5h4M9 11h7M9 14.5h7M9 18h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
                 </svg>
                 <span class="flex-1">Berita</span>
-                <span class="rounded-full bg-[#eef1ee] px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.08em] text-[#90949a]">Segera</span>
-            </div>
+            </a>
         </nav>
 
         <div class="border-t border-site-border p-4">

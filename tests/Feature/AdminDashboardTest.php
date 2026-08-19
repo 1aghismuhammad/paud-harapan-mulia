@@ -48,7 +48,7 @@ it('shows database backed news statistics', function (): void {
         ->assertSee('data-stat="draft">3</p>', false);
 });
 
-it('shows safe dashboard actions without exposing an unfinished news route', function (): void {
+it('exposes the active news management route from the dashboard', function (): void {
     $user = User::factory()->create();
 
     $this->actingAs($user)
@@ -56,6 +56,6 @@ it('shows safe dashboard actions without exposing an unfinished news route', fun
         ->assertOk()
         ->assertSee('Lihat Website')
         ->assertSee('Keluar')
-        ->assertSee('Kelola Berita — Phase 3D')
-        ->assertDontSee('href="/admin/berita"', false);
+        ->assertSee('Kelola Berita')
+        ->assertSee('href="'.route('admin.news.index').'"', false);
 });

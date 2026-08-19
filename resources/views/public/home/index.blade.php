@@ -281,11 +281,41 @@
                 <h2 class="section-title lg:text-[44px]">Berita Terbaru</h2>
             </div>
 
-            <div class="mt-10 grid gap-6 md:grid-cols-3 lg:mt-12 lg:gap-7">
-                <x-site.news-card image="images/paud/news-parenting.jpeg" date="Preview Konten" title="Home Parenting PAUD Harapan Mulia" excerpt="Contoh kartu berita untuk menguji hierarchy dan komposisi sebelum CMS dibangun." />
-                <x-site.news-card image="images/paud/news-akhirussanah.jpeg" date="Preview Konten" title="Kegiatan Akhirussanah" excerpt="Preview tampilan berita untuk menguji struktur layout." />
-                <x-site.news-card image="images/paud/news-kegiatan.jpeg" date="Preview Konten" title="Kegiatan Siswa Harapan Mulia" excerpt="Konten production nantinya berasal dari berita yang dipublikasikan admin." />
-            </div>
+            @if ($latestNews->isNotEmpty())
+                <div class="mt-10 grid gap-6 md:grid-cols-3 lg:mt-12 lg:gap-7">
+                    @foreach ($latestNews as $newsPost)
+                        @php
+                            $plainExcerpt = trim((string) $newsPost->excerpt) ?: \Illuminate\Support\Str::limit(
+                                trim(preg_replace('/\s+/', ' ', strip_tags($newsPost->content)) ?? ''),
+                                145,
+                                '…'
+                            );
+                            $imageUrl = $newsPost->featured_image
+                                ? \Illuminate\Support\Facades\Storage::disk('public')->url($newsPost->featured_image)
+                                : null;
+                        @endphp
+                        <x-site.news-card
+                            :image="$imageUrl"
+                            :date="$newsPost->published_at?->format('d M Y') ?? '—'"
+                            :title="$newsPost->title"
+                            :excerpt="$plainExcerpt"
+                            :author="$newsPost->author?->name"
+                            :url="route('news.show', ['newsPost' => $newsPost->slug])"
+                        />
+                    @endforeach
+                </div>
+
+                <div class="mt-10 text-center">
+                    <a href="{{ route('news.index') }}" class="inline-flex rounded-[4px] border border-brand-green-600 px-6 py-3 text-[10px] font-semibold tracking-[.12em] text-brand-green-700 uppercase transition hover:bg-brand-green-600 hover:text-white">
+                        Lihat Semua Berita
+                    </a>
+                </div>
+            @else
+                <div class="mx-auto mt-10 max-w-[680px] rounded-[6px] border border-site-border bg-[#f8faf7] px-6 py-8 text-center">
+                    <p class="text-[13px] font-semibold text-site-text">Belum ada berita yang dipublikasikan.</p>
+                    <p class="mt-2 text-[11px] leading-6 text-site-muted">Berita terbaru sekolah akan muncul di bagian ini setelah dipublikasikan melalui CMS.</p>
+                </div>
+            @endif
         </div>
     </section>
 @endsection

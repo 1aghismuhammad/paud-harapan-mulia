@@ -1,48 +1,54 @@
 @extends('layouts.public')
 
 @section('title', 'Berita — PAUD Harapan Mulia')
-@section('meta_description', 'Berita dan artikel PAUD Islam Terpadu Harapan Mulia.')
+@section('meta_description', 'Berita dan artikel terbaru PAUD Islam Terpadu Harapan Mulia.')
 
 @section('content')
-    <section class="pt-24 pb-24 md:pt-28 md:pb-28 lg:pt-32 lg:pb-32">
+    <section class="pt-20 pb-24 md:pt-24 md:pb-28 lg:pt-28 lg:pb-32">
         <div class="content-container">
             <div class="text-center">
                 <p class="eyebrow">Berita & Artikel</p>
-                <h1 class="mt-3 text-[36px] font-semibold tracking-[-0.04em] text-site-text md:text-[44px]">
-                    Berita & Artikel
-                </h1>
+                <h1 class="mt-3 text-[36px] font-semibold tracking-[-0.04em] text-site-text md:text-[44px]">Berita Terbaru</h1>
+                <p class="mx-auto mt-4 max-w-[680px] text-[13px] leading-7 text-site-muted">
+                    Informasi kegiatan, program, dan kabar terbaru dari PAUD IT Harapan Mulia.
+                </p>
             </div>
 
-            <div class="mt-12 flex items-center justify-center gap-4">
-                <span class="reference-arrow hidden lg:inline-flex">←</span>
+            @if ($newsPosts->isNotEmpty())
+                <div class="mt-12 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+                    @foreach ($newsPosts as $newsPost)
+                        @php
+                            $plainExcerpt = trim((string) $newsPost->excerpt) ?: \Illuminate\Support\Str::limit(
+                                trim(preg_replace('/\s+/', ' ', strip_tags($newsPost->content)) ?? ''),
+                                155,
+                                '…'
+                            );
+                            $imageUrl = $newsPost->featured_image
+                                ? \Illuminate\Support\Facades\Storage::disk('public')->url($newsPost->featured_image)
+                                : null;
+                        @endphp
 
-                <div class="grid w-full gap-7 md:grid-cols-3">
-                    <x-site.news-card
-                        image="images/paud/news-parenting.jpeg"
-                        date="Preview Konten"
-                        title="Home Parenting PAUD Harapan Mulia"
-                        excerpt="Contoh layout artikel untuk kebutuhan review UI sebelum CMS berita dibangun."
-                    />
-                    <x-site.news-card
-                        image="images/paud/news-akhirussanah.jpeg"
-                        date="Preview Konten"
-                        title="Kegiatan Akhirussanah"
-                        excerpt="Preview tampilan berita sekolah yang nantinya dikelola melalui dashboard admin."
-                    />
-                    <x-site.news-card
-                        image="images/paud/news-kegiatan.jpeg"
-                        date="Preview Konten"
-                        title="Kegiatan Siswa Harapan Mulia"
-                        excerpt="Konten production nantinya berasal dari berita yang dipublikasikan admin."
-                    />
+                        <x-site.news-card
+                            :image="$imageUrl"
+                            :date="$newsPost->published_at?->format('d M Y') ?? '—'"
+                            :title="$newsPost->title"
+                            :excerpt="$plainExcerpt"
+                            :author="$newsPost->author?->name"
+                            :url="route('news.show', ['newsPost' => $newsPost->slug])"
+                        />
+                    @endforeach
                 </div>
 
-                <span class="reference-arrow hidden lg:inline-flex">→</span>
-            </div>
-
-            <div class="mx-auto mt-10 max-w-[700px] rounded-[5px] border border-brand-yellow-400/30 bg-brand-yellow-400/10 px-5 py-4 text-center text-[10px] leading-5 text-amber-900">
-                Halaman ini masih preview UI. Judul, tanggal, dan ringkasan belum merupakan publikasi resmi sekolah.
-            </div>
+                @if ($newsPosts->hasPages())
+                    <div class="mt-12">{{ $newsPosts->links() }}</div>
+                @endif
+            @else
+                <div class="mx-auto mt-12 max-w-[720px] rounded-[8px] border border-site-border bg-[#f8faf7] px-6 py-12 text-center">
+                    <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#edf5ea] text-brand-green-900">◷</div>
+                    <h2 class="mt-4 text-[18px] font-semibold text-site-text">Belum ada berita yang dipublikasikan</h2>
+                    <p class="mt-2 text-[12px] leading-6 text-site-muted">Silakan kembali lagi untuk melihat kabar terbaru dari sekolah.</p>
+                </div>
+            @endif
         </div>
     </section>
 @endsection

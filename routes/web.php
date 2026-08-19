@@ -4,9 +4,11 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\NewsMediaController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PublicNewsController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'public.home.index')->name('home');
+Route::get('/', HomeController::class)->name('home');
 
 Route::prefix('tentang-kami')->name('about.')->group(function (): void {
     Route::view('/sejarah', 'public.about.history')->name('history');
@@ -19,7 +21,8 @@ Route::prefix('sekolah')->name('school.')->group(function (): void {
     Route::view('/tk', 'public.school.tk')->name('tk');
 });
 
-Route::view('/berita', 'public.news.index')->name('news.index');
+Route::get('/berita', [PublicNewsController::class, 'index'])->name('news.index');
+Route::get('/berita/{newsPost:slug}', [PublicNewsController::class, 'show'])->name('news.show');
 
 Route::prefix('admin')->name('admin.')->group(function (): void {
     Route::middleware('guest')->group(function (): void {

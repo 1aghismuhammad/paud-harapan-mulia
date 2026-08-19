@@ -1,6 +1,10 @@
 <?php
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
 use function Pest\Laravel\get;
+
+uses(RefreshDatabase::class);
 
 it('renders the public company profile pages', function (string $uri): void {
     get($uri)->assertOk();

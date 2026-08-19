@@ -7,12 +7,12 @@
         <section class="overflow-hidden rounded-[18px] border border-site-border bg-white shadow-[0_14px_36px_rgba(29,79,48,0.07)]">
             <div class="grid gap-6 px-6 py-7 sm:px-7 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:px-8 md:py-8">
                 <div>
-                    <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-green-600">Phase 3C</p>
+                    <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-green-600">Phase 3D</p>
                     <h2 class="mt-2 text-[26px] font-semibold leading-tight tracking-[-0.025em] text-site-text sm:text-[32px]">
                         Selamat datang, {{ auth()->user()->name }}
                     </h2>
                     <p class="mt-3 max-w-[680px] text-[13px] leading-7 text-site-muted sm:text-[14px]">
-                        Dashboard admin siap digunakan sebagai pusat pengelolaan konten. Database berita sudah aktif. CRUD pengelolaan berita akan diaktifkan pada batch Phase 3D berikutnya.
+                        Dashboard admin siap digunakan sebagai pusat pengelolaan konten. Database berita dan CRUD pengelolaan berita sudah aktif. Admin dapat mulai membuat draft maupun mempublikasikan berita.
                     </p>
                 </div>
 
@@ -81,11 +81,11 @@
                 <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-green-600">Pengelolaan Konten</p>
                 <h2 class="mt-2 text-[20px] font-semibold text-site-text">Berita</h2>
                 <p class="mt-2 max-w-[620px] text-[13px] leading-6 text-site-muted">
-                    Modul berita belum diaktifkan pada Phase 3C. Database, status draft/published, dan CRUD akan dibuat pada batch berikutnya.
+                    Modul berita belum diaktifkan pada Phase 3D. Database, status draft/published, dan CRUD akan dibuat pada batch berikutnya.
                 </p>
-                <button type="button" disabled class="mt-5 inline-flex min-h-11 cursor-not-allowed items-center rounded-[10px] bg-[#edf0ed] px-4 text-[12px] font-semibold text-[#9a9da5]">
-                    Kelola Berita — Phase 3D
-                </button>
+                <a href="{{ route('admin.news.index') }}" class="mt-5 inline-flex min-h-11 items-center rounded-[10px] bg-brand-green-900 px-4 text-[12px] font-semibold text-white transition hover:bg-brand-green-950">
+                    Kelola Berita
+                </a>
             </article>
 
             <article class="rounded-[16px] border border-site-border bg-brand-green-950 p-6 text-white shadow-[0_12px_30px_rgba(29,79,48,0.14)]">

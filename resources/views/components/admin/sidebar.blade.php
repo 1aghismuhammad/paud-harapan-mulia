@@ -30,14 +30,16 @@
 
         <p class="mt-8 px-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#a1a5ad]">Konten</p>
         <div class="mt-3 space-y-1.5">
-            <div class="flex min-h-11 items-center gap-3 rounded-[10px] px-3.5 text-[13px] font-semibold text-[#a5a8ae]" aria-disabled="true">
+            <a
+                href="{{ route('admin.news.index') }}"
+                class="flex min-h-11 items-center gap-3 rounded-[10px] px-3.5 text-[13px] font-semibold transition {{ request()->routeIs('admin.news.*') ? 'bg-brand-green-900 text-white shadow-[0_8px_20px_rgba(41,105,62,0.16)]' : 'text-site-muted hover:bg-[#f3f7f2] hover:text-brand-green-950' }}"
+            >
                 <svg class="h-[18px] w-[18px] shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <path d="M6 3.75h9.25L19 7.5v12.75H6V3.75Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
                     <path d="M15 3.75V7.5h4M9 11h7M9 14.5h7M9 18h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
                 </svg>
                 <span class="flex-1">Berita</span>
-                <span class="rounded-full bg-[#eef1ee] px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.08em] text-[#90949a]">Segera</span>
-            </div>
+            </a>
         </div>
     </nav>
 

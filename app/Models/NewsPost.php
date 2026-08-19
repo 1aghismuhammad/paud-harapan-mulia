@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     'featured_image',
     'status',
     'published_at',
+    'tags',
     'meta_title',
     'meta_description',
 ])]
@@ -76,6 +77,7 @@ class NewsPost extends Model
     {
         return [
             'published_at' => 'datetime',
+            'tags' => 'array',
         ];
     }
 }

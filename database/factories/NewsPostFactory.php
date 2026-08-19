@@ -32,6 +32,7 @@ class NewsPostFactory extends Factory
             'featured_image' => null,
             'status' => NewsPost::STATUS_DRAFT,
             'published_at' => null,
+            'tags' => null,
             'meta_title' => null,
             'meta_description' => null,
         ];

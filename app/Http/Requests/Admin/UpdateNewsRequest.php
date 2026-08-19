@@ -21,7 +21,7 @@ class UpdateNewsRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'excerpt' => ['nullable', 'string', 'max:600'],
-            'content' => ['required', 'string'],
+            'content' => ['required', 'string', 'max:100000'],
             'featured_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
             'remove_featured_image' => ['nullable', 'boolean'],
             'status' => ['required', Rule::in([NewsPost::STATUS_DRAFT, NewsPost::STATUS_PUBLISHED])],
@@ -40,6 +40,7 @@ class UpdateNewsRequest extends FormRequest
         return [
             'title.required' => 'Judul berita wajib diisi.',
             'content.required' => 'Isi berita wajib diisi.',
+            'content.max' => 'Isi berita terlalu panjang. Maksimal 100.000 karakter HTML.',
             'featured_image.image' => 'Featured image harus berupa file gambar yang valid.',
             'featured_image.mimes' => 'Featured image hanya boleh berformat JPG, JPEG, PNG, atau WEBP.',
             'featured_image.max' => 'Ukuran featured image maksimal 5 MB.',

@@ -6,15 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreNewsRequest;
 use App\Http\Requests\Admin\UpdateNewsRequest;
 use App\Models\NewsPost;
+use App\Support\NewsContentSanitizer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Throwable;
 
 class NewsController extends Controller
 {
+    public function __construct(private readonly NewsContentSanitizer $contentSanitizer)
+    {
+    }
+
     public function index(): View
     {
         $newsPosts = NewsPost::query()
@@ -41,7 +47,7 @@ class NewsController extends Controller
                 'title' => $data['title'],
                 'slug' => $this->uniqueSlug($data['title']),
                 'excerpt' => $this->nullableText($data['excerpt'] ?? null),
-                'content' => $data['content'],
+                'content' => $this->sanitizeContent($data['content']),
                 'featured_image' => $featuredImage,
                 'status' => $data['status'],
                 'published_at' => $this->resolvePublishedAt($data['status'], $data['published_at'] ?? null),
@@ -82,7 +88,7 @@ class NewsController extends Controller
                 'title' => $data['title'],
                 'slug' => $this->uniqueSlug($data['title'], $newsPost),
                 'excerpt' => $this->nullableText($data['excerpt'] ?? null),
-                'content' => $data['content'],
+                'content' => $this->sanitizeContent($data['content']),
                 'featured_image' => $featuredImage,
                 'status' => $data['status'],
                 'published_at' => $this->resolvePublishedAt(
@@ -196,6 +202,19 @@ class NewsController extends Controller
         }
 
         return $existing ?? now();
+    }
+
+    private function sanitizeContent(string $content): string
+    {
+        $sanitized = $this->contentSanitizer->sanitize($content);
+
+        if (! $this->contentSanitizer->hasMeaningfulContent($sanitized)) {
+            throw ValidationException::withMessages([
+                'content' => 'Isi berita wajib memiliki teks atau gambar yang valid.',
+            ]);
+        }
+
+        return $sanitized;
     }
 
     private function nullableText(?string $value): ?string

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\NewsMediaController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'public.home.index')->name('home');
@@ -33,6 +34,7 @@ Route::prefix('admin')->name('admin.')->group(function (): void {
             Route::get('/', [NewsController::class, 'index'])->name('index');
             Route::get('/tambah', [NewsController::class, 'create'])->name('create');
             Route::post('/', [NewsController::class, 'store'])->name('store');
+            Route::post('/media', NewsMediaController::class)->middleware('throttle:30,1')->name('media.store');
             Route::get('/{newsPost}/edit', [NewsController::class, 'edit'])->name('edit');
             Route::put('/{newsPost}', [NewsController::class, 'update'])->name('update');
             Route::delete('/{newsPost}', [NewsController::class, 'destroy'])->name('destroy');

@@ -1,7 +1,7 @@
 # DESIGN — Company Profile PAUD Harapan Mulia
 
-**Version:** 1.2 — Reference Direction Locked  
-**Date:** 14 Agustus 2026
+**Version:** 1.3 — Public UI + Admin CMS Direction Locked  
+**Date:** 19 Agustus 2026
 
 ## 1. Visual Direction
 
@@ -222,11 +222,11 @@ Profile visual    4:3
 - reduced-motion support;
 - tidak mengandalkan warna saja.
 
-## 15. Phase 1 Review Gate
+## 15. Phase 1 Closure Rule
 
-User melakukan visual review setelah bundle Phase 1 diterapkan.
+Phase 1 public UI dianggap **frozen** setelah responsive QA, build, dan regression test lolos. Perubahan visual setelah closure hanya dilakukan untuk bug/regression nyata.
 
-Hal yang dapat direvisi tanpa mengubah architecture:
+Hal yang masih dapat direvisi tanpa mengubah architecture:
 
 - exact spacing;
 - font;
@@ -236,3 +236,267 @@ Hal yang dapat direvisi tanpa mengubah architecture:
 - card shadow;
 - copy placeholder;
 - green/orange shade.
+
+
+## 16. Admin CMS Visual Direction
+
+Admin CMS menggunakan identitas visual yang sama dengan website publik, tetapi layout dibuat lebih utilitarian dan fokus pada pekerjaan admin.
+
+Prinsip:
+
+- hijau tetap menjadi warna primer;
+- background admin menggunakan surface terang dan whitespace cukup;
+- sidebar + header reusable;
+- informasi akun tampil jelas tanpa mengekspos data sensitif;
+- action primer menggunakan tombol hijau;
+- destructive action menggunakan treatment terpisah dan selalu membutuhkan konfirmasi;
+- admin UI tidak meniru public homepage secara literal;
+- tidak memakai dashboard analytics kompleks jika belum ada kebutuhan nyata.
+
+### Desktop
+
+```text
+┌──────────────┬─────────────────────────────────────────────┐
+│ Sidebar      │ Header / Page Title                        │
+│              ├─────────────────────────────────────────────┤
+│ Dashboard    │ Main Admin Content                         │
+│ Berita       │                                             │
+│              │                                             │
+│ Lihat Website│                                             │
+│ Keluar       │                                             │
+└──────────────┴─────────────────────────────────────────────┘
+```
+
+### Mobile / Tablet
+
+- sidebar berubah menjadi off-canvas drawer;
+- hamburger membuka drawer;
+- overlay dan `Escape` dapat menutup drawer;
+- body scroll dikunci saat drawer terbuka;
+- main content tidak boleh terjepit oleh sidebar desktop.
+
+## 17. News CMS Information Architecture
+
+Phase 3 news CMS menggunakan satu jenis konten: **Berita**. Tidak ada category taxonomy pada MVP.
+
+Field editorial:
+
+```text
+Judul              required
+Isi Berita         required / rich text
+Excerpt            optional
+Tags               optional / custom
+Featured Image     optional
+Status             draft | published
+Tanggal Publish    default now, dapat dipilih
+Author              otomatis dari admin login
+Slug                otomatis dari judul
+Meta Title          optional
+Meta Description    optional
+```
+
+Aturan:
+
+- tidak ada public category management;
+- tags dapat dibuat custom;
+- slug tidak menjadi input utama admin;
+- author tidak dapat dimanipulasi dari form;
+- published dengan tanggal masa depan diperlakukan sebagai scheduled;
+- draft dan scheduled belum boleh tampil di public scope;
+- featured image boleh kosong saat draft maupun published.
+
+## 18. News Editor — Gutenberg-Inspired, Not Gutenberg Clone
+
+Referensi UX editor mengambil bagian yang berguna dari WordPress/Gutenberg: **writing canvas besar, title-first flow, post settings di sidebar, dan action publish yang jelas**. Implementasi tetap sederhana dan mempertahankan backend Laravel yang sudah ada.
+
+Yang diambil:
+
+- area menulis menjadi bagian paling dominan;
+- title field besar di atas writing canvas;
+- toolbar rich-text ringkas;
+- sidebar kanan untuk pengaturan post;
+- top action untuk `Simpan Draft` dan `Publish`;
+- featured image di sidebar;
+- excerpt di sidebar;
+- publication status + date di sidebar;
+- author ditampilkan read-only;
+- tags menggunakan interaction yang lebih nyaman seperti chips;
+- SEO ditempatkan sebagai pengaturan sekunder;
+- responsive layout mengubah sidebar settings menjadi panel/stack di layar kecil.
+
+Yang **tidak** diambil:
+
+- full block editor architecture;
+- Categories;
+- Template;
+- Discussion / Comments;
+- Post Format;
+- custom HTML editor;
+- font family bebas;
+- ukuran font bebas;
+- warna teks bebas;
+- iframe/embed bebas;
+- plugin-style settings yang tidak relevan.
+
+Target layout desktop:
+
+```text
+┌───────────────────────────────────────────────────────────────────┐
+│ ← Berita                        Simpan Draft        Publish        │
+├──────────────────────────────────────────────┬────────────────────┤
+│                                              │ POST SETTINGS      │
+│ Tambahkan judul...                           │                    │
+│                                              │ Featured Image     │
+│ Rich Text Toolbar                            │ Excerpt            │
+│ ──────────────────────────────────────────   │ Status             │
+│                                              │ Tanggal Publish    │
+│ Writing Canvas                               │ Author             │
+│                                              │ Tags               │
+│                                              │ SEO                │
+│                                              │                    │
+└──────────────────────────────────────────────┴────────────────────┘
+```
+
+Recommended desktop proportion:
+
+```text
+Writing area    ~72–76%
+Settings panel  ~24–28%
+```
+
+Pada `< 992px`, settings panel tidak dipaksa tetap di kanan. Panel berubah menjadi stack/accordion setelah editor agar writing area tetap luas.
+
+## 19. Rich Text & Media Rules
+
+Toolbar minimum:
+
+```text
+Undo
+Redo
+Paragraph
+Heading 2
+Heading 3
+Bold
+Italic
+Bullet List
+Numbered List
+Blockquote
+Link
+Inline Image
+```
+
+Tidak ada tool styling bebas yang dapat merusak konsistensi public article.
+
+### Featured Image
+
+- gambar utama artikel;
+- opsional;
+- JPG/JPEG/PNG/WEBP;
+- maksimum 5 MB;
+- disimpan pada public disk di folder `news/`;
+- dapat diganti atau dihapus dari editor.
+
+### Inline Image
+
+- digunakan di dalam body artikel;
+- dapat memiliki caption;
+- disimpan di `news/content/`;
+- upload hanya melalui authenticated endpoint;
+- format sama dengan featured image;
+- bukan remote arbitrary image.
+
+### HTML Sanitization
+
+Rich text harus disanitasi sebelum disimpan/render.
+
+Allowlist elemen utama:
+
+```text
+p br h2 h3 strong b em i ul ol li blockquote a figure img figcaption
+```
+
+Elemen/atribut berbahaya harus dibuang, termasuk:
+
+```text
+script iframe object embed form style
+onclick onerror onload
+javascript:
+```
+
+Inline image yang dipertahankan hanya image dari managed news content storage.
+
+## 20. Public News Design Direction
+
+Public news mengambil hierarchy editorial yang kuat, bukan meniru identitas visual situs referensi.
+
+### News Card
+
+```text
+[ Featured Image jika ada ]
+Tanggal
+Judul
+Excerpt / fallback content
+Baca Selengkapnya
+```
+
+- image ratio default 16:9;
+- card tetap rapi jika featured image kosong;
+- excerpt boleh fallback ke potongan plain text content;
+- hanya `published` dengan `published_at <= now()` yang boleh tampil.
+
+### News Detail
+
+```text
+Page Hero / Header
+Tanggal Publikasi
+Judul Berita
+Author
+
+Breadcrumb
+Beranda / Berita / Judul
+
+[ Featured Image jika ada ]
+
+Article Content
+- paragraph
+- H2/H3
+- list
+- quote
+- inline images + caption
+
+Tags jika ada
+```
+
+Reading column ditargetkan sekitar `800–900px` pada desktop agar artikel nyaman dibaca.
+
+SEO fallback:
+
+```text
+meta_title       -> title jika kosong
+meta_description -> excerpt atau potongan content jika kosong
+```
+
+## 21. CMS UI QA Gate
+
+Sebelum editor/public news dianggap stabil, lakukan QA minimal pada:
+
+```text
+390 × 844
+768 × 1024
+992 × 900
+1200 × 900
+1440 × 900
+```
+
+Checklist:
+
+- editor tidak horizontal overflow;
+- toolbar usable dengan keyboard dan touch;
+- settings panel tetap dapat diakses pada mobile;
+- save/publish action selalu jelas;
+- featured/inline image preview tidak merusak layout;
+- focus state terlihat;
+- destructive action tidak berdekatan dengan action primer tanpa pembeda;
+- admin drawer tidak overlap permanen dengan content;
+- public rich-text typography konsisten dengan brand;
+- article image responsive dan tidak gepeng.

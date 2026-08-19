@@ -6,6 +6,8 @@
         $newsPost?->published_at?->format('Y-m-d\TH:i') ?? now()->format('Y-m-d\TH:i')
     );
     $tagValue = old('tags', $newsPost?->tags ? implode(', ', $newsPost->tags) : '');
+    $contentValue = old('content', $newsPost?->content ?? '');
+    $safeEditorContent = app(\App\Support\NewsContentSanitizer::class)->sanitize($contentValue);
 @endphp
 
 @if ($errors->any())
@@ -38,16 +40,50 @@
         </div>
 
         <div>
-            <label for="content" class="block text-[12px] font-semibold text-site-text">Isi Berita <span class="text-red-600">*</span></label>
-            <textarea
-                id="content"
-                name="content"
-                rows="16"
-                required
-                class="mt-2 w-full rounded-[10px] border border-site-border px-3.5 py-3 text-[13px] leading-7 text-site-text outline-none transition focus:border-brand-green-600 focus:ring-2 focus:ring-[#dfeeda]"
-                placeholder="Tulis isi berita di sini..."
-            >{{ old('content', $newsPost?->content) }}</textarea>
-            <p class="mt-1.5 text-[10px] leading-5 text-[#9a9da5]">Phase 3D menggunakan textarea aman. Toolbar rich text dan gambar di dalam artikel ditambahkan pada Phase 3F.</p>
+            <div class="flex flex-wrap items-end justify-between gap-3">
+                <div>
+                    <label for="news-rich-editor" class="block text-[12px] font-semibold text-site-text">Isi Berita <span class="text-red-600">*</span></label>
+                    <p class="mt-1 text-[10px] leading-5 text-site-muted">Gunakan format seperlunya agar artikel tetap konsisten dengan desain website.</p>
+                </div>
+                <span class="rounded-full bg-[#edf5ea] px-2.5 py-1 text-[9px] font-semibold text-brand-green-950">Rich Text Aktif</span>
+            </div>
+
+            <div class="mt-2 overflow-hidden rounded-[12px] border border-site-border bg-white focus-within:border-brand-green-600 focus-within:ring-2 focus-within:ring-[#dfeeda]">
+                <div data-news-editor-toolbar class="flex flex-wrap items-center gap-1.5 border-b border-site-border bg-[#f8faf7] px-2.5 py-2">
+                    <button type="button" data-editor-command="undo" class="rounded-[7px] px-2.5 py-1.5 text-[11px] font-semibold text-site-muted transition hover:bg-white hover:text-site-text" title="Undo">↶</button>
+                    <button type="button" data-editor-command="redo" class="rounded-[7px] px-2.5 py-1.5 text-[11px] font-semibold text-site-muted transition hover:bg-white hover:text-site-text" title="Redo">↷</button>
+                    <span class="mx-0.5 h-6 w-px bg-site-border"></span>
+                    <select data-editor-block class="min-h-8 rounded-[7px] border border-site-border bg-white px-2 text-[10px] font-semibold text-site-text outline-none focus:border-brand-green-600">
+                        <option value="p">Paragraf</option>
+                        <option value="h2">Heading 2</option>
+                        <option value="h3">Heading 3</option>
+                        <option value="blockquote">Kutipan</option>
+                    </select>
+                    <button type="button" data-editor-command="bold" class="rounded-[7px] px-2.5 py-1.5 text-[11px] font-bold text-site-text transition hover:bg-white" title="Bold">B</button>
+                    <button type="button" data-editor-command="italic" class="rounded-[7px] px-2.5 py-1.5 text-[11px] italic text-site-text transition hover:bg-white" title="Italic">I</button>
+                    <button type="button" data-editor-command="insertUnorderedList" class="rounded-[7px] px-2.5 py-1.5 text-[10px] font-semibold text-site-muted transition hover:bg-white hover:text-site-text">• List</button>
+                    <button type="button" data-editor-command="insertOrderedList" class="rounded-[7px] px-2.5 py-1.5 text-[10px] font-semibold text-site-muted transition hover:bg-white hover:text-site-text">1. List</button>
+                    <button type="button" data-editor-link class="rounded-[7px] px-2.5 py-1.5 text-[10px] font-semibold text-site-muted transition hover:bg-white hover:text-site-text">Link</button>
+                    <button type="button" data-editor-image class="rounded-[7px] bg-brand-green-900 px-3 py-1.5 text-[10px] font-semibold text-white transition hover:bg-brand-green-950">+ Gambar</button>
+                </div>
+
+                <div
+                    id="news-rich-editor"
+                    data-news-editor
+                    data-upload-url="{{ route('admin.news.media.store') }}"
+                    contenteditable="true"
+                    role="textbox"
+                    aria-multiline="true"
+                    class="min-h-[420px] px-4 py-4 text-[13px] leading-7 text-site-text outline-none [&_a]:text-brand-green-700 [&_a]:underline [&_blockquote]:my-5 [&_blockquote]:border-l-4 [&_blockquote]:border-brand-green-600 [&_blockquote]:bg-[#f5f8f4] [&_blockquote]:px-4 [&_blockquote]:py-3 [&_figcaption]:mt-2 [&_figcaption]:text-center [&_figcaption]:text-[10px] [&_figcaption]:italic [&_figcaption]:text-site-muted [&_figure]:my-6 [&_h2]:mb-3 [&_h2]:mt-7 [&_h2]:text-[22px] [&_h2]:font-semibold [&_h3]:mb-2 [&_h3]:mt-6 [&_h3]:text-[17px] [&_h3]:font-semibold [&_img]:max-h-[520px] [&_img]:w-full [&_img]:rounded-[10px] [&_img]:border [&_img]:border-site-border [&_img]:object-contain [&_li]:my-1 [&_ol]:my-4 [&_ol]:list-decimal [&_ol]:pl-6 [&_p]:my-3 [&_ul]:my-4 [&_ul]:list-disc [&_ul]:pl-6"
+                >{!! $safeEditorContent !!}</div>
+            </div>
+
+            <textarea id="content" name="content" class="sr-only" tabindex="-1" aria-hidden="true">{{ $safeEditorContent }}</textarea>
+            <input id="news_inline_image" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" class="sr-only">
+            <div class="mt-2 flex flex-wrap items-center justify-between gap-2">
+                <p class="text-[10px] leading-5 text-[#9a9da5]">Format yang diizinkan: paragraf, H2/H3, bold, italic, list, link, kutipan, serta gambar + caption.</p>
+                <p data-editor-upload-status class="text-[10px] font-medium text-brand-green-700" aria-live="polite"></p>
+            </div>
         </div>
 
         <div>
@@ -189,6 +225,199 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        const editor = document.querySelector('[data-news-editor]');
+        const toolbar = document.querySelector('[data-news-editor-toolbar]');
+        const contentInput = document.getElementById('content');
+        const inlineImageInput = document.getElementById('news_inline_image');
+        const uploadStatus = document.querySelector('[data-editor-upload-status]');
+        const form = editor?.closest('form');
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+        let savedRange = null;
+
+        if (editor && toolbar && contentInput && form) {
+            try {
+                document.execCommand('defaultParagraphSeparator', false, 'p');
+            } catch {
+                // Browser fallback: editor tetap dapat digunakan tanpa default paragraph command.
+            }
+
+            const syncContent = () => {
+                contentInput.value = editor.innerHTML.trim();
+            };
+
+            const saveSelection = () => {
+                const selection = window.getSelection();
+
+                if (!selection || selection.rangeCount === 0 || !editor.contains(selection.anchorNode)) {
+                    return;
+                }
+
+                savedRange = selection.getRangeAt(0).cloneRange();
+            };
+
+            const restoreSelection = () => {
+                if (!savedRange) {
+                    editor.focus();
+                    return null;
+                }
+
+                const selection = window.getSelection();
+
+                if (!selection) {
+                    return null;
+                }
+
+                selection.removeAllRanges();
+                selection.addRange(savedRange);
+
+                return savedRange;
+            };
+
+            const runCommand = (command, value = null) => {
+                editor.focus();
+                document.execCommand(command, false, value);
+                syncContent();
+                saveSelection();
+            };
+
+            toolbar.addEventListener('mousedown', (event) => {
+                if (event.target.closest('button')) {
+                    event.preventDefault();
+                }
+            });
+
+            toolbar.querySelectorAll('[data-editor-command]').forEach((button) => {
+                button.addEventListener('click', () => {
+                    runCommand(button.dataset.editorCommand);
+                });
+            });
+
+            toolbar.querySelector('[data-editor-block]')?.addEventListener('change', (event) => {
+                runCommand('formatBlock', event.target.value);
+                event.target.value = 'p';
+            });
+
+            toolbar.querySelector('[data-editor-link]')?.addEventListener('click', () => {
+                const href = window.prompt('Masukkan URL. Gunakan https:// untuk tautan eksternal.');
+
+                if (!href) {
+                    return;
+                }
+
+                const safeClientPattern = /^(https?:\/\/|mailto:|tel:|\/(?!\/)|#)/i;
+
+                if (!safeClientPattern.test(href.trim())) {
+                    window.alert('URL tidak valid. Gunakan http(s), mailto, tel, URL internal /..., atau anchor #....');
+                    return;
+                }
+
+                runCommand('createLink', href.trim());
+            });
+
+            editor.addEventListener('input', () => {
+                syncContent();
+                saveSelection();
+            });
+            editor.addEventListener('keyup', saveSelection);
+            editor.addEventListener('mouseup', saveSelection);
+            editor.addEventListener('focus', saveSelection);
+            form.addEventListener('submit', syncContent);
+            syncContent();
+
+            toolbar.querySelector('[data-editor-image]')?.addEventListener('click', () => {
+                saveSelection();
+                inlineImageInput?.click();
+            });
+
+            inlineImageInput?.addEventListener('change', async () => {
+                const [file] = inlineImageInput.files;
+
+                if (!file || !csrfToken) {
+                    return;
+                }
+
+                const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+
+                if (!allowedTypes.includes(file.type)) {
+                    uploadStatus.textContent = 'Format gambar tidak didukung.';
+                    inlineImageInput.value = '';
+                    return;
+                }
+
+                if (file.size > 5 * 1024 * 1024) {
+                    uploadStatus.textContent = 'Ukuran gambar maksimal 5 MB.';
+                    inlineImageInput.value = '';
+                    return;
+                }
+
+                uploadStatus.textContent = 'Mengunggah gambar...';
+
+                const payload = new FormData();
+                payload.append('image', file);
+
+                try {
+                    const response = await fetch(editor.dataset.uploadUrl, {
+                        method: 'POST',
+                        body: payload,
+                        credentials: 'same-origin',
+                        headers: {
+                            Accept: 'application/json',
+                            'X-CSRF-TOKEN': csrfToken,
+                        },
+                    });
+                    const data = await response.json().catch(() => ({}));
+
+                    if (!response.ok) {
+                        const message = data?.errors?.image?.[0] || data?.message || 'Upload gambar gagal.';
+                        throw new Error(message);
+                    }
+
+                    const caption = window.prompt('Caption foto (opsional):', '') ?? '';
+                    const figure = document.createElement('figure');
+                    const image = document.createElement('img');
+                    const paragraph = document.createElement('p');
+
+                    image.src = data.url;
+                    image.alt = caption.trim() || file.name;
+                    image.loading = 'lazy';
+                    figure.appendChild(image);
+
+                    if (caption.trim()) {
+                        const figcaption = document.createElement('figcaption');
+                        figcaption.textContent = caption.trim();
+                        figure.appendChild(figcaption);
+                    }
+
+                    paragraph.appendChild(document.createElement('br'));
+
+                    const range = restoreSelection();
+
+                    if (range && editor.contains(range.commonAncestorContainer)) {
+                        range.deleteContents();
+                        range.insertNode(paragraph);
+                        range.insertNode(figure);
+                        range.setStartAfter(paragraph);
+                        range.collapse(true);
+
+                        const selection = window.getSelection();
+                        selection?.removeAllRanges();
+                        selection?.addRange(range);
+                    } else {
+                        editor.append(figure, paragraph);
+                    }
+
+                    syncContent();
+                    editor.focus();
+                    saveSelection();
+                    uploadStatus.textContent = 'Gambar berhasil dimasukkan.';
+                } catch (error) {
+                    uploadStatus.textContent = error instanceof Error ? error.message : 'Upload gambar gagal.';
+                } finally {
+                    inlineImageInput.value = '';
+                }
+            });
+        }
+
         const input = document.getElementById('featured_image');
         const previewWrap = document.getElementById('featured-preview-wrap');
         const preview = document.getElementById('featured-preview');

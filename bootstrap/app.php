@@ -17,9 +17,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->redirectUsersTo(fn (): string => route('admin.dashboard'));
         $middleware->append(SecurityHeaders::class);
 
-        if (env('APP_ENV') === 'production') {
-            $middleware->trustProxies(at: '*');
-        }
+        app()->booted(function () use ($middleware): void {
+            if (config('app.env') === 'production') {
+                $middleware->trustProxies(at: '*');
+            }
+        });
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

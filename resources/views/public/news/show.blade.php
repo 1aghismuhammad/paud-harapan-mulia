@@ -80,6 +80,7 @@
                             src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($newsPost->featured_image) }}"
                             alt="{{ $newsPost->title }}"
                             class="max-h-[680px] w-full rounded-[8px] border border-site-border object-cover shadow-[0_16px_42px_rgba(17,24,39,0.07)]"
+                            decoding="async"
                         >
                     </figure>
                 @endif

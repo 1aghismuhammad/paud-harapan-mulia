@@ -20,6 +20,8 @@
                     src="{{ asset('images/paud/hero-sekolah.jpeg') }}"
                     alt="Dokumentasi PAUD Harapan Mulia"
                     class="aspect-[1.8/1] w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
                 >
             </div>
 

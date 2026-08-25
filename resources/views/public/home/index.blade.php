@@ -73,11 +73,15 @@
                             src="{{ asset($item['icon']) }}"
                             alt=""
                             class="home-feature-icon-default"
+                            loading="lazy"
+                            decoding="async"
                         >
                         <img
                             src="{{ asset($item['icon_hover']) }}"
                             alt=""
                             class="home-feature-icon-hover"
+                            loading="lazy"
+                            decoding="async"
                         >
                     </span>
 
@@ -99,6 +103,8 @@
                             src="{{ asset('images/paud/visi-anak.jpeg') }}"
                             alt="Kegiatan siswa PAUD Harapan Mulia"
                             class="aspect-[4/5] w-full object-cover"
+                            loading="lazy"
+                            decoding="async"
                         >
                     </div>
 
@@ -107,6 +113,8 @@
                             src="{{ asset('images/paud/visi-kegiatan.jpeg') }}"
                             alt="Kegiatan belajar PAUD Harapan Mulia"
                             class="aspect-[4/5] w-full object-cover"
+                            loading="lazy"
+                            decoding="async"
                         >
                     </div>
                 </div>
@@ -164,6 +172,8 @@
                         src="{{ asset('images/paud/profile-sekolah.jpeg') }}"
                         alt="Dokumentasi PAUD Harapan Mulia"
                         class="h-full w-full object-cover opacity-95 transition-[transform,filter,opacity] duration-[1200ms] ease-out group-hover:scale-[1.055] group-hover:brightness-[1.04] group-hover:saturate-[1.08] group-hover:opacity-100"
+                        loading="lazy"
+                        decoding="async"
                     >
 
                     <button
@@ -223,13 +233,13 @@
 
             <div class="mt-10 flex flex-wrap justify-center gap-6 md:gap-8 lg:mt-14 lg:gap-10">
                 <a href="{{ route('school.paud') }}" data-motion-unit-card class="group relative h-[190px] w-[190px] overflow-hidden rounded-[5px] bg-brand-green-950 text-white shadow-[0_20px_46px_rgba(17,24,39,0.14)] transition hover:-translate-y-1 md:h-[250px] md:w-[250px] lg:h-[330px] lg:w-[330px]">
-                    <img src="{{ asset('images/paud/unit-paud.jpeg') }}" alt="Unit PAUD Harapan Mulia" class="h-full w-full object-cover opacity-50 transition duration-300 group-hover:scale-105 group-hover:opacity-60">
+                    <img src="{{ asset('images/paud/unit-paud.jpeg') }}" alt="Unit PAUD Harapan Mulia" class="h-full w-full object-cover opacity-50 transition duration-300 group-hover:scale-105 group-hover:opacity-60" loading="lazy" decoding="async">
                     <div class="absolute inset-0 bg-gradient-to-t from-brand-green-950/40 via-brand-green-950/10 to-brand-green-950/20"></div>
                     <span class="absolute inset-0 flex items-center justify-center text-[32px] font-medium tracking-[0.02em] md:text-[42px] lg:text-[54px]">PAUD</span>
                 </a>
 
                 <a href="{{ route('school.tk') }}" data-motion-unit-card class="group relative h-[190px] w-[190px] overflow-hidden rounded-[5px] bg-brand-green-950 text-white shadow-[0_20px_46px_rgba(17,24,39,0.14)] transition hover:-translate-y-1 md:h-[250px] md:w-[250px] lg:h-[330px] lg:w-[330px]">
-                    <img src="{{ asset('images/paud/unit-tk.jpeg') }}" alt="Unit TK Harapan Mulia" class="h-full w-full object-cover opacity-50 transition duration-300 group-hover:scale-105 group-hover:opacity-60">
+                    <img src="{{ asset('images/paud/unit-tk.jpeg') }}" alt="Unit TK Harapan Mulia" class="h-full w-full object-cover opacity-50 transition duration-300 group-hover:scale-105 group-hover:opacity-60" loading="lazy" decoding="async">
                     <div class="absolute inset-0 bg-gradient-to-t from-brand-green-950/40 via-brand-green-950/10 to-brand-green-950/20"></div>
                     <span class="absolute inset-0 flex items-center justify-center text-[32px] font-medium tracking-[0.02em] md:text-[42px] lg:text-[54px]">TK</span>
                 </a>

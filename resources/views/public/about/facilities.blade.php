@@ -103,6 +103,7 @@
                                                 src="{{ asset($item['image']) }}"
                                                 alt="{{ $item['title'] }} PAUD Harapan Mulia"
                                                 class="h-full w-full object-cover transition duration-500 ease-out group-hover:scale-[1.035] group-focus:scale-[1.035]"
+                                                decoding="async"
                                                 @if ($sectionIndex > 0 || $itemIndex > 0) loading="lazy" @endif
                                             >
 

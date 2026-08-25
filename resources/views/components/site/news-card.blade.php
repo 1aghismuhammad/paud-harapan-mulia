@@ -20,6 +20,7 @@
                     alt=""
                     class="h-full w-full object-cover transition duration-500 hover:scale-[1.025]"
                     loading="lazy"
+                    decoding="async"
                 >
             </div>
         @endif

@@ -11,6 +11,7 @@
                     src="{{ asset('images/paud/unit-tk.jpeg') }}"
                     alt="TK Islam Terpadu Harapan Mulia"
                     class="aspect-[4/3] w-full object-cover sm:aspect-[16/8] lg:aspect-[2.1/1]"
+                    decoding="async"
                 >
                 <div class="absolute inset-x-[22%] bottom-[8%] hidden min-h-16 items-center justify-center bg-white/95 px-6 text-center lg:flex">
                     <span class="text-[14px] font-medium tracking-[0.12em] text-brand-green-700 uppercase">TK Islam Terpadu Harapan Mulia</span>
@@ -40,6 +41,8 @@
                                 src="{{ asset('images/paud/visi-anak.jpeg') }}"
                                 alt="Siswa TK Harapan Mulia"
                                 class="aspect-[2/3] w-full object-cover transition duration-500 md:aspect-[3/4] hover:scale-[1.035]"
+                                loading="lazy"
+                                decoding="async"
                             >
                         </div>
 
@@ -48,6 +51,8 @@
                                 src="{{ asset('images/paud/unit-tk.jpeg') }}"
                                 alt="Aktivitas TK Harapan Mulia"
                                 class="aspect-[2/3] w-full object-cover transition duration-500 md:aspect-[3/4] hover:scale-[1.035]"
+                                loading="lazy"
+                                decoding="async"
                             >
                         </div>
                     </div>
@@ -165,6 +170,8 @@
                                                 src="{{ asset($item['image']) }}"
                                                 alt="{{ $item['title'] }} — {{ $showcase['title'] }} TK Harapan Mulia"
                                                 class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.035]"
+                                                loading="lazy"
+                                                decoding="async"
                                             >
 
                                             <div

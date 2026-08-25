@@ -16,6 +16,7 @@
                             src="{{ asset($slide['image']) }}"
                             alt="{{ $slide['alt'] }}"
                             class="h-full w-full object-cover"
+                            decoding="async"
                             @if ($index === 0) fetchpriority="high" @else loading="lazy" @endif
                         >
                     </div>

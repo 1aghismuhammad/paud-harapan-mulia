@@ -15,7 +15,7 @@
     --}}
     <section class="relative bg-brand-green-900 text-white">
         <div class="inner-content-container relative flex min-h-[150px] items-center md:min-h-[130px] lg:min-h-[82px]">
-            <h1 class="text-[26px] font-semibold tracking-[-0.03em] md:text-[30px] lg:hidden">
+            <h1 class="text-[26px] font-semibold tracking-[-0.03em] md:text-[30px] lg:sr-only">
                 Fasilitas
             </h1>
 

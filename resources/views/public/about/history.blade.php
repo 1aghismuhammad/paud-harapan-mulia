@@ -12,7 +12,7 @@
 
     <section class="page-section-space">
         <div class="article-container">
-            <h2 class="page-title text-[36px] md:text-[44px] lg:text-[48px]">Sejarah</h2>
+            <p class="page-title text-[36px] md:text-[44px] lg:text-[48px]">Sejarah</p>
             <p class="mt-5 text-[15px] font-medium text-site-muted md:text-[16px] lg:text-[17px]">Sejarah Berdirinya Sekolah</p>
 
             <div class="mx-auto mt-10 max-w-[900px] overflow-hidden rounded-[5px] bg-slate-100 md:mt-12 lg:max-w-[1000px]">

@@ -8,7 +8,7 @@
 
     <section class="page-section-space">
         <div class="article-container">
-            <h2 class="page-title text-[36px] md:text-[44px] lg:text-[48px]">Visi & Misi</h2>
+            <p class="page-title text-[36px] md:text-[44px] lg:text-[48px]">Visi & Misi</p>
 
             <div class="mt-10 space-y-10 text-[16px] leading-[1.95] text-site-muted md:mt-12 md:text-[17px] md:leading-[2] lg:text-[18px] lg:leading-[2]">
                 <p>

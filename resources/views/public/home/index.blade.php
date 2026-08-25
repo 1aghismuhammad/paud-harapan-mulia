@@ -43,6 +43,8 @@
         ];
     @endphp
 
+    <h1 class="sr-only">PAUD Islam Terpadu Harapan Mulia</h1>
+
     <x-site.hero />
 
     <section class="relative z-10 mt-12 md:mt-14 lg:mt-16">

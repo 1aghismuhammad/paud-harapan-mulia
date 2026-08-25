@@ -31,9 +31,13 @@
                         autofocus
                         class="h-12 w-full rounded-[10px] border border-site-border bg-white px-4 text-[14px] text-site-text outline-none transition focus:border-brand-green-600 focus:ring-4 focus:ring-brand-green-600/10"
                         placeholder="admin@contoh.sch.id"
+                        @error('email')
+                            aria-invalid="true"
+                            aria-describedby="email-error"
+                        @enderror
                     >
                     @error('email')
-                        <p class="mt-2 text-[12px] font-medium text-red-600">{{ $message }}</p>
+                        <p id="email-error" class="mt-2 text-[12px] font-medium text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -47,9 +51,13 @@
                         required
                         class="h-12 w-full rounded-[10px] border border-site-border bg-white px-4 text-[14px] text-site-text outline-none transition focus:border-brand-green-600 focus:ring-4 focus:ring-brand-green-600/10"
                         placeholder="Masukkan password"
+                        @error('password')
+                            aria-invalid="true"
+                            aria-describedby="password-error"
+                        @enderror
                     >
                     @error('password')
-                        <p class="mt-2 text-[12px] font-medium text-red-600">{{ $message }}</p>
+                        <p id="password-error" class="mt-2 text-[12px] font-medium text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
 

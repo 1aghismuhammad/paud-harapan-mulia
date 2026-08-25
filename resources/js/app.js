@@ -24,6 +24,8 @@ ready(() => {
 
     if (menuButton && mobileMenu) {
         const setMenu = (open) => {
+            const wasOpen = menuButton.getAttribute('aria-expanded') === 'true';
+
             clearTimeout(menuCloseTimer);
 
             menuButton.setAttribute('aria-expanded', String(open));
@@ -46,6 +48,10 @@ ready(() => {
             }
 
             mobileMenu.dataset.open = 'false';
+
+            if (wasOpen) {
+                menuButton.focus();
+            }
 
             if (prefersReducedMotion()) {
                 mobileMenu.hidden = true;
@@ -469,9 +475,6 @@ ready(() => {
         const setupCardInteraction = () => {
             cards.forEach((card) => {
                 card.style.cursor = 'pointer';
-                card.setAttribute('tabindex', '0');
-                card.setAttribute('role', 'button');
-                card.setAttribute('aria-label', 'Tampilkan testimonial berikutnya');
 
                 card.addEventListener('click', () => {
                     if (isMobile()) {

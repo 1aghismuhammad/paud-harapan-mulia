@@ -1,13 +1,54 @@
 <!DOCTYPE html>
 <html lang="id">
     <head>
+        @php
+            $seoTitle = trim($__env->yieldContent('title', 'PAUD Harapan Mulia'));
+            $seoDescription = trim($__env->yieldContent('meta_description', 'Website resmi PAUD Islam Terpadu Harapan Mulia Ngawen, Blora.'));
+            $seoCanonical = url()->current();
+            $seoImage = asset('images/paud/logo-official.webp');
+            $seoSiteName = 'PAUD IT Harapan Mulia';
+            $seoOrganization = [
+                '@context' => 'https://schema.org',
+                '@type' => 'EducationalOrganization',
+                'name' => 'PAUD Islam Terpadu Harapan Mulia',
+                'alternateName' => $seoSiteName,
+                'url' => url('/'),
+                'logo' => $seoImage,
+                'telephone' => '+6289613624186',
+                'email' => 'tkitharapanmulia063@gmail.com',
+                'address' => [
+                    '@type' => 'PostalAddress',
+                    'streetAddress' => 'Jl. Caren RT 01 RW 04',
+                    'addressLocality' => 'Ngawen',
+                    'addressRegion' => 'Blora',
+                    'addressCountry' => 'ID',
+                ],
+            ];
+        @endphp
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="@yield('meta_description', 'Website resmi PAUD Islam Terpadu Harapan Mulia Ngawen, Blora.')">
+        <meta name="description" content="{{ $seoDescription }}">
         <meta name="theme-color" content="#29693E">
 
-        <title>@yield('title', 'PAUD Harapan Mulia')</title>
+        <title>{{ $seoTitle }}</title>
+        <link rel="canonical" href="{{ $seoCanonical }}">
         <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
+
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="{{ $seoSiteName }}">
+        <meta property="og:locale" content="id_ID">
+        <meta property="og:title" content="{{ $seoTitle }}">
+        <meta property="og:description" content="{{ $seoDescription }}">
+        <meta property="og:url" content="{{ $seoCanonical }}">
+        <meta property="og:image" content="{{ $seoImage }}">
+
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{{ $seoTitle }}">
+        <meta name="twitter:description" content="{{ $seoDescription }}">
+        <meta name="twitter:image" content="{{ $seoImage }}">
+
+        <script type="application/ld+json">{!! json_encode($seoOrganization, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}</script>
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">

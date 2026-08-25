@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', 'TK — Harapan Mulia')
+@section('title', 'TK — PAUD Harapan Mulia')
 @section('meta_description', 'TK Islam Terpadu Harapan Mulia di Kecamatan Ngawen, Kabupaten Blora.')
 
 @section('content')

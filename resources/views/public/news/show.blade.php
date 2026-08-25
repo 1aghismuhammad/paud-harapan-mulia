@@ -4,13 +4,45 @@
 @section('meta_description', $metaDescription)
 
 @push('head')
+    @php
+        $articleTitle = $newsPost->meta_title ?: $newsPost->title;
+        $articleUrl = route('news.show', ['newsPost' => $newsPost->slug]);
+        $articleImage = $newsPost->featured_image
+            ? url(\Illuminate\Support\Facades\Storage::disk('public')->url($newsPost->featured_image))
+            : null;
+        $articleSchema = [
+            '@context' => 'https://schema.org',
+            '@type' => 'NewsArticle',
+            'headline' => $articleTitle,
+            'description' => $metaDescription,
+            'datePublished' => $newsPost->published_at?->toAtomString(),
+            'dateModified' => $newsPost->updated_at?->toAtomString(),
+            'mainEntityOfPage' => $articleUrl,
+            'author' => [
+                '@type' => 'Person',
+                'name' => $newsPost->author?->name ?? 'PAUD IT Harapan Mulia',
+            ],
+            'publisher' => [
+                '@type' => 'EducationalOrganization',
+                'name' => 'PAUD IT Harapan Mulia',
+            ],
+        ];
+
+        if ($articleImage !== null) {
+            $articleSchema['image'] = $articleImage;
+        }
+    @endphp
     <meta property="og:type" content="article">
-    <meta property="og:title" content="{{ $newsPost->meta_title ?: $newsPost->title }}">
+    <meta property="og:title" content="{{ $articleTitle }}">
     <meta property="og:description" content="{{ $metaDescription }}">
-    <meta property="og:url" content="{{ route('news.show', ['newsPost' => $newsPost->slug]) }}">
-    @if ($newsPost->featured_image)
-        <meta property="og:image" content="{{ url(\Illuminate\Support\Facades\Storage::disk('public')->url($newsPost->featured_image)) }}">
+    <meta property="og:url" content="{{ $articleUrl }}">
+    <meta name="twitter:title" content="{{ $articleTitle }}">
+    <meta name="twitter:description" content="{{ $metaDescription }}">
+    @if ($articleImage)
+        <meta property="og:image" content="{{ $articleImage }}">
+        <meta name="twitter:image" content="{{ $articleImage }}">
     @endif
+    <script type="application/ld+json">{!! json_encode($articleSchema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}</script>
 @endpush
 
 @section('content')

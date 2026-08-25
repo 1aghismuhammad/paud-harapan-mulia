@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', 'PAUD — Harapan Mulia')
+@section('title', 'PAUD — PAUD Harapan Mulia')
 @section('meta_description', 'Unit PAUD Harapan Mulia dengan pembiasaan Islami dan pembelajaran kreatif.')
 
 @section('content')

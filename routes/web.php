@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\NewsMediaController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\PublicNewsController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,8 +18,8 @@ Route::prefix('tentang-kami')->name('about.')->group(function (): void {
 });
 
 Route::prefix('sekolah')->name('school.')->group(function (): void {
-    Route::view('/paud', 'public.school.paud')->name('paud');
-    Route::view('/tk', 'public.school.tk')->name('tk');
+    Route::get('/paud', [SchoolController::class, 'paud'])->name('paud');
+    Route::get('/tk', [SchoolController::class, 'tk'])->name('tk');
 });
 
 Route::get('/berita', [PublicNewsController::class, 'index'])->name('news.index');

@@ -297,13 +297,25 @@
                 </div>
             </section>
 
-            <section class="mt-14">
+<section class="mt-14">
                 <h2 class="text-center text-[30px] font-semibold tracking-[-0.035em] md:text-[36px]">Berita TK</h2>
 
                 <div class="mt-9 grid gap-6 md:grid-cols-3">
-                    <x-site.news-card image="images/paud/news-parenting.jpeg" date="Preview Konten" title="Home Parenting TK Harapan Mulia" excerpt="Preview berita unit untuk kebutuhan review UI." />
-                    <x-site.news-card image="images/paud/news-kegiatan.jpeg" date="Preview Konten" title="Pembelajaran Kreatif Siswa" excerpt="Preview berita unit untuk kebutuhan review UI." />
-                    <x-site.news-card image="images/paud/news-akhirussanah.jpeg" date="Preview Konten" title="Dokumentasi Kegiatan Sekolah" excerpt="Preview berita unit untuk kebutuhan review UI." />
+                    @foreach ($latestNews as $newsPost)
+                        @php
+                            $plainExcerpt = strip_tags($newsPost->excerpt ?? $newsPost->content ?? '');
+                            $imageUrl = $newsPost->featured_image
+                                ? \Illuminate\Support\Facades\Storage::disk('public')->url($newsPost->featured_image)
+                                : null;
+                        @endphp
+                        <x-site.news-card
+                            :image="$imageUrl"
+                            :date="$newsPost->published_at?->format('d M Y') ?? '—'"
+                            :title="$newsPost->title"
+                            :excerpt="$plainExcerpt"
+                            :author="$newsPost->author?->name"
+                        />
+                    @endforeach
                 </div>
             </section>
         </div>

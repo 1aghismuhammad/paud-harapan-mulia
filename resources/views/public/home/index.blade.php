@@ -157,25 +157,60 @@
                 </a>
             </div>
 
-            <div class="group relative isolate overflow-hidden rounded-[8px] bg-brand-green-950 shadow-[0_20px_55px_rgba(17,24,39,0.12)] transition-[transform,box-shadow] duration-700 ease-out hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(41,105,62,0.22)]">
-                <img
-                    src="{{ asset('images/paud/profile-sekolah.jpeg') }}"
-                    alt="Dokumentasi PAUD Harapan Mulia"
-                    class="aspect-[4/3] w-full object-cover opacity-95 transition-[transform,filter,opacity] duration-[1200ms] ease-out group-hover:scale-[1.055] group-hover:brightness-[1.04] group-hover:saturate-[1.08] group-hover:opacity-100 lg:aspect-[1.34/1]"
-                >
+            <div class="group relative isolate overflow-hidden rounded-[8px] bg-brand-green-950 shadow-[0_20px_55px_rgba(17,24,39,0.12)] transition-[transform,box-shadow] duration-700 ease-out hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(41,105,62,0.22)]" id="school-profile-video">
+                <div class="relative aspect-[4/3] w-full lg:aspect-[1.34/1]">
+                    <img
+                        id="school-profile-thumbnail"
+                        src="{{ asset('images/paud/profile-sekolah.jpeg') }}"
+                        alt="Dokumentasi PAUD Harapan Mulia"
+                        class="h-full w-full object-cover opacity-95 transition-[transform,filter,opacity] duration-[1200ms] ease-out group-hover:scale-[1.055] group-hover:brightness-[1.04] group-hover:saturate-[1.08] group-hover:opacity-100"
+                    >
 
-                {{-- Overlay dibuat ringan agar foto tetap menjadi fokus utama. --}}
-                <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-brand-green-950/30 via-transparent to-white/5 transition-opacity duration-700 group-hover:opacity-70"></div>
-                <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-80 transition-opacity duration-700 group-hover:opacity-45"></div>
+                    <button
+                        type="button"
+                        id="school-profile-play"
+                        class="absolute inset-0 flex items-center justify-center"
+                        aria-label="Putar video profil sekolah"
+                    >
+                        <span class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-white/90 text-brand-green-600 shadow-lg transition-transform duration-300 hover:scale-110">
+                            ▶
+                        </span>
+                    </button>
 
-                {{-- Highlight sweep saat hover: memberi kesan polished tanpa mengganggu foto. --}}
-                <div class="pointer-events-none absolute inset-y-[-25%] -left-[28%] w-[18%] -skew-x-12 bg-white/25 opacity-0 blur-xl transition-[left,opacity] duration-[1350ms] ease-out group-hover:left-[118%] group-hover:opacity-100"></div>
+                    <div id="school-profile-player" class="hidden absolute inset-0">
+                        <iframe
+                            class="h-full w-full"
+                            src=""
+                            title="Video Profil Sekolah Harapan Mulia"
+                            allow="autoplay; fullscreen"
+                            allowfullscreen
+                        ></iframe>
+                    </div>
 
-                {{-- Inner frame muncul halus saat hover. --}}
-                <div class="pointer-events-none absolute inset-3 rounded-[5px] border border-white/0 transition-colors duration-700 group-hover:border-white/35 lg:inset-4"></div>
+                    <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-brand-green-950/30 via-transparent to-white/5 transition-opacity duration-700 group-hover:opacity-70"></div>
+                    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-80 transition-opacity duration-700 group-hover:opacity-45"></div>
 
-                <span class="absolute left-0 top-1/2 -translate-y-1/2 -rotate-90 bg-brand-green-600 px-5 py-2 text-[9px] tracking-[.16em] text-white uppercase shadow-[0_8px_20px_rgba(0,0,0,0.12)] transition-[background-color,transform] duration-500 group-hover:bg-brand-green-700 group-hover:-translate-y-[52%] lg:px-7 lg:py-3">Harapan Mulia</span>
+                    <span class="absolute left-0 top-1/2 -translate-y-1/2 -rotate-90 bg-brand-green-600 px-5 py-2 text-[9px] tracking-[.16em] text-white uppercase shadow-[0_8px_20px_rgba(0,0,0,0.12)] transition-[background-color,transform] duration-500 group-hover:bg-brand-green-700 group-hover:-translate-y-[52%] lg:px-7 lg:py-3">Harapan Mulia</span>
+                </div>
             </div>
+
+            <script>
+                (() => {
+                    const button = document.getElementById('school-profile-play');
+                    const thumbnail = document.getElementById('school-profile-thumbnail');
+                    const player = document.getElementById('school-profile-player');
+                    const iframe = player?.querySelector('iframe');
+
+                    if (!button || !thumbnail || !player || !iframe) return;
+
+                    button.addEventListener('click', () => {
+                        iframe.src = 'https://drive.google.com/file/d/10jwrK1zVdykVL0qYl9ipSen3NVo0NWqW/preview?usp=sharing';
+                        thumbnail.classList.add('hidden');
+                        button.classList.add('hidden');
+                        player.classList.remove('hidden');
+                    }, { once: true });
+                })();
+            </script>
         </div>
     </section>
 

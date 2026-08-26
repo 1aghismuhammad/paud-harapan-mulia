@@ -123,25 +123,18 @@
             </p>
 
             <div class="flex items-center gap-7 lg:gap-8" aria-label="Media sosial">
-                <a href="#" class="text-white transition hover:text-brand-yellow-400" aria-label="Facebook">
+                <a href="https://www.facebook.com/profile.php?id=100015126961842" target="_blank" rel="noopener noreferrer" class="text-white transition hover:text-brand-yellow-400" aria-label="Facebook">
                     <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M13.5 8.4V6.7c0-.8.5-1 1-1h2V2.4c-.4-.1-1.8-.2-3.4-.2-3.3 0-5.6 2-5.6 5.8v3.2H4v4h3.5V22h4.2v-6.8h3.5l.6-4h-4.1V8.8c0-1.1.3-1.9 1.8-1.9Z"/>
                     </svg>
                 </a>
 
-                <a href="#" class="text-white transition hover:text-brand-yellow-400" aria-label="YouTube">
+                <a href="https://www.youtube.com/channel/UCxIpkGFNxzFJ-5bu67yEVbA" target="_blank" rel="noopener noreferrer" class="text-white transition hover:text-brand-yellow-400" aria-label="YouTube">
                     <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M21.6 7.2a2.7 2.7 0 0 0-1.9-1.9C18 4.8 12 4.8 12 4.8s-6 0-7.7.5a2.7 2.7 0 0 0-1.9 1.9A28 28 0 0 0 2 12a28 28 0 0 0 .4 4.8 2.7 2.7 0 0 0 1.9 1.9c1.7.5 7.7.5 7.7.5s6 0 7.7-.5a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 22 12a28 28 0 0 0-.4-4.8ZM10 15.3V8.7l5.7 3.3L10 15.3Z"/>
                     </svg>
                 </a>
 
-                <a href="#" class="text-white transition hover:text-brand-yellow-400" aria-label="Instagram">
-                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <rect x="3" y="3" width="18" height="18" rx="5"/>
-                        <circle cx="12" cy="12" r="4"/>
-                        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
-                    </svg>
-                </a>
             </div>
         </div>
 

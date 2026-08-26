@@ -17,6 +17,8 @@
                 <a
                     href="https://wa.me/6289613624186"
                     class="flex items-center gap-5 border-b border-white/10 py-5 first:pt-0 hover:text-white lg:gap-6"
+                    target="_blank" 
+                    rel="noopener noreferrer"
                 >
                     <span class="inline-flex w-8 shrink-0 items-center justify-center text-brand-yellow-400">
                         <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" aria-hidden="true">

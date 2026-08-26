@@ -13,20 +13,17 @@
 
         <div class="flex items-center gap-7">
             <div class="flex items-center gap-2">
-                <a href="#" class="icon-pill" aria-label="Facebook">
+                <a href="https://www.facebook.com/profile.php?id=100015126961842" target="_blank" rel="noopener noreferrer" class="icon-pill" aria-label="Facebook">
                     <span class="text-xs font-semibold">f</span>
                 </a>
-                <a href="#" class="icon-pill" aria-label="YouTube">
+                <a href="https://www.youtube.com/channel/UCxIpkGFNxzFJ-5bu67yEVbA" target="_blank" rel="noopener noreferrer" class="icon-pill" aria-label="YouTube">
                     <span class="text-[10px]">▶</span>
-                </a>
-                <a href="#" class="icon-pill" aria-label="Instagram">
-                    <span class="text-xs">◎</span>
                 </a>
             </div>
 
             <div class="h-10 w-px bg-site-border"></div>
 
-            <a href="https://wa.me/6289613624186" class="flex items-center gap-3">
+            <a href="https://wa.me/6289613624186" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3">
                 <span class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-site-border text-brand-green-700">
                     <span class="text-lg">◉</span>
                 </span>

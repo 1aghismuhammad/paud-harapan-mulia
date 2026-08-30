@@ -751,10 +751,6 @@ ready(() => {
             stagger: 100,
         },
         {
-            elements: [...document.querySelectorAll('[data-motion-unit-card]')],
-            stagger: 80,
-        },
-        {
             elements: [...document.querySelectorAll('.home-news-container > .text-center, .home-news-container .news-reference-card, .news-reference-card')],
             stagger: 80,
         },

@@ -226,25 +226,60 @@
         </div>
     </section>
 
-    {{-- Unit pendidikan dibuat lebih besar --}}
-    <section class="border-t border-site-border py-16 lg:py-28">
-        <div class="mx-auto w-full max-w-[1320px] px-5 sm:px-6 lg:px-0">
-            <div class="text-center">
-                <p class="text-[10px] tracking-[.24em] text-site-muted uppercase lg:text-[11px]">Unit Pendidikan</p>
+    <section class="border-t border-site-border py-16 lg:py-24">
+        <div class="home-main-container">
+            <div class="mx-auto max-w-[720px] text-center">
+                <p class="eyebrow lg:text-[13px]">Sekolah Kami</p>
+                <h2 class="section-title">
+                    Tumbuh, Belajar, dan Berkembang
+                    <span class="mt-1 block">Bersama Harapan Mulia</span>
+                </h2>
+                <p class="section-copy mx-auto max-w-[560px] lg:mt-6 lg:text-[15px] lg:leading-8">
+                    Harapan Mulia hadir sebagai lingkungan belajar yang mendampingi anak untuk tumbuh dengan nilai-nilai Islami, kemandirian, kreativitas, dan pengalaman belajar yang menyenangkan.
+                </p>
             </div>
 
-            <div class="mt-10 flex flex-wrap justify-center gap-6 md:gap-8 lg:mt-14 lg:gap-10">
-                <a href="{{ route('school.paud') }}" data-motion-unit-card class="group relative h-[190px] w-[190px] overflow-hidden rounded-[5px] bg-brand-green-950 text-white shadow-[0_20px_46px_rgba(17,24,39,0.14)] transition hover:-translate-y-1 md:h-[250px] md:w-[250px] lg:h-[330px] lg:w-[330px]">
-                    <img src="{{ asset('images/paud/unit-paud.jpeg') }}" alt="Unit PAUD Harapan Mulia" class="h-full w-full object-cover opacity-50 transition duration-300 group-hover:scale-105 group-hover:opacity-60" loading="lazy" decoding="async">
-                    <div class="absolute inset-0 bg-gradient-to-t from-brand-green-950/40 via-brand-green-950/10 to-brand-green-950/20"></div>
-                    <span class="absolute inset-0 flex items-center justify-center text-[32px] font-medium tracking-[0.02em] md:text-[42px] lg:text-[54px]">PAUD</span>
-                </a>
+            <div class="group mt-10 overflow-hidden rounded-[8px] border border-site-border bg-white shadow-[0_18px_48px_rgba(17,24,39,0.08)] transition-[transform,box-shadow] duration-500 ease-out hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(41,105,62,0.14)] lg:mt-14 lg:grid lg:grid-cols-[minmax(0,1.12fr)_minmax(0,0.88fr)]">
+                <div class="overflow-hidden bg-brand-green-950">
+                    <img
+                        src="{{ asset('images/paud/hero-sekolah.jpeg') }}"
+                        alt="Kegiatan belajar di Harapan Mulia"
+                        class="aspect-[16/11] h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] md:aspect-[16/10] lg:aspect-auto lg:min-h-[420px]"
+                        loading="lazy"
+                        decoding="async"
+                    >
+                </div>
 
-                <a href="{{ route('school.tk') }}" data-motion-unit-card class="group relative h-[190px] w-[190px] overflow-hidden rounded-[5px] bg-brand-green-950 text-white shadow-[0_20px_46px_rgba(17,24,39,0.14)] transition hover:-translate-y-1 md:h-[250px] md:w-[250px] lg:h-[330px] lg:w-[330px]">
-                    <img src="{{ asset('images/paud/unit-tk.jpeg') }}" alt="Unit TK Harapan Mulia" class="h-full w-full object-cover opacity-50 transition duration-300 group-hover:scale-105 group-hover:opacity-60" loading="lazy" decoding="async">
-                    <div class="absolute inset-0 bg-gradient-to-t from-brand-green-950/40 via-brand-green-950/10 to-brand-green-950/20"></div>
-                    <span class="absolute inset-0 flex items-center justify-center text-[32px] font-medium tracking-[0.02em] md:text-[42px] lg:text-[54px]">TK</span>
-                </a>
+                <div class="flex flex-col px-6 py-8 md:px-8 lg:px-10 lg:py-11">
+                    <p class="eyebrow lg:text-[13px]">Tentang Harapan Mulia</p>
+                    <h3 class="mt-2 text-[22px] leading-tight font-semibold tracking-[-0.03em] text-site-text md:text-[26px] lg:text-[28px]">
+                        Lebih dari Sekadar Tempat Belajar
+                    </h3>
+                    <p class="section-copy mt-4 lg:mt-5 lg:text-[15px] lg:leading-8">
+                        Kami percaya proses pendidikan anak tumbuh dari keseimbangan antara pembelajaran, pembiasaan yang baik, lingkungan yang nyaman, serta hubungan yang erat antara sekolah dan keluarga.
+                    </p>
+
+                    <div class="mt-7 grid gap-4 md:grid-cols-3 md:gap-5">
+                        @foreach ([
+                            ['title' => 'Islami', 'copy' => 'Nilai baik dalam keseharian.'],
+                            ['title' => 'Kreatif', 'copy' => 'Belajar aktif dan menyenangkan.'],
+                            ['title' => 'Kolaboratif', 'copy' => 'Sekolah tumbuh bersama keluarga.'],
+                        ] as $value)
+                            <div class="border-l-2 border-brand-green-600 pl-3">
+                                <p class="text-[13px] font-semibold text-site-text lg:text-[14px]">{{ $value['title'] }}</p>
+                                <p class="mt-1 text-[12px] leading-5 text-site-muted lg:text-[13px] lg:leading-6">{{ $value['copy'] }}</p>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <a
+                        href="{{ route('about.history') }}"
+                        class="group/cta mt-8 inline-flex min-h-11 items-center gap-3 self-start text-[13px] font-semibold text-site-text transition duration-300 hover:text-brand-green-700 focus-visible:outline-brand-orange-500 lg:mt-10 lg:text-[15px]"
+                    >
+                        <span class="inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-brand-green-600 text-[13px] text-brand-green-600 transition duration-300 group-hover/cta:border-brand-green-700 group-hover/cta:text-brand-green-700 lg:h-10 lg:w-10" aria-hidden="true">→</span>
+                        Kenali Sekolah Kami
+                    </a>
+                </div>
             </div>
         </div>
     </section>

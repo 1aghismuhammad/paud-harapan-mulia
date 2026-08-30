@@ -1,9 +1,9 @@
 # DESIGN — Company Profile PAUD Harapan Mulia
 
-**Version:** 1.4 — Current Public UI + Admin CMS  
+**Version:** 1.5 — Current Public UI + Admin CMS  
 **Date:** 30 Agustus 2026
 
-Reconciliation 30 Agustus 2026: hero autoplay, komposisi beranda (Sekolah Kami), logo resmi, dan sumber berita CMS. Detail implementasi historis: [`history/UI-DESIGN-HISTORY.md`](history/UI-DESIGN-HISTORY.md).
+Reconciliation 30 Agustus 2026: hero autoplay, komposisi beranda (Sekolah Kami), logo resmi, dan sumber berita CMS. Navigasi “Sekolah Kami” adalah tautan langsung ke `/sekolah-kami` (bukan dropdown PAUD/TK). Detail implementasi historis: [`history/UI-DESIGN-HISTORY.md`](history/UI-DESIGN-HISTORY.md).
 
 ## 1. Visual Direction
 
@@ -64,7 +64,7 @@ Jika user menilai visual font belum cocok, typography dapat diganti tanpa mengub
 ```text
 Logo + social + WhatsApp + email
 ────────────────────────────────
-Beranda   Tentang Kami▼   Sekolah Kami▼   Berita
+Beranda   Tentang Kami▼   Sekolah Kami   Berita
 ```
 
 Tentang Kami:
@@ -75,16 +75,11 @@ Visi & Misi
 Fasilitas
 ```
 
-Sekolah Kami:
-
-```text
-PAUD
-TK
-```
+Sekolah Kami adalah tautan langsung ke `/sekolah-kami`. Tidak ada submenu PAUD/TK pada navigasi primer.
 
 ### Mobile
 
-Logo + hamburger. Submenu menggunakan accordion.
+Logo + hamburger. Submenu accordion hanya untuk Tentang Kami. Sekolah Kami adalah tautan langsung.
 
 Tidak ada menu Galeri.
 
@@ -136,8 +131,9 @@ Homepage menampilkan **satu showcase sekolah**, bukan dua kartu PAUD/TK.
 Maksud visual:
 
 - satu identitas sekolah dan satu lingkungan belajar;
-- foto showcase, narasi singkat, nilai sekolah, dan CTA (Kenali Sekolah Kami);
-- halaman PAUD dan TK tetap tujuan navigasi terpisah.
+- foto showcase, narasi singkat, nilai sekolah, dan CTA (Kenali Sekolah Kami) ke `/sekolah-kami`;
+- halaman publik kanonik `/sekolah-kami` memakai struktur visual halaman PAUD (hero, profil, showcase, keunggulan, berita) dengan narasi satu institusi;
+- halaman PAUD dan TK tetap ada sebagai halaman legacy, bukan tujuan navigasi primer.
 
 Layout dua kartu Unit Pendidikan di homepage adalah **desain historis yang sudah diganti**. Lihat [`history/PROJECT-DECISION-LOG.md`](history/PROJECT-DECISION-LOG.md).
 
@@ -145,9 +141,12 @@ Layout dua kartu Unit Pendidikan di homepage adalah **desain historis yang sudah
 
 Visual dipertahankan seperti reference: green background + white cards.
 
-Pada Phase 1, isi bersifat placeholder dan ditandai `Preview / Placeholder`.
+Pada Phase 1, isi bersifat placeholder dan ditandai `Preview / Placeholder`. Itu catatan historis, bukan kondisi current.
 
-Sebelum production wajib diganti testimonial nyata atau section dinonaktifkan.
+Homepage saat ini memakai 2 testimonial orang tua nyata beserta foto:
+
+- Bunda Cakrawala / Kelas Raudhah
+- Orang Tua Murid / PAUD IT Harapan Mulia
 
 ## 10. News
 

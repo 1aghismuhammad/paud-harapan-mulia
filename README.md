@@ -2,7 +2,7 @@
 
 Website **Company Profile PAUD (KB & TK) Islam Terpadu Harapan Mulia** berbasis Laravel.
 
-Produk ini adalah website publik single institution dengan **CMS berita admin yang sudah diimplementasikan**. MVP mencakup profil sekolah, halaman PAUD/TK, fasilitas, berita, responsive design, SEO, dan pengalaman admin yang sederhana.
+Produk ini adalah website publik single institution dengan **CMS berita admin yang sudah diimplementasikan**. MVP mencakup profil sekolah, halaman kanonik Sekolah Kami (PAUD + TK sebagai satu institusi), fasilitas, berita, responsive design, SEO, dan pengalaman admin yang sederhana.
 
 ## Current Status
 
@@ -26,8 +26,6 @@ Tentang Kami
 ├── Visi & Misi
 └── Fasilitas
 Sekolah Kami
-├── PAUD
-└── TK
 Berita
 ```
 
@@ -85,24 +83,23 @@ MySQL Laragon harus aktif jika `.env` menggunakan MySQL lokal.
 Public UI mengikuti referensi yang disetujui:
 
 - top information bar;
-- navigation desktop dan dropdown Tentang Kami / Sekolah Kami;
+- navigation desktop dan dropdown Tentang Kami; Sekolah Kami adalah tautan langsung;
 - mobile navigation;
 - hero image carousel;
 - highlight cards;
 - visi & misi;
 - profil sekolah;
-- showcase **Sekolah Kami** (satu identitas sekolah dan satu lingkungan belajar; halaman PAUD/TK tetap ada di navigasi);
-- testimonial placeholder untuk development;
+- showcase **Sekolah Kami** (satu identitas sekolah dan satu lingkungan belajar; CTA ke `/sekolah-kami`);
+- testimonial homepage: 2 testimonial orang tua nyata (Bunda Cakrawala / Kelas Raudhah; Orang Tua Murid / PAUD IT Harapan Mulia);
 - berita terbaru dari CMS;
 - footer.
 
-Testimonial masih **placeholder** sampai konten production tersedia. Berita publik berasal dari CMS (hanya post yang sudah dipublikasikan).
+Berita publik berasal dari CMS (hanya post yang sudah dipublikasikan).
 
 ## Production Rule
 
 Sebelum production:
 
-- placeholder testimonial harus diganti data nyata atau section dinonaktifkan;
 - konten statis sekolah (termasuk kontak) diverifikasi;
 - `APP_DEBUG=false`;
 - HTTPS aktif;

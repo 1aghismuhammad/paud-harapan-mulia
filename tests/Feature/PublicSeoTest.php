@@ -26,12 +26,20 @@ it('includes canonical open graph twitter and organization schema on public page
     '/tentang-kami/sejarah',
     '/tentang-kami/visi-misi',
     '/tentang-kami/fasilitas',
+    '/sekolah-kami',
     '/sekolah/paud',
     '/sekolah/tk',
     '/berita',
 ]);
 
-it('uses a consistent document title on the PAUD and TK pages', function (): void {
+it('uses a consistent document title on the Sekolah Kami and legacy PAUD and TK pages', function (): void {
+    $this->get(route('school.index'))
+        ->assertOk()
+        ->assertSee('<title>Sekolah Kami — PAUD Harapan Mulia</title>', false)
+        ->assertSee('<link rel="canonical" href="'.route('school.index').'"', false)
+        ->assertSee('property="og:url"', false)
+        ->assertSee('PAUD dan TK Islam Terpadu Harapan Mulia di Ngawen, Blora', false);
+
     $this->get(route('school.paud'))
         ->assertOk()
         ->assertSee('<title>PAUD — PAUD Harapan Mulia</title>', false);
@@ -92,8 +100,11 @@ it('serves a sitemap of public pages and currently published news only', functio
         ->assertHeader('Content-Type', 'application/xml')
         ->assertSee(route('home'), false)
         ->assertSee(route('about.history'), false)
+        ->assertSee(route('school.index'), false)
         ->assertSee(route('news.index'), false)
         ->assertSee(route('news.show', ['newsPost' => $published->slug]), false)
+        ->assertDontSee(route('school.paud'), false)
+        ->assertDontSee(route('school.tk'), false)
         ->assertDontSee('draft-sitemap', false)
         ->assertDontSee('jadwal-sitemap', false)
         ->assertDontSee('/admin', false)

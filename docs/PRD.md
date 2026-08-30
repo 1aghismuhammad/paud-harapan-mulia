@@ -1,11 +1,11 @@
 # PRD — Company Profile PAUD Harapan Mulia
 
-**Version:** 1.3 — Current Product Reality  
+**Version:** 1.4 — Current Product Reality  
 **Date:** 30 Agustus 2026  
 **Product:** Company Profile PAUD Harapan Mulia  
 **Institution:** Single institution
 
-Reconciliation 30 Agustus 2026: status fase, komposisi beranda (Sekolah Kami), dan CMS berita diselaraskan dengan implementasi current. Schema teknis ada di [`ARCHITECTURE.md`](ARCHITECTURE.md).
+Reconciliation 30 Agustus 2026 (malam): navigasi publik “Sekolah Kami” menjadi satu halaman kanonik `/sekolah-kami`. Route legacy `/sekolah/paud` dan `/sekolah/tk` tetap ada tetapi bukan tujuan navigasi/sitemap primer.
 
 ## 1. Product Summary
 
@@ -44,8 +44,6 @@ Tentang Kami
 └── Fasilitas
 
 Sekolah Kami
-├── PAUD
-└── TK
 
 Berita
 ```
@@ -69,9 +67,9 @@ Berita Terbaru
 Footer
 ```
 
-Section Sekolah Kami menampilkan Harapan Mulia sebagai **satu identitas sekolah dan satu lingkungan belajar**, bukan sebagai pilihan PAUD-vs-TK pada section tersebut.
+Section Sekolah Kami menampilkan Harapan Mulia sebagai **satu identitas sekolah dan satu lingkungan belajar**, bukan sebagai pilihan PAUD-vs-TK pada section tersebut. CTA section mengarah ke `/sekolah-kami`.
 
-Halaman dan route PAUD/TK tetap ada (`/sekolah/paud`, `/sekolah/tk`) dan tetap dapat diakses dari navigasi.
+Halaman legacy PAUD/TK tetap ada (`/sekolah/paud`, `/sekolah/tk`) dan tetap dapat dibuka, tetapi tidak lagi tampil di navigasi primer atau sitemap primer.
 
 ### Tentang Kami
 
@@ -81,8 +79,14 @@ Halaman dan route PAUD/TK tetap ada (`/sekolah/paud`, `/sekolah/tk`) dan tetap d
 
 ### Sekolah Kami
 
-- PAUD
-- TK
+Satu halaman kanonik `/sekolah-kami` yang menggambarkan PAUD dan TK Islam Terpadu Harapan Mulia sebagai satu institusi / satu lingkungan belajar.
+
+Halaman legacy:
+
+- `/sekolah/paud`
+- `/sekolah/tk`
+
+tetap dapat diakses, tetapi bukan tujuan navigasi atau sitemap primer.
 
 ### Berita
 
@@ -101,7 +105,8 @@ Hanya berita dengan `status = published` dan `published_at <= now()` yang tampil
 - misi;
 - tujuan;
 - fasilitas;
-- unit PAUD/TK;
+- halaman Sekolah Kami (`/sekolah-kami`);
+- halaman legacy PAUD/TK;
 - contact info;
 - kata perenungan;
 - highlight sekolah.
@@ -175,6 +180,11 @@ Sebelum production:
 testimonial nyata tersedia -> ganti placeholder
 testimonial nyata belum tersedia -> nonaktifkan section
 ```
+
+Cabang **testimonial nyata tersedia** sudah terpenuhi. Homepage saat ini menampilkan 2 testimonial orang tua nyata:
+
+- Bunda Cakrawala / Kelas Raudhah
+- Orang Tua Murid / PAUD IT Harapan Mulia
 
 ## 10. Media
 

@@ -41,25 +41,9 @@
                 </div>
             </div>
 
-            <div class="group relative">
-                <a href="{{ route('school.paud') }}" class="nav-link {{ request()->routeIs('school.*') ? 'nav-link-active' : '' }}">
-                    Sekolah Kami
-                    <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <path d="m6 9 6 6 6-6"/>
-                    </svg>
-                </a>
-
-                {{-- Same hover-safe bridge for the school dropdown. --}}
-                <span
-                    class="absolute top-full right-0 left-0 z-40 h-5 bg-transparent"
-                    aria-hidden="true"
-                ></span>
-
-                <div class="dropdown-panel !top-[calc(100%+3px)] !w-[300px] !px-6 !py-4">
-                    <a href="{{ route('school.paud') }}" class="dropdown-item !py-[17px]">PAUD</a>
-                    <a href="{{ route('school.tk') }}" class="dropdown-item !py-[17px]">TK</a>
-                </div>
-            </div>
+            <a href="{{ route('school.index') }}" class="nav-link {{ request()->routeIs('school.*') ? 'nav-link-active' : '' }}">
+                Sekolah Kami
+            </a>
 
             <a href="{{ route('news.index') }}" class="nav-link {{ request()->routeIs('news.*') ? 'nav-link-active' : '' }}">
                 Berita

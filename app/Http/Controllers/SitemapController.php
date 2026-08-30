@@ -14,8 +14,7 @@ class SitemapController extends Controller
             route('about.history'),
             route('about.vision-mission'),
             route('about.facilities'),
-            route('school.paud'),
-            route('school.tk'),
+            route('school.index'),
             route('news.index'),
         ];
 

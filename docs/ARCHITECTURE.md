@@ -1,9 +1,9 @@
 # ARCHITECTURE — Company Profile PAUD Harapan Mulia
 
-**Version:** 1.3  
+**Version:** 1.4  
 **Date:** 30 Agustus 2026
 
-Reconciliation 30 Agustus 2026: routing mixed, sitemap, schema `news_posts` implemented, testing SQLite vs MySQL. Tidak merancang ulang architecture; hanya mencatat realitas current.
+Reconciliation 30 Agustus 2026: routing mixed, sitemap, schema `news_posts` implemented, testing SQLite vs MySQL. Halaman kanonik `GET /sekolah-kami` (`school.index`) ditambahkan; `/sekolah/paud` dan `/sekolah/tk` tetap sebagai route legacy. Tidak merancang ulang architecture.
 
 ## 1. Architecture Style
 
@@ -65,6 +65,7 @@ GET  /sitemap.xml                           sitemap
 GET  /tentang-kami/sejarah                  about.history
 GET  /tentang-kami/visi-misi                about.vision-mission
 GET  /tentang-kami/fasilitas                about.facilities
+GET  /sekolah-kami                          school.index
 GET  /sekolah/paud                          school.paud
 GET  /sekolah/tk                            school.tk
 GET  /berita                                news.index
@@ -86,7 +87,7 @@ DELETE /admin/berita/{newsPost}             admin.news.destroy
 Pemetaan controller:
 
 - `HomeController` — beranda
-- `SchoolController` — PAUD / TK
+- `SchoolController` — Sekolah Kami (kanonik), plus halaman legacy PAUD / TK
 - `PublicNewsController` — daftar dan detail berita
 - `SitemapController` — sitemap
 - `Admin\AuthController` + `AuthenticateAdmin` — login/logout
@@ -94,7 +95,7 @@ Pemetaan controller:
 - `Admin\NewsController` — CRUD berita
 - `Admin\NewsMediaController` — unggah media inline (throttle)
 
-About pages: `Route::view`. Tidak ada route Galeri.
+About pages: `Route::view`. Route `/sekolah/paud` dan `/sekolah/tk` adalah halaman legacy (bukan sitemap/navigasi primer). Tidak ada route Galeri.
 
 ## 5. View Structure
 
@@ -148,7 +149,7 @@ Vanilla JavaScript (tanpa Alpine/React/Vue untuk kebutuhan public UI ini).
 
 Script di view halaman terkait:
 
-- showcase dan keunggulan PAUD/TK;
+- showcase dan keunggulan Sekolah Kami (struktur sama pada halaman legacy PAUD/TK);
 - carousel fasilitas.
 
 ## 8. CSS / Design Tokens

@@ -26,15 +26,7 @@
                 </div>
             </div>
 
-            <div class="border-b border-site-border">
-                <button type="button" data-mobile-submenu-toggle aria-expanded="false" aria-controls="mobile-school-menu" class="flex w-full items-center justify-between py-5 text-left text-[16px] font-semibold text-slate-800">
-                    <span>Sekolah Kami</span><span data-submenu-symbol class="text-xl font-light text-slate-500">+</span>
-                </button>
-                <div id="mobile-school-menu" hidden class="pb-4 pl-4">
-                    <a href="{{ route('school.paud') }}" class="block py-2.5 text-sm text-slate-500">PAUD</a>
-                    <a href="{{ route('school.tk') }}" class="block py-2.5 text-sm text-slate-500">TK</a>
-                </div>
-            </div>
+            <a href="{{ route('school.index') }}" class="block border-b border-site-border py-5 text-[16px] font-semibold {{ request()->routeIs('school.*') ? 'text-brand-green-700' : 'text-slate-800' }}">Sekolah Kami</a>
 
             <a href="{{ route('news.index') }}" class="block border-b border-site-border py-5 text-[16px] font-semibold {{ request()->routeIs('news.*') ? 'text-brand-green-700' : 'text-slate-800' }}">Berita</a>
         </nav>

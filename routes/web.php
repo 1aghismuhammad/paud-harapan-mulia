@@ -19,6 +19,8 @@ Route::prefix('tentang-kami')->name('about.')->group(function (): void {
     Route::view('/fasilitas', 'public.about.facilities')->name('facilities');
 });
 
+Route::get('/sekolah-kami', [SchoolController::class, 'index'])->name('school.index');
+
 Route::prefix('sekolah')->name('school.')->group(function (): void {
     Route::get('/paud', [SchoolController::class, 'paud'])->name('paud');
     Route::get('/tk', [SchoolController::class, 'tk'])->name('tk');

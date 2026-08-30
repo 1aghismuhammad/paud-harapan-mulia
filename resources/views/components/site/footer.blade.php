@@ -95,8 +95,7 @@
                 <a href="{{ route('about.history') }}" class="transition hover:text-white">Sejarah</a>
                 <a href="{{ route('about.vision-mission') }}" class="transition hover:text-white">Visi & Misi</a>
                 <a href="{{ route('about.facilities') }}" class="transition hover:text-white">Fasilitas</a>
-                <a href="{{ route('school.paud') }}" class="transition hover:text-white">PAUD</a>
-                <a href="{{ route('school.tk') }}" class="transition hover:text-white">TK</a>
+                <a href="{{ route('school.index') }}" class="transition hover:text-white">Sekolah Kami</a>
                 <a href="{{ route('news.index') }}" class="transition hover:text-white">Berita</a>
             </nav>
         </div>

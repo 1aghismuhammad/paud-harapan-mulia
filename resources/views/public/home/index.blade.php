@@ -257,7 +257,7 @@
                     </div>
 
                     <a
-                        href="{{ route('about.history') }}"
+                        href="{{ route('school.index') }}"
                         class="group/cta mt-8 inline-flex min-h-11 items-center gap-3 self-start text-[13px] font-semibold text-site-text transition duration-300 hover:text-brand-green-700 focus-visible:outline-brand-orange-500 lg:mt-10 lg:text-[15px]"
                     >
                         <span class="inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-brand-green-600 text-[13px] text-brand-green-600 transition duration-300 group-hover/cta:border-brand-green-700 group-hover/cta:text-brand-green-700 lg:h-10 lg:w-10" aria-hidden="true">→</span>

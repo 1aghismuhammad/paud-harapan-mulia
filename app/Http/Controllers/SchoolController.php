@@ -19,6 +19,11 @@ class SchoolController extends Controller
         ];
     }
 
+    public function index(): View
+    {
+        return view('public.school.index', $this->latestNews());
+    }
+
     public function paud(): View
     {
         return view('public.school.paud', $this->latestNews());

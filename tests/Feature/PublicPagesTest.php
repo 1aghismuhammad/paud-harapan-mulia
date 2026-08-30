@@ -13,6 +13,7 @@ it('renders the public company profile pages', function (string $uri): void {
     '/tentang-kami/sejarah',
     '/tentang-kami/visi-misi',
     '/tentang-kami/fasilitas',
+    '/sekolah-kami',
     '/sekolah/paud',
     '/sekolah/tk',
     '/berita',
@@ -38,4 +39,31 @@ it('shows the two real parent testimonials on the homepage', function (): void {
         ->assertDontSee('Placeholder 04')
         ->assertDontSee('Placeholder 05')
         ->assertDontSee('Placeholder 06');
+});
+
+it('presents Sekolah Kami as a direct primary destination without PAUD or TK submenu links', function (): void {
+    get('/')
+        ->assertOk()
+        ->assertSee('href="'.route('school.index').'"', false)
+        ->assertSee('>Sekolah Kami</a>', false)
+        ->assertDontSee(route('school.paud'), false)
+        ->assertDontSee(route('school.tk'), false)
+        ->assertDontSee('id="mobile-school-menu"', false)
+        ->assertDontSee('dropdown-item !py-[17px]">PAUD</a>', false)
+        ->assertDontSee('dropdown-item !py-[17px]">TK</a>', false);
+});
+
+it('keeps legacy PAUD and TK pages available outside primary navigation', function (): void {
+    get('/sekolah/paud')->assertOk();
+    get('/sekolah/tk')->assertOk();
+});
+
+it('renders the canonical Sekolah Kami page as one Harapan Mulia institution', function (): void {
+    get('/sekolah-kami')
+        ->assertOk()
+        ->assertSee('<title>Sekolah Kami — PAUD Harapan Mulia</title>', false)
+        ->assertSee('PAUD dan TK Islam Terpadu Harapan Mulia')
+        ->assertSee('satu lingkungan pendidikan')
+        ->assertSee('Keunggulan Sekolah')
+        ->assertSee('href="'.route('school.index').'"', false);
 });

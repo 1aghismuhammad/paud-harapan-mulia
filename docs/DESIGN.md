@@ -108,7 +108,6 @@ Hero
 Highlight Cards
 Visi & Misi
 Profil Sekolah
-Sekolah Kami
 Testimonial
 Berita Terbaru
 Footer
@@ -126,16 +125,11 @@ Ketiganya bersumber dari dokumen sekolah: program keagamaan, pembelajaran kreati
 
 ## 8. Sekolah Kami
 
-Homepage menampilkan **satu showcase sekolah**, bukan dua kartu PAUD/TK.
+Halaman kanonik adalah `/sekolah-kami`. Homepage tidak menampilkan showcase Sekolah Kami terpisah; CTA “Lihat Profil Sekolah” pada section Profil Sekolah mengarah ke halaman itu.
 
-Maksud visual:
+Halaman publik kanonik memakai struktur visual halaman PAUD (hero, profil, showcase, keunggulan, berita) dengan narasi satu institusi. Halaman PAUD dan TK tetap ada sebagai halaman legacy, bukan tujuan navigasi primer.
 
-- satu identitas sekolah dan satu lingkungan belajar;
-- foto showcase, narasi singkat, nilai sekolah, dan CTA (Kenali Sekolah Kami) ke `/sekolah-kami`;
-- halaman publik kanonik `/sekolah-kami` memakai struktur visual halaman PAUD (hero, profil, showcase, keunggulan, berita) dengan narasi satu institusi;
-- halaman PAUD dan TK tetap ada sebagai halaman legacy, bukan tujuan navigasi primer.
-
-Layout dua kartu Unit Pendidikan di homepage adalah **desain historis yang sudah diganti**. Lihat [`history/PROJECT-DECISION-LOG.md`](history/PROJECT-DECISION-LOG.md).
+Layout dua kartu Unit Pendidikan di homepage, lalu showcase Sekolah Kami di beranda, adalah **desain historis yang sudah diganti**. Lihat [`history/PROJECT-DECISION-LOG.md`](history/PROJECT-DECISION-LOG.md).
 
 ## 9. Testimonial
 
@@ -216,7 +210,6 @@ Rule:
 Hero desktop         ~16:7 / wide
 Hero mobile          adaptive / portrait-aware crop
 News card            16:9
-Sekolah Kami showcase  wide / content-aware crop
 Profile visual       4:3
 ```
 

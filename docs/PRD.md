@@ -61,13 +61,12 @@ Hero Image Carousel
 3 Highlight / Keunggulan
 Visi & Misi
 Profil Sekolah + Video/Gambar
-Sekolah Kami
 Testimonial
 Berita Terbaru
 Footer
 ```
 
-Section Sekolah Kami menampilkan Harapan Mulia sebagai **satu identitas sekolah dan satu lingkungan belajar**, bukan sebagai pilihan PAUD-vs-TK pada section tersebut. CTA section mengarah ke `/sekolah-kami`.
+CTA “Lihat Profil Sekolah” pada section Profil Sekolah mengarah ke `/sekolah-kami`. Homepage tidak menampilkan section Sekolah Kami terpisah.
 
 Halaman legacy PAUD/TK tetap ada (`/sekolah/paud`, `/sekolah/tk`) dan tetap dapat dibuka, tetapi tidak lagi tampil di navigasi primer atau sitemap primer.
 

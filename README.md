@@ -88,8 +88,7 @@ Public UI mengikuti referensi yang disetujui:
 - hero image carousel;
 - highlight cards;
 - visi & misi;
-- profil sekolah;
-- showcase **Sekolah Kami** (satu identitas sekolah dan satu lingkungan belajar; CTA ke `/sekolah-kami`);
+- profil sekolah (CTA “Lihat Profil Sekolah” ke `/sekolah-kami`);
 - testimonial homepage: 2 testimonial orang tua nyata (Bunda Cakrawala / Kelas Raudhah; Orang Tua Murid / PAUD IT Harapan Mulia);
 - berita terbaru dari CMS;
 - footer.

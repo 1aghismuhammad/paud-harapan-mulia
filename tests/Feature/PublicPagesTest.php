@@ -41,6 +41,16 @@ it('shows the two real parent testimonials on the homepage', function (): void {
         ->assertDontSee('Placeholder 06');
 });
 
+it('sends the homepage Profil Sekolah CTA to Sekolah Kami and omits the old showcase section', function (): void {
+    get('/')
+        ->assertOk()
+        ->assertSee('Lihat Profil Sekolah')
+        ->assertSee('href="'.route('school.index').'"', false)
+        ->assertDontSee('Tumbuh, Belajar, dan Berkembang')
+        ->assertDontSee('Lebih dari Sekadar Tempat Belajar')
+        ->assertDontSee('Kenali Sekolah Kami');
+});
+
 it('presents Sekolah Kami as a direct primary destination without PAUD or TK submenu links', function (): void {
     get('/')
         ->assertOk()

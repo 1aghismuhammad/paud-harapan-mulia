@@ -5,42 +5,26 @@
 
 @section('content')
     @php
-        $testimonialSlides = [
+        $testimonials = [
             [
-                [
-                    'quote' => 'Lingkungan sekolah terasa ramah dan guru mendampingi anak dengan penuh perhatian. Kegiatan yang diberikan membantu membangun kebiasaan baik, kemandirian, serta rasa percaya diri anak dalam proses belajar.',
-                    'name' => 'Placeholder 01',
-                    'role' => 'Orang Tua Murid',
-                ],
-                [
-                    'quote' => 'Kegiatan belajar dibuat menyenangkan dan tetap menanamkan kebiasaan baik. Pendampingan guru dan komunikasi sekolah membantu kami sebagai orang tua untuk mengikuti perkembangan serta proses belajar anak.',
-                    'name' => 'Placeholder 02',
-                    'role' => 'Orang Tua Murid',
-                ],
-                [
-                    'quote' => 'Program sekolah membantu anak belajar mandiri dan percaya diri. Pembiasaan yang dilakukan secara konsisten memberi pengalaman positif bagi anak sekaligus mendukung kerja sama antara sekolah dan keluarga.',
-                    'name' => 'Placeholder 03',
-                    'role' => 'Orang Tua Murid',
-                ],
+                'quote' => "Alhamdulillah, kami sangat bersyukur bisa mempercayakan pendidikan anak kami di TK IT Harapan Mulia. Lingkungan sekolah yang islami, bersih, dan menyenangkan membuat anak kami selalu antusias berangkat sekolah setiap hari.\n\nTidak hanya kemampuan akademis dasar yang berkembang, tetapi nilai-nilai akhlak mulia, kebiasaan baik, dan hafalan doa sehari-hari juga tertanam dengan sangat baik.\n\nTerima kasih kepada seluruh guru yang penuh kesabaran dan kasih sayang dalam membimbing.",
+                'name' => 'Bunda Cakrawala',
+                'role' => 'Kelas Raudhah',
+                'photo' => 'images/paud/testimonials/bunda-cakrawala.png',
+                'photo_alt' => 'Bunda Cakrawala',
+                'photo_object' => 'object-center',
             ],
             [
-                [
-                    'quote' => 'Anak kami menjadi lebih berani, lebih disiplin, dan semakin senang berangkat ke sekolah. Suasana pembelajaran yang hangat sangat membantu perkembangan sosial dan emosionalnya.',
-                    'name' => 'Placeholder 04',
-                    'role' => 'Orang Tua Murid',
-                ],
-                [
-                    'quote' => 'Sekolah tidak hanya fokus pada kegiatan akademik, tetapi juga membentuk karakter, kebiasaan ibadah, serta perilaku yang baik dalam keseharian anak.',
-                    'name' => 'Placeholder 05',
-                    'role' => 'Orang Tua Murid',
-                ],
-                [
-                    'quote' => 'Kami merasa terbantu karena komunikasi sekolah dengan orang tua berjalan baik. Informasi kegiatan, perkembangan anak, dan arahan pembiasaan diberikan dengan jelas.',
-                    'name' => 'Placeholder 06',
-                    'role' => 'Orang Tua Murid',
-                ],
+                'quote' => "Sebagai orang tua, kami ingin memberikan pendidikan terbaik untuk anak-anak kami. Alhamdulillah, kami menemukan itu di PAUD IT Harapan Mulia Ngawen.\n\nKami terkesan bukan hanya dengan kegiatan belajarnya, tetapi juga bagaimana anak-anak dibimbing mengenal agama, memiliki akhlak yang baik, mandiri, bertanggung jawab, dan saling menyayangi.\n\nPara guru sangat komunikatif dan penuh perhatian. Kami merasa anak tidak hanya ‘sekolah’, tetapi benar-benar didampingi dalam proses tumbuh dan kembangnya.",
+                'name' => 'Orang Tua Murid',
+                'role' => 'PAUD IT Harapan Mulia',
+                'photo' => 'images/paud/testimonials/orang-tua-murid.png',
+                'photo_alt' => 'Orang Tua Murid PAUD IT Harapan Mulia',
+                'photo_object' => 'object-[center_22%]',
             ],
         ];
+
+        $testimonialSlides = array_chunk($testimonials, 3);
     @endphp
 
     <h1 class="sr-only">PAUD Islam Terpadu Harapan Mulia</h1>
@@ -307,20 +291,40 @@
                     style="transform: translateX(0%);"
                 >
                     @foreach ($testimonialSlides as $slide)
+                        @php
+                            $slideCount = count($slide);
+                            $cardWidthClass = match ($slideCount) {
+                                1 => 'md:w-[min(32rem,72%)] md:max-w-[32rem]',
+                                2 => 'md:w-[39%] md:max-w-[32rem] lg:w-[38%] lg:max-w-[31.5rem]',
+                                default => 'md:w-[calc((100%-2.5rem)/3)] md:max-w-[calc((100%-2.5rem)/3)] lg:w-[calc((100%-56px)/3)] lg:max-w-[calc((100%-56px)/3)]',
+                            };
+                        @endphp
                         <div class="w-full shrink-0">
-                            <div class="grid gap-5 md:grid-cols-3 lg:gap-[28px]">
+                            <div class="flex flex-col gap-5 md:flex-row md:flex-wrap md:justify-center lg:gap-[28px]">
                                 @foreach ($slide as $testimonial)
-                                    <article class="flex min-h-[300px] flex-col rounded-[5px] bg-white px-8 py-9 text-left text-site-text shadow-[0_12px_32px_rgba(17,24,39,0.07)] md:min-h-[360px] lg:min-h-[465px] lg:px-[48px] lg:pt-[48px] lg:pb-[42px]">
-                                        <p class="text-[13px] leading-7 text-site-muted md:text-[14px] md:leading-8 lg:text-[17px] lg:leading-[2.02]">
+                                    <article class="flex min-h-[240px] w-full flex-col rounded-[5px] bg-white px-8 py-9 text-left text-site-text shadow-[0_12px_32px_rgba(17,24,39,0.07)] md:min-h-[280px] md:shrink-0 md:py-8 {{ $cardWidthClass }} lg:px-[48px] lg:pt-[40px] lg:pb-[36px]">
+                                        <p class="whitespace-pre-line text-[13px] leading-7 text-site-muted md:text-[16px] md:leading-[1.8]">
                                             “{{ $testimonial['quote'] }}”
                                         </p>
 
                                         <div class="mt-auto flex items-center gap-4 pt-8 lg:gap-5 lg:pt-10">
-                                            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#eef0f2] text-[#757986] lg:h-[54px] lg:w-[54px]">
-                                                <svg class="h-6 w-6 lg:h-7 lg:w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                                                    <circle cx="12" cy="8" r="3.5"/>
-                                                    <path d="M5.5 20c.8-4 3-6 6.5-6s5.7 2 6.5 6"/>
-                                                </svg>
+                                            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#eef0f2] text-[#757986] lg:h-[54px] lg:w-[54px]">
+                                                @if (! empty($testimonial['photo']))
+                                                    <img
+                                                        src="{{ asset($testimonial['photo']) }}"
+                                                        alt="{{ $testimonial['photo_alt'] ?? $testimonial['name'] }}"
+                                                        class="h-full w-full object-cover {{ $testimonial['photo_object'] ?? 'object-center' }}"
+                                                        width="54"
+                                                        height="54"
+                                                        loading="lazy"
+                                                        decoding="async"
+                                                    >
+                                                @else
+                                                    <svg class="h-6 w-6 lg:h-7 lg:w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                                                        <circle cx="12" cy="8" r="3.5"/>
+                                                        <path d="M5.5 20c.8-4 3-6 6.5-6s5.7 2 6.5 6"/>
+                                                    </svg>
+                                                @endif
                                             </span>
 
                                             <div>
@@ -341,17 +345,25 @@
             </div>
 
             {{-- dots fungsional --}}
-            <div class="mt-7 flex justify-center gap-2.5 pb-12 lg:mt-8 lg:pb-[74px]" aria-label="Navigasi testimonial">
-                @foreach ($testimonialSlides as $index => $slide)
-                    <button
-                        type="button"
-                        class="h-3 w-3 rounded-full transition lg:h-[14px] lg:w-[14px] {{ $index === 0 ? 'bg-brand-green-600' : 'bg-[#edf0f3]' }}"
-                        data-testimonial-dot
-                        data-index="{{ $index }}"
-                        aria-label="Tampilkan testimonial slide {{ $index + 1 }}"
-                        aria-pressed="{{ $index === 0 ? 'true' : 'false' }}"
-                    ></button>
-                @endforeach
+            <div class="mt-7 pb-12 lg:mt-8 lg:pb-[74px]">
+                <div
+                    class="flex justify-center gap-2.5"
+                    data-testimonial-dots
+                    aria-label="Navigasi testimonial"
+                >
+                    @if (count($testimonialSlides) > 1)
+                        @foreach ($testimonialSlides as $index => $slide)
+                            <button
+                                type="button"
+                                class="h-3 w-3 rounded-full transition lg:h-[14px] lg:w-[14px] {{ $index === 0 ? 'bg-brand-green-600' : 'bg-[#edf0f3]' }}"
+                                data-testimonial-dot
+                                data-index="{{ $index }}"
+                                aria-label="Tampilkan testimonial slide {{ $index + 1 }}"
+                                aria-pressed="{{ $index === 0 ? 'true' : 'false' }}"
+                            ></button>
+                        @endforeach
+                    @endif
+                </div>
             </div>
         </div>
     </section>

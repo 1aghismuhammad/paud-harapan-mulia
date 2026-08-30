@@ -422,14 +422,14 @@ ready(() => {
     });
 
     // ---------------------------------------------------------
-    // Testimonial V9 — responsive 3-up desktop / 1-up mobile.
+    // Testimonial slider — 3-up desktop / 1-up mobile, N cards.
     // ---------------------------------------------------------
     document.querySelectorAll('[data-testimonial-slider]').forEach((slider) => {
         const track = slider.querySelector('[data-testimonial-track]');
         const pageSlides = track ? [...track.children] : [];
         const groups = pageSlides.map((slide) => slide.querySelector(':scope > div'));
         const cards = pageSlides.flatMap((slide) => [...slide.querySelectorAll('article')]);
-        const dots = [...slider.querySelectorAll('[data-testimonial-dot]')];
+        const dotsRoot = slider.querySelector('[data-testimonial-dots]');
 
         const AUTOPLAY_MS = 6500;
         const SLIDE_MS = 600;
@@ -438,6 +438,7 @@ ready(() => {
         let mobileIndex = 0;
         let startX = 0;
         let autoplayTimer = null;
+        let dots = [];
 
         if (!track || pageSlides.length === 0 || cards.length === 0) {
             return;
@@ -446,7 +447,12 @@ ready(() => {
         const isMobile = () => window.matchMedia('(max-width: 767px)').matches;
 
         const pageCount = pageSlides.length;
-        const cardsPerPage = Math.max(1, Math.ceil(cards.length / pageCount));
+        const cardsPerPage = Math.max(
+            1,
+            pageSlides[0]?.querySelectorAll('article').length ?? 1,
+        );
+        const desktopCanAdvance = pageCount > 1;
+        const mobileCanAdvance = cards.length > 1;
 
         const setTransition = () => {
             const transition = prefersReducedMotion()
@@ -472,14 +478,62 @@ ready(() => {
             });
         };
 
+        const syncDots = (activeIndex) => {
+            if (!dotsRoot) {
+                return;
+            }
+
+            const count = isMobile() ? cards.length : pageCount;
+
+            if (count < 2) {
+                dotsRoot.replaceChildren();
+                dotsRoot.setAttribute('aria-hidden', 'true');
+                dots = [];
+                return;
+            }
+
+            dotsRoot.removeAttribute('aria-hidden');
+
+            if (dots.length !== count) {
+                dots = Array.from({ length: count }, (_, index) => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'h-3 w-3 rounded-full transition lg:h-[14px] lg:w-[14px] bg-[#edf0f3]';
+                    button.setAttribute('data-testimonial-dot', '');
+                    button.setAttribute('data-index', String(index));
+                    button.setAttribute('aria-label', `Tampilkan testimonial slide ${index + 1}`);
+                    button.setAttribute('aria-pressed', 'false');
+                    return button;
+                });
+
+                dotsRoot.replaceChildren(...dots);
+            }
+
+            updateDots(activeIndex);
+        };
+
+        const setCardCursors = () => {
+            const clickable = isMobile() ? mobileCanAdvance : desktopCanAdvance;
+
+            cards.forEach((card) => {
+                card.style.cursor = clickable ? 'pointer' : '';
+            });
+        };
+
         const setupCardInteraction = () => {
             cards.forEach((card) => {
-                card.style.cursor = 'pointer';
-
                 card.addEventListener('click', () => {
                     if (isMobile()) {
+                        if (!mobileCanAdvance) {
+                            return;
+                        }
+
                         goToMobile(mobileIndex + 1);
                     } else {
+                        if (!desktopCanAdvance) {
+                            return;
+                        }
+
                         goToDesktop(desktopPage + 1);
                     }
 
@@ -494,8 +548,16 @@ ready(() => {
                     event.preventDefault();
 
                     if (isMobile()) {
+                        if (!mobileCanAdvance) {
+                            return;
+                        }
+
                         goToMobile(mobileIndex + 1);
                     } else {
+                        if (!desktopCanAdvance) {
+                            return;
+                        }
+
                         goToDesktop(desktopPage + 1);
                     }
 
@@ -511,13 +573,18 @@ ready(() => {
                 }
 
                 group.style.removeProperty('display');
+                group.style.removeProperty('flex-direction');
+                group.style.removeProperty('flex-wrap');
                 group.style.removeProperty('gap');
+                group.style.removeProperty('width');
                 group.style.removeProperty('transform');
             });
 
             cards.forEach((card) => {
                 card.style.removeProperty('flex');
                 card.style.removeProperty('width');
+                card.style.removeProperty('min-width');
+                card.style.removeProperty('max-width');
             });
 
             desktopPage = Math.min(
@@ -526,7 +593,8 @@ ready(() => {
             );
 
             track.style.transform = `translateX(-${desktopPage * 100}%)`;
-            updateDots(desktopPage);
+            setCardCursors();
+            syncDots(desktopPage);
         };
 
         const applyMobileLayout = () => {
@@ -536,13 +604,17 @@ ready(() => {
                 }
 
                 group.style.display = 'flex';
+                group.style.flexDirection = 'row';
                 group.style.flexWrap = 'nowrap';
                 group.style.gap = '0px';
+                group.style.width = '100%';
             });
 
             cards.forEach((card) => {
                 card.style.flex = '0 0 100%';
                 card.style.width = '100%';
+                card.style.minWidth = '100%';
+                card.style.maxWidth = '100%';
             });
 
             mobileIndex = Math.min(
@@ -565,10 +637,15 @@ ready(() => {
                     : 'translateX(0%)';
             });
 
-            updateDots(groupIndex);
+            setCardCursors();
+            syncDots(mobileIndex);
         };
 
         const goToDesktop = (index) => {
+            if (!desktopCanAdvance) {
+                return;
+            }
+
             desktopPage = (index + pageCount) % pageCount;
             mobileIndex = desktopPage * cardsPerPage;
 
@@ -580,10 +657,14 @@ ready(() => {
                 }
             });
 
-            updateDots(desktopPage);
+            syncDots(desktopPage);
         };
 
         const goToMobile = (index) => {
+            if (!mobileCanAdvance) {
+                return;
+            }
+
             mobileIndex = (index + cards.length) % cards.length;
 
             const groupIndex = Math.floor(mobileIndex / cardsPerPage);
@@ -610,7 +691,7 @@ ready(() => {
                 group.style.transform = 'translateX(0%)';
             });
 
-            updateDots(groupIndex);
+            syncDots(mobileIndex);
         };
 
         const stopAutoplay = () => {
@@ -623,7 +704,9 @@ ready(() => {
         const startAutoplay = () => {
             stopAutoplay();
 
-            if (document.hidden || cards.length < 2) {
+            const canAdvance = isMobile() ? mobileCanAdvance : desktopCanAdvance;
+
+            if (document.hidden || !canAdvance) {
                 return;
             }
 
@@ -650,19 +733,29 @@ ready(() => {
             }
         };
 
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                desktopPage = index;
+        if (dotsRoot) {
+            dotsRoot.addEventListener('click', (event) => {
+                const dot = event.target.closest('[data-testimonial-dot]');
+
+                if (!dot || !dotsRoot.contains(dot)) {
+                    return;
+                }
+
+                const index = Number.parseInt(dot.getAttribute('data-index') ?? '', 10);
+
+                if (Number.isNaN(index)) {
+                    return;
+                }
 
                 if (isMobile()) {
-                    goToMobile(index * cardsPerPage);
+                    goToMobile(index);
                 } else {
                     goToDesktop(index);
                 }
 
                 startAutoplay();
             });
-        });
+        }
 
         slider.addEventListener('keydown', (event) => {
             if (event.key === 'ArrowLeft') {

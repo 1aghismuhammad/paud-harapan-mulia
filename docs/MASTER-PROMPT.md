@@ -5,26 +5,31 @@
 
 Dokumen ini merupakan pembaruan konteks project berdasarkan kondisi repository terbaru.
 
-Project telah berkembang dari kondisi awal Master Prompt dan saat ini status aktual adalah:
+```text
+Phase 0  Foundation & Documentation              DONE
+Phase 1  Design System & Public UI               DONE
+Phase 2  Static Content Finalization             WAITING CLIENT CONFIRMATION
+Phase 3  Admin Authentication & News CMS         DONE
+Phase 4  SEO / Performance / A11y / Hardening    DONE
+Phase 5  UAT & Production Deployment             NEXT
+```
 
-- Phase 0 Foundation & Documentation: DONE
-- Phase 1 Design System & Public UI: DONE
-- Phase 2 Static Content Finalization: WAITING CLIENT CONFIRMATION
-- Phase 3 Admin Authentication & News CMS: DONE IMPLEMENTATION, FINAL REVIEW COMPLETED
-- Phase 4 SEO / Performance / Accessibility / Hardening: NEXT
-- Phase 5 UAT / Deployment / Production: FUTURE
+## Current Capability
+
+Sudah tersedia di repository:
+
+- public Blade site;
+- admin News CMS;
+- `GET /sitemap.xml`;
+- security / performance / accessibility hardening.
 
 ## Current Priority
 
-Fokus pengembangan berikutnya:
+Fokus berikutnya:
 
-1. Security
-2. Correctness
-3. Maintainability
-4. Performance
-5. Accessibility
-6. SEO
-7. Production readiness
+1. Phase 5 UAT dan deployment production/cPanel.
+2. Menutup residual Phase 2 (konten client yang masih menunggu).
+3. Architecture yang sudah selesai jangan dibuka kembali tanpa kebutuhan nyata. Project Owner boleh terus meminta penyempurnaan UI/UX yang disetujui; terapkan secara minimal tanpa mengubah architecture yang tidak diperlukan.
 
 ## Development Principle
 

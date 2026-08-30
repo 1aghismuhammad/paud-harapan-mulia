@@ -1,7 +1,9 @@
 # ARCHITECTURE — Company Profile PAUD Harapan Mulia
 
-**Version:** 1.2  
-**Date:** 14 Agustus 2026
+**Version:** 1.3  
+**Date:** 30 Agustus 2026
+
+Reconciliation 30 Agustus 2026: routing mixed, sitemap, schema `news_posts` implemented, testing SQLite vs MySQL. Tidak merancang ulang architecture; hanya mencatat realitas current.
 
 ## 1. Architecture Style
 
@@ -12,7 +14,7 @@ Browser
    ↓
 Laravel 13
    ├── Public Blade Website
-   └── Admin CMS (Phase 3)
+   └── Admin CMS
    ↓
 MySQL / MariaDB
    +
@@ -33,91 +35,100 @@ Pest                ^4
 Production target   cPanel + ea-php83 + PHP-FPM
 ```
 
-## 3. Public Layer
+## 3. Request Flow
 
-Phase 1 menggunakan `Route::view` karena halaman masih static dan tidak membutuhkan Controller.
-
-Target flow:
+Halaman about yang masih static memakai `Route::view`. Halaman yang membutuhkan data atau orkestrasi memakai Controller.
 
 ```text
 Route
   ↓
-Blade View
-  ↓
-Shared Layout
-  ↓
-Site Components
-```
-
-Ketika data dinamis masuk pada Phase 3:
-
-```text
-Route
-  ↓
-Controller
+Controller (bila data/auth)
   ↓
 Form Request / Authorization bila relevan
   ↓
-Service / Action bila ada business logic nyata
+Action bila ada satu use-case bernama (contoh: AuthenticateAdmin)
   ↓
 Eloquent
   ↓
-Database
+Blade / HTTP response
 ```
 
-## 4. Public Route Map
+Abstraksi (Action/Service/Repository) hanya ditambah jika punya tanggung jawab nyata. Jangan membungkus Eloquent secara mekanis.
+
+## 4. Route Map
+
+Nama route mengikuti [`routes/web.php`](../routes/web.php).
 
 ```text
-GET /                                      home
-GET /tentang-kami/sejarah                  about.history
-GET /tentang-kami/visi-misi                about.vision-mission
-GET /tentang-kami/fasilitas                about.facilities
-GET /sekolah/paud                          school.paud
-GET /sekolah/tk                            school.tk
-GET /berita                                news.index
+GET  /                                      home
+GET  /sitemap.xml                           sitemap
+GET  /tentang-kami/sejarah                  about.history
+GET  /tentang-kami/visi-misi                about.vision-mission
+GET  /tentang-kami/fasilitas                about.facilities
+GET  /sekolah/paud                          school.paud
+GET  /sekolah/tk                            school.tk
+GET  /berita                                news.index
+GET  /berita/{newsPost:slug}                news.show
+
+GET  /admin/login                           admin.login
+POST /admin/login                           admin.login.store
+POST /admin/logout                          admin.logout
+GET  /admin                                 admin.dashboard
+GET  /admin/berita                          admin.news.index
+GET  /admin/berita/tambah                   admin.news.create
+POST /admin/berita                          admin.news.store
+POST /admin/berita/media                    admin.news.media.store
+GET  /admin/berita/{newsPost}/edit          admin.news.edit
+PUT  /admin/berita/{newsPost}               admin.news.update
+DELETE /admin/berita/{newsPost}             admin.news.destroy
 ```
 
-Detail `/berita/{slug}` dibuat pada Phase 3 ketika model berita tersedia.
+Pemetaan controller:
 
-Tidak ada route Galeri.
+- `HomeController` — beranda
+- `SchoolController` — PAUD / TK
+- `PublicNewsController` — daftar dan detail berita
+- `SitemapController` — sitemap
+- `Admin\AuthController` + `AuthenticateAdmin` — login/logout
+- `Admin\DashboardController` — dashboard
+- `Admin\NewsController` — CRUD berita
+- `Admin\NewsMediaController` — unggah media inline (throttle)
 
-## 5. Phase 1 View Structure
+About pages: `Route::view`. Tidak ada route Galeri.
+
+## 5. View Structure
 
 ```text
 resources/views/
 ├── layouts/
-│   └── public.blade.php
-├── components/
-│   └── site/
-│       ├── topbar.blade.php
-│       ├── navbar.blade.php
-│       ├── mobile-menu.blade.php
-│       ├── hero.blade.php
-│       ├── page-hero.blade.php
-│       ├── section-heading.blade.php
-│       ├── news-card.blade.php
-│       └── footer.blade.php
-└── public/
-    ├── home/index.blade.php
-    ├── about/
-    │   ├── history.blade.php
-    │   ├── vision-mission.blade.php
-    │   └── facilities.blade.php
-    ├── school/
-    │   ├── paud.blade.php
-    │   └── tk.blade.php
-    └── news/index.blade.php
+│   ├── public.blade.php
+│   └── admin.blade.php
+├── components/site/     (topbar, navbar, hero, footer, …)
+├── components/admin/
+├── public/
+│   ├── home/index.blade.php
+│   ├── about/
+│   ├── school/
+│   ├── news/index.blade.php
+│   ├── news/show.blade.php
+│   └── sitemap.blade.php
+└── admin/
+    ├── auth/login.blade.php
+    ├── dashboard.blade.php
+    └── news/
 ```
 
-## 6. Static Media — Phase 1
+## 6. Media / Storage
+
+Static developer assets:
 
 ```text
 public/images/paud/
 ```
 
-Digunakan untuk temporary logo/reference visual dan foto sekolah yang dikelola developer.
+Logo current: `logo-official.webp`. Logo sementara dataset tidak lagi current.
 
-Phase 3 featured image berita menggunakan Laravel public disk:
+Unggahan berita:
 
 ```text
 storage/app/public/news/
@@ -126,19 +137,23 @@ public/storage -> storage/app/public
 
 ## 7. JavaScript Policy
 
-Vanilla JavaScript cukup untuk Phase 1:
+Vanilla JavaScript (tanpa Alpine/React/Vue untuk kebutuhan public UI ini).
 
-- mobile menu;
-- mobile submenu accordion;
-- hero carousel.
+`resources/js/app.js`:
 
-Tidak menambahkan Alpine/React/Vue hanya untuk kebutuhan tersebut.
+- mobile navigation dan submenu accordion;
+- hero carousel;
+- testimonial slider;
+- motion / scroll reveal.
+
+Script di view halaman terkait:
+
+- showcase dan keunggulan PAUD/TK;
+- carousel fasilitas.
 
 ## 8. CSS / Design Tokens
 
 Tailwind CSS 4 `@theme` digunakan untuk token brand.
-
-Candidate tokens:
 
 ```text
 brand-green-dark  #29693E
@@ -148,9 +163,9 @@ brand-orange      #F66F09
 brand-yellow      #F4C90F
 ```
 
-Typography Phase 1 menggunakan Poppins-style geometric sans sesuai reference direction, dengan fallback system sans.
+Typography memakai Poppins dengan fallback system sans.
 
-## 9. Authentication — Phase 3
+## 9. Authentication
 
 Session-based authentication.
 
@@ -158,48 +173,56 @@ Session-based authentication.
 - public registration disabled;
 - CSRF default Laravel;
 - password hashing default Laravel;
-- admin route menggunakan `auth` middleware.
+- admin route memakai middleware `auth` / `guest`;
+- login divalidasi `LoginRequest` dan dijalankan `App\Actions\Admin\AuthenticateAdmin`.
 
-## 10. News Model — Phase 3 Candidate
+## 10. News Model — Implemented
+
+Tabel `news_posts` (dari migration, termasuk tags):
 
 ```text
 news_posts
 ├── id
-├── author_id
+├── user_id nullable FK users, nullOnDelete
 ├── title
 ├── slug unique
 ├── excerpt nullable
 ├── content longText
-├── featured_image_path nullable
-├── featured_image_alt nullable
-├── status indexed
-├── published_at nullable/indexed
-├── seo_title nullable
-├── seo_description nullable
-├── timestamps
-└── softDeletes (jika disetujui saat implementasi)
+├── featured_image nullable
+├── status indexed (default draft)
+├── published_at nullable indexed
+├── tags JSON nullable
+├── meta_title nullable
+├── meta_description nullable
+└── timestamps
 ```
 
-Tidak ada schema Galeri.
+Tidak ada `softDeletes`. Tidak ada schema Galeri.
+
+Scope publik `published()`:
+
+```text
+status = published
+AND published_at IS NOT NULL
+AND published_at <= now()
+```
 
 ## 11. Testing
 
-Phase 1 minimum:
+Pest Feature tests mencakup antara lain: public pages, SEO/sitemap, security headers, admin auth, dashboard, news database/CRUD, rich text, featured image, inline image.
 
-- public routes return 200;
-- navigation view dapat dirender;
-- no database dependency untuk static pages.
+Otomatis: SQLite in-memory (`phpunit.xml`). Itu tidak membuktikan locking/semantics production MySQL.
 
-Phase 3 menambah Feature Test untuk authentication, validation, authorization, news CRUD, draft/published visibility, dan upload.
+Target development/production: MySQL / MariaDB.
 
 ## 12. Security Baseline
 
 - Blade escaped output default;
-- raw HTML hanya untuk trusted/sanitized news content pada Phase 3;
+- raw HTML hanya untuk konten berita yang sudah disanitasi;
 - file upload divalidasi;
 - no secret committed;
 - production `APP_DEBUG=false`;
-- HTTPS;
+- HTTPS di production;
 - admin route protected.
 
 ## 13. Production
@@ -224,7 +247,6 @@ Command dijalankan sesuai capability hosting.
 
 ## 14. Architecture Constraints
 
-- jangan membuat Service/Action/Repository untuk static Phase 1;
-- jangan membuat database sebelum feature membutuhkan;
-- jangan menambah dependency hanya untuk behavior yang dapat diselesaikan dengan stack existing;
+- jangan menambah Action/Service/Repository tanpa tanggung jawab nyata;
+- jangan menambah dependency jika stack existing sudah cukup;
 - perubahan architecture harus dikonfirmasi bila bertentangan dengan PRD/design/AGENTS.

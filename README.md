@@ -2,20 +2,20 @@
 
 Website **Company Profile PAUD (KB & TK) Islam Terpadu Harapan Mulia** berbasis Laravel.
 
-Produk ini adalah website publik single institution dengan CMS berita pada fase berikutnya. MVP berfokus pada profil sekolah, unit PAUD/TK, fasilitas, berita, responsive design, SEO, dan pengalaman admin yang sederhana.
+Produk ini adalah website publik single institution dengan **CMS berita admin yang sudah diimplementasikan**. MVP mencakup profil sekolah, halaman PAUD/TK, fasilitas, berita, responsive design, SEO, dan pengalaman admin yang sederhana.
 
 ## Current Status
 
 ```text
-Phase 0  Foundation & Documentation         DONE
-Phase 1  Design System & Public UI          REVIEW / CLOSURE QA
-Phase 2  Static Content Finalization        NOT STARTED
-Phase 3  Admin Authentication & News CMS    NOT STARTED
-Phase 4  SEO / Performance / A11y           NOT STARTED
-Phase 5  UAT & Production Deployment        NOT STARTED
+Phase 0  Foundation & Documentation              DONE
+Phase 1  Design System & Public UI               DONE
+Phase 2  Static Content Finalization             WAITING CLIENT CONFIRMATION
+Phase 3  Admin Authentication & News CMS         DONE
+Phase 4  SEO / Performance / A11y / Hardening    DONE
+Phase 5  UAT & Production Deployment             NEXT
 ```
 
-Phase 1 sudah masuk tahap closure QA. Visual detailing dibekukan sementara; perubahan berikutnya hanya untuk regression, verification, dan dokumentasi closure sebelum status resmi `DONE`. Lihat [`docs/progress/2026-08-18-phase-01-closure-review.md`](docs/progress/2026-08-18-phase-01-closure-review.md).
+Phase 2 menunggu konten final dari client. Langkah berikutnya adalah Phase 5 UAT dan deployment production.
 
 ## Final MVP Navigation
 
@@ -50,8 +50,11 @@ Database   MySQL / MariaDB
 - [`docs/PRD.md`](docs/PRD.md)
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
 - [`docs/DESIGN.md`](docs/DESIGN.md)
-- [`docs/phase-01/UI-REFERENCE-CONTRACT.md`](docs/phase-01/UI-REFERENCE-CONTRACT.md)
-- [`docs/progress/`](docs/progress/)
+- [`docs/MASTER-PROMPT.md`](docs/MASTER-PROMPT.md)
+- [`docs/phase-01/UI-REFERENCE-CONTRACT.md`](docs/phase-01/UI-REFERENCE-CONTRACT.md) (kontrak historis Phase 1A)
+- [`docs/phase-04/PHASE-04-COMPLETION.md`](docs/phase-04/PHASE-04-COMPLETION.md)
+- [`docs/history/README.md`](docs/history/README.md) — **historical narrative only**, bukan spesifikasi current
+- [`docs/progress/`](docs/progress/) — dated snapshots
 - [`AGENTS.md`](AGENTS.md)
 - [`.agents/`](.agents/)
 
@@ -77,33 +80,30 @@ npm run dev
 
 MySQL Laragon harus aktif jika `.env` menggunakan MySQL lokal.
 
-## Phase 1 Preview
+## Public UI
 
-Phase 1 membuat public UI foundation berdasarkan referensi yang disetujui:
+Public UI mengikuti referensi yang disetujui:
 
 - top information bar;
-- navigation desktop;
-- dropdown Tentang Kami / Sekolah Kami;
+- navigation desktop dan dropdown Tentang Kami / Sekolah Kami;
 - mobile navigation;
 - hero image carousel;
 - highlight cards;
-- visi & misi section;
-- profile section;
-- unit PAUD/TK;
+- visi & misi;
+- profil sekolah;
+- showcase **Sekolah Kami** (satu identitas sekolah dan satu lingkungan belajar; halaman PAUD/TK tetap ada di navigasi);
 - testimonial placeholder untuk development;
-- preview berita;
-- footer;
-- static page shells agar navigation dapat direview end-to-end.
+- berita terbaru dari CMS;
+- footer.
 
-Testimonial dan berita contoh pada Phase 1 bersifat **placeholder untuk review UI**, bukan konten production.
+Testimonial masih **placeholder** sampai konten production tersedia. Berita publik berasal dari CMS (hanya post yang sudah dipublikasikan).
 
 ## Production Rule
 
 Sebelum production:
 
 - placeholder testimonial harus diganti data nyata atau section dinonaktifkan;
-- preview berita harus diganti CMS berita;
-- seluruh kontak sekolah diverifikasi;
+- konten statis sekolah (termasuk kontak) diverifikasi;
 - `APP_DEBUG=false`;
 - HTTPS aktif;
 - document root mengarah ke folder `public`.

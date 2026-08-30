@@ -1,7 +1,9 @@
 # DESIGN — Company Profile PAUD Harapan Mulia
 
-**Version:** 1.3 — Public UI + Admin CMS Direction Locked  
-**Date:** 19 Agustus 2026
+**Version:** 1.4 — Current Public UI + Admin CMS  
+**Date:** 30 Agustus 2026
+
+Reconciliation 30 Agustus 2026: hero autoplay, komposisi beranda (Sekolah Kami), logo resmi, dan sumber berita CMS. Detail implementasi historis: [`history/UI-DESIGN-HISTORY.md`](history/UI-DESIGN-HISTORY.md).
 
 ## 1. Visual Direction
 
@@ -25,6 +27,8 @@ Diganti:
 - blue/purple reference -> hijau, orange, yellow PAUD Harapan Mulia;
 - jenjang sekolah reference -> PAUD dan TK;
 - copy reference -> konten PAUD Harapan Mulia.
+
+Branding current memakai **logo resmi** (`logo-official.webp`). Logo sementara dataset bersifat historis saja.
 
 ## 2. Brand Colors
 
@@ -92,7 +96,13 @@ Tidak ada menu Galeri.
 - pagination dots;
 - responsive crop;
 - first slide menjadi candidate LCP;
-- autoplay lembut, berhenti saat hover/focus, menghormati reduced motion.
+- autoplay sekitar setiap 7 detik;
+- pointer di atas hero **tidak** menghentikan autoplay;
+- progres berhenti saat tab/document hidden;
+- transisi memakai fade-through yang terlihat;
+- reduced motion: dissolve sederhana tanpa spatial zoom.
+
+Angka milidetik dan eksperimen fade terdahulu tercatat di [`history/UI-DESIGN-HISTORY.md`](history/UI-DESIGN-HISTORY.md) dan [`phase-01/HOTFIX-hero-fade-v5-visible.md`](phase-01/HOTFIX-hero-fade-v5-visible.md), bukan di dokumen desain ini.
 
 ## 6. Homepage Composition
 
@@ -103,7 +113,7 @@ Hero
 Highlight Cards
 Visi & Misi
 Profil Sekolah
-Unit Pendidikan
+Sekolah Kami
 Testimonial
 Berita Terbaru
 Footer
@@ -119,16 +129,17 @@ Tiga card mengikuti reference, diadaptasi menjadi:
 
 Ketiganya bersumber dari dokumen sekolah: program keagamaan, pembelajaran kreatif/menyenangkan, dan program parenting.
 
-## 8. Unit Pendidikan
+## 8. Sekolah Kami
 
-Section affiliation reference diadaptasi menjadi:
+Homepage menampilkan **satu showcase sekolah**, bukan dua kartu PAUD/TK.
 
-```text
-Unit Pendidikan
-[ PAUD ] [ TK ]
-```
+Maksud visual:
 
-Card menuju route unit masing-masing.
+- satu identitas sekolah dan satu lingkungan belajar;
+- foto showcase, narasi singkat, nilai sekolah, dan CTA (Kenali Sekolah Kami);
+- halaman PAUD dan TK tetap tujuan navigasi terpisah.
+
+Layout dua kartu Unit Pendidikan di homepage adalah **desain historis yang sudah diganti**. Lihat [`history/PROJECT-DECISION-LOG.md`](history/PROJECT-DECISION-LOG.md).
 
 ## 9. Testimonial
 
@@ -140,9 +151,9 @@ Sebelum production wajib diganti testimonial nyata atau section dinonaktifkan.
 
 ## 10. News
 
-Phase 1 menampilkan preview cards static supaya layout dapat direview.
+Berita Terbaru di homepage dan halaman `/berita` memakai data CMS.
 
-Phase 3 menggantinya dengan data CMS.
+Jika belum ada berita yang dipublikasikan, tampil empty state. Bukan preview statis Phase 1.
 
 ## 11. Footer
 
@@ -203,11 +214,11 @@ Rule:
 ## 13. Image Ratios
 
 ```text
-Hero desktop      ~16:7 / wide
-Hero mobile       adaptive / portrait-aware crop
-News card         16:9
-Unit card         4:3 atau square visual
-Profile visual    4:3
+Hero desktop         ~16:7 / wide
+Hero mobile          adaptive / portrait-aware crop
+News card            16:9
+Sekolah Kami showcase  wide / content-aware crop
+Profile visual       4:3
 ```
 
 ## 14. Accessibility Baseline
@@ -222,11 +233,22 @@ Profile visual    4:3
 - reduced-motion support;
 - tidak mengandalkan warna saja.
 
-## 15. Phase 1 Closure Rule
+## 15. Phase 1 Baseline and Visual Change Policy
 
-Phase 1 public UI dianggap **frozen** setelah responsive QA, build, dan regression test lolos. Perubahan visual setelah closure hanya dilakukan untuk bug/regression nyata.
+Phase 1 menetapkan **baseline UI publik yang stabil** setelah responsive QA, build, dan regression check.
 
-Hal yang masih dapat direvisi tanpa mengubah architecture:
+Jangan membuka kembali atau merancang ulang UI yang sudah selesai secara proaktif tanpa alasan konkret.
+
+Perubahan visual setelah baseline diperbolehkan jika:
+
+- diminta atau disetujui secara eksplisit oleh Project Owner;
+- memperbaiki bug/regression;
+- memperbaiki perilaku responsive atau accessibility;
+- menyelaraskan perubahan produk/desain yang sudah disetujui.
+
+Penyempurnaan visual tersebut harus mempertahankan architecture existing kecuali perubahan yang disetujui memang memerlukan perubahan architecture.
+
+Hal yang tetap dapat direvisi tanpa mengubah architecture:
 
 - exact spacing;
 - font;

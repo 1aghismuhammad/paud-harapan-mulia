@@ -68,6 +68,16 @@ it('keeps legacy PAUD and TK pages available outside primary navigation', functi
     get('/sekolah/tk')->assertOk();
 });
 
+it('shows Fasilitas in the shared about-page hero and keeps the facilities content heading', function (): void {
+    get('/tentang-kami/fasilitas')
+        ->assertOk()
+        ->assertSee('inner-page-hero', false)
+        ->assertSee('<h1', false)
+        ->assertSee('Fasilitas')
+        ->assertSee('Beranda')
+        ->assertSee('Ruang & Sarana Belajar');
+});
+
 it('renders the canonical Sekolah Kami page as one Harapan Mulia institution', function (): void {
     get('/sekolah-kami')
         ->assertOk()

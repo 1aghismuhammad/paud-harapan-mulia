@@ -5,30 +5,11 @@
 
 @section('content')
     {{--
-        Facilities page reference treatment:
-        - compact green band on desktop with breadcrumb tab
-        - taller green title band on mobile
-        - large centred facility sections
-        - 3-up desktop carousel / single-card mobile carousel
-
+        Facilities page: shared About page-hero (same as Visi & Misi).
+        Large centred facility sections; 3-up desktop / single-card mobile carousel.
         Facility inventory and naming remain subject to school verification.
     --}}
-    <section class="relative bg-brand-green-900 text-white">
-        <div class="inner-content-container relative flex min-h-[150px] items-center md:min-h-[130px] lg:min-h-[82px]">
-            <h1 class="text-[26px] font-semibold tracking-[-0.03em] md:text-[30px] lg:sr-only">
-                Fasilitas
-            </h1>
-
-            <nav
-                class="absolute right-0 bottom-0 hidden rounded-t-[8px] bg-white px-8 py-[22px] text-[12px] font-semibold text-site-text shadow-[0_-2px_8px_rgba(17,24,39,0.02)] lg:block"
-                aria-label="Breadcrumb"
-            >
-                <a href="{{ route('home') }}" class="transition hover:text-brand-green-700">Beranda</a>
-                <span class="mx-2 text-[#c3c6ce]">/</span>
-                <span class="text-brand-green-600">Fasilitas</span>
-            </nav>
-        </div>
-    </section>
+    <x-site.page-hero title="Fasilitas" breadcrumb="Fasilitas" />
 
     @php
         $facilitySections = [
@@ -59,11 +40,7 @@
 
     <section class="bg-white pb-16 pt-14 md:pb-20 md:pt-16 lg:pb-24 lg:pt-14">
         <div class="mx-auto w-full max-w-[1300px] px-5 sm:px-6 lg:px-0">
-            <h2 class="text-[27px] font-semibold leading-tight tracking-[-0.035em] text-site-text md:text-[31px] lg:text-[32px]">
-                Fasilitas
-            </h2>
-
-            <div class="mt-10 space-y-16 md:mt-12 md:space-y-20 lg:mt-11 lg:space-y-14">
+            <div class="space-y-16 md:space-y-20 lg:space-y-14">
                 @foreach ($facilitySections as $sectionIndex => $section)
                     <section class="text-center" aria-labelledby="facility-section-{{ $sectionIndex }}">
                         <h3

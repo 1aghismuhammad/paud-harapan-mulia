@@ -378,7 +378,7 @@ ready(() => {
         const scheduleNext = () => {
             stopAutoplay();
 
-            if (prefersReducedMotion() || slides.length < 2 || document.hidden) {
+            if (slides.length < 2 || document.hidden) {
                 return;
             }
 

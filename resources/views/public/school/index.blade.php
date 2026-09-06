@@ -416,7 +416,7 @@
             const startAutoplay = () => {
                 stopAutoplay();
 
-                if (document.hidden || maxStartIndex() === 0) {
+                if (document.hidden || maxStartIndex() === 0 || reduceMotion) {
                     return;
                 }
 

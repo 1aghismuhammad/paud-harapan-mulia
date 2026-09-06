@@ -48,10 +48,6 @@
                     <li>Kolaborasi dengan orang tua melalui program parenting.</li>
                     <li>Lingkungan sekolah yang mendukung pembentukan karakter dan kebiasaan baik.</li>
                 </ol>
-
-                <p class="pt-4 text-[13px] leading-[1.85] italic text-site-muted md:text-[14px] lg:text-[15px]">
-                    Catatan: detail sejarah tetap perlu diverifikasi secara editorial oleh pihak sekolah sebelum production.
-                </p>
             </div>
         </div>
     </section>

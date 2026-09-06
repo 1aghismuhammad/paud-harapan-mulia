@@ -109,10 +109,6 @@
             <blockquote class="mt-7 max-w-[320px] text-[14px] leading-7 text-white/65 lg:mt-8 lg:text-[15px] lg:leading-[1.9]">
                 “Pendidikan adalah proses menumbuhkan kebiasaan baik, kemandirian, kreativitas, dan akhlak dalam lingkungan yang aman serta menyenangkan.”
             </blockquote>
-
-            <p class="mt-4 text-[12px] leading-5 text-brand-yellow-400 lg:text-[13px]">
-                — Preview copy, menunggu final sekolah
-            </p>
         </div>
     </div>
 

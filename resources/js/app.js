@@ -208,6 +208,24 @@ ready(() => {
             });
         };
 
+        const startAmbientZoom = (image) => {
+            if (prefersReducedMotion() || !image) {
+                return null;
+            }
+
+            return image.animate(
+                [
+                    { transform: 'scale(1.025)' },
+                    { transform: 'scale(1)' },
+                ],
+                {
+                    duration: 6200,
+                    easing: 'ease-out',
+                    fill: 'forwards',
+                },
+            );
+        };
+
         const initializeSlides = () => {
             carousel.classList.add('is-enhanced');
 
@@ -222,6 +240,7 @@ ready(() => {
             active = 0;
             updateDots();
             updateDebugState();
+            startAmbientZoom(slides[0]?.querySelector('img'));
         };
 
         const transitionTo = async (index) => {
@@ -301,21 +320,7 @@ ready(() => {
                 },
             );
 
-            let incomingImageAnimation = null;
-
-            if (!reduced && incomingImage) {
-                incomingImageAnimation = incomingImage.animate(
-                    [
-                        { transform: 'scale(1.025)' },
-                        { transform: 'scale(1)' },
-                    ],
-                    {
-                        duration: 6200,
-                        easing: 'ease-out',
-                        fill: 'forwards',
-                    },
-                );
-            }
+            const incomingImageAnimation = startAmbientZoom(incomingImage);
 
             try {
                 const animations = [
@@ -373,7 +378,7 @@ ready(() => {
         const scheduleNext = () => {
             stopAutoplay();
 
-            if (slides.length < 2 || document.hidden) {
+            if (prefersReducedMotion() || slides.length < 2 || document.hidden) {
                 return;
             }
 
@@ -706,7 +711,7 @@ ready(() => {
 
             const canAdvance = isMobile() ? mobileCanAdvance : desktopCanAdvance;
 
-            if (document.hidden || !canAdvance) {
+            if (document.hidden || !canAdvance || prefersReducedMotion()) {
                 return;
             }
 

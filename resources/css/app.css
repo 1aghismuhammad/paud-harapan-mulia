@@ -441,13 +441,7 @@
     }
 
     [data-carousel].is-enhanced [data-carousel-slide] img {
-        transform: scale(1.02);
-        transition: transform 6800ms ease-out;
         will-change: transform;
-    }
-
-    [data-carousel].is-enhanced [data-carousel-slide].is-active img {
-        transform: scale(1);
     }
 
     /* Shared card motion language. */

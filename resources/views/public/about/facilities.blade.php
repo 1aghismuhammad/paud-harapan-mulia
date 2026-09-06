@@ -183,10 +183,7 @@
                 const scheduleAutoplay = () => {
                     stopAutoplay();
 
-                    // Match the homepage hero scheduling model: mobile autoplay keeps
-                    // running while the tab is active. Reduced-motion only changes the
-                    // transition style; it must not silently disable the slideshow.
-                    if (!isMobile() || document.hidden || items.length < 2) {
+                    if (!isMobile() || document.hidden || items.length < 2 || reducedMotion) {
                         return;
                     }
 
@@ -216,53 +213,10 @@
                         return;
                     }
 
-                    // Keep autoplay active for reduced-motion users, but remove the spatial
-                    // animation. This mirrors the hero carousel's accessibility behaviour.
+                    // Reduced-motion: autoplay stays off; prev/next/swipe jump without fade or scale.
                     if (reducedMotion) {
-                        const outgoing = items[index];
-
-                        isTransitioning = true;
-
-                        const fadeOut = outgoing.animate(
-                            [
-                                { opacity: 1 },
-                                { opacity: 0.18 },
-                            ],
-                            {
-                                duration: 320,
-                                easing: 'ease-in-out',
-                                fill: 'forwards',
-                            },
-                        );
-
-                        try {
-                            await fadeOut.finished;
-                        } catch {
-                            // Continue to the normalized final state below.
-                        }
-
-                        fadeOut.cancel();
                         index = nextIndex;
                         render({ animate: false });
-
-                        const incoming = items[index];
-                        const fadeIn = incoming.animate(
-                            [
-                                { opacity: 0.18 },
-                                { opacity: 1 },
-                            ],
-                            {
-                                duration: 480,
-                                easing: 'ease-out',
-                            },
-                        );
-
-                        try {
-                            await fadeIn.finished;
-                        } catch {
-                            // Continue to the normalized final state below.
-                        }
-
                         isTransitioning = false;
                         return;
                     }

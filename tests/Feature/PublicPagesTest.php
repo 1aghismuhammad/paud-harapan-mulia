@@ -75,7 +75,28 @@ it('shows Fasilitas in the shared about-page hero and keeps the facilities conte
         ->assertSee('<h1', false)
         ->assertSee('Fasilitas')
         ->assertSee('Beranda')
-        ->assertSee('Ruang & Sarana Belajar');
+        ->assertSee('Ruang & Sarana Belajar')
+        ->assertSee('Program Parenting & Kolaborasi Keluarga')
+        ->assertSee('Kajian Sinergi Keluarga')
+        ->assertSee('Gerakan Orang Tua Mengaji (GOM)')
+        ->assertSee('Home Parenting')
+        ->assertSee('1 bulan sekali')
+        ->assertSee('images/program-parenting/kajian-sinergi-keluarga.jpeg')
+        ->assertSee('images/program-parenting/gom-gerakan-orang-tua-mengaji.jpeg')
+        ->assertSee('images/program-parenting/home-parenting.jpeg')
+        ->assertSeeInOrder([
+            'kajian-sinergi-keluarga.jpeg',
+            'Kajian Sinergi Keluarga',
+            '3 bulan sekali',
+            'gom-gerakan-orang-tua-mengaji.jpeg',
+            'Gerakan Orang Tua Mengaji (GOM)',
+            '2 pekan sekali',
+            'home-parenting.jpeg',
+            'Home Parenting',
+            '1 bulan sekali',
+        ])
+        ->assertDontSee('Lingkungan & Aktivitas')
+        ->assertDontSee('menunggu data fasilitas resmi');
 });
 
 it('renders the canonical Sekolah Kami page as one Harapan Mulia institution', function (): void {

@@ -6,8 +6,7 @@
 @section('content')
     {{--
         Facilities page: shared About page-hero (same as Visi & Misi).
-        Large centred facility sections; 3-up desktop / single-card mobile carousel.
-        Facility inventory and naming remain subject to school verification.
+        Facility photo carousel, then editorial parenting-program blocks.
     --}}
     <x-site.page-hero title="Fasilitas" breadcrumb="Fasilitas" />
 
@@ -24,16 +23,33 @@
                     ['image' => 'images/paud/hero-sekolah.jpeg', 'title' => 'Lingkungan Sekolah'],
                 ],
             ],
+        ];
+
+        $parentingPrograms = [
             [
-                'title' => 'Lingkungan & Aktivitas',
-                'description' => 'Lingkungan sekolah dan kegiatan pembelajaran ditampilkan sebagai dokumentasi visual sambil menunggu data fasilitas resmi yang telah dikonfirmasi secara lengkap.',
-                'items' => [
-                    ['image' => 'images/paud/hero-sekolah.jpeg', 'title' => 'Kegiatan Bersama'],
-                    ['image' => 'images/paud/visi-kegiatan.jpeg', 'title' => 'Aktivitas Luar Ruang'],
-                    ['image' => 'images/paud/unit-tk.jpeg', 'title' => 'Kegiatan Islami'],
-                    ['image' => 'images/paud/profile-sekolah.jpeg', 'title' => 'Dokumentasi Kegiatan'],
-                    ['image' => 'images/paud/news-kegiatan.jpeg', 'title' => 'Aktivitas Siswa'],
-                ],
+                'title' => 'Kajian Sinergi Keluarga',
+                'frequency' => '3 bulan sekali',
+                'description' => 'Ruang belajar dan refleksi bagi orang tua untuk memperkuat sinergi keluarga dan sekolah dalam mendampingi tumbuh kembang anak.',
+                'image' => 'images/program-parenting/kajian-sinergi-keluarga.jpeg',
+                'alt' => 'Poster Program Kajian Sinergi Keluarga PAUD IT Harapan Mulia',
+                'image_first_on_desktop' => true,
+            ],
+            [
+                'title' => 'Gerakan Orang Tua Mengaji (GOM)',
+                'frequency' => '2 pekan sekali',
+                'description' => 'Kegiatan rutin orang tua untuk membangun kebiasaan membaca Al-Qur\'an, memperkuat keteladanan, dan menumbuhkan nilai kebaikan dalam keluarga.',
+                'image' => 'images/program-parenting/gom-gerakan-orang-tua-mengaji.jpeg',
+                'alt' => 'Poster Gerakan Orang Tua Mengaji PAUD IT Harapan Mulia',
+                'image_first_on_desktop' => false,
+            ],
+            [
+                'title' => 'Home Parenting',
+                'frequency' => '1 bulan sekali',
+                'description' => 'Program pendampingan yang mempertemukan sekolah dan orang tua dalam suasana yang lebih dekat untuk berdiskusi, berbagi pengalaman, dan memperkuat sinergi dalam mendampingi tumbuh kembang anak.',
+                'image' => 'images/program-parenting/home-parenting.jpeg',
+                'alt' => 'Kegiatan Home Parenting PAUD IT Harapan Mulia',
+                'image_first_on_desktop' => true,
+                'presentation' => 'photo',
             ],
         ];
     @endphp
@@ -112,6 +128,90 @@
                         </div>
                     </section>
                 @endforeach
+
+                <section class="text-center" aria-labelledby="parenting-section">
+                    <h3
+                        id="parenting-section"
+                        class="text-[30px] font-semibold leading-[1.15] tracking-[-0.045em] text-site-text md:text-[38px] lg:text-[47px]"
+                    >
+                        Program Parenting &amp; Kolaborasi Keluarga
+                    </h3>
+
+                    <p class="mx-auto mt-5 max-w-[830px] text-[14px] leading-[2] text-site-muted md:text-[15px] lg:mt-4 lg:text-[15px] lg:leading-[1.9]">
+                        Harapan Mulia membangun sinergi antara sekolah dan keluarga melalui program pendampingan orang tua yang dilaksanakan secara berkala.
+                    </p>
+
+                    <div class="mx-auto mt-12 max-w-[1140px] space-y-16 text-left md:mt-14 md:space-y-20 lg:mt-16 lg:space-y-24">
+                        @foreach ($parentingPrograms as $program)
+                            @php
+                                $isPhoto = ($program['presentation'] ?? 'poster') === 'photo';
+                            @endphp
+                            <article
+                                class="grid items-center gap-8 lg:grid-cols-2 lg:gap-16"
+                                aria-labelledby="parenting-program-{{ $loop->index }}"
+                            >
+                                <div class="{{ $program['image_first_on_desktop'] ? '' : 'lg:order-2' }}">
+                                    @if ($isPhoto)
+                                        <div class="group overflow-hidden rounded-[9px] bg-[#eef1f3] shadow-[0_8px_24px_rgba(17,24,39,0.07)] transition duration-300 hover:shadow-[0_12px_28px_rgba(17,24,39,0.13)]">
+                                            <img
+                                                src="{{ asset($program['image']) }}"
+                                                alt="{{ $program['alt'] }}"
+                                                class="h-auto w-full object-cover transition duration-500 ease-out group-hover:scale-[1.02]"
+                                                decoding="async"
+                                                loading="lazy"
+                                            >
+                                        </div>
+                                    @else
+                                        <a
+                                            href="{{ asset($program['image']) }}"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="group mx-auto block w-[82%] rounded-[9px] border border-[#edf0f2] bg-[#f7f9fa] p-4 shadow-[0_8px_24px_rgba(17,24,39,0.07)] transition duration-300 hover:shadow-[0_12px_28px_rgba(17,24,39,0.13)] focus-visible:outline-brand-green-600 lg:w-full"
+                                        >
+                                            <img
+                                                src="{{ asset($program['image']) }}"
+                                                alt="{{ $program['alt'] }}"
+                                                class="mx-auto h-auto w-full max-h-[28rem] object-contain lg:max-h-[36rem]"
+                                                decoding="async"
+                                                loading="lazy"
+                                            >
+                                        </a>
+                                    @endif
+                                </div>
+
+                                <div class="{{ $program['image_first_on_desktop'] ? '' : 'lg:order-1' }}">
+                                    <h4
+                                        id="parenting-program-{{ $loop->index }}"
+                                        class="text-[22px] font-semibold leading-tight tracking-[-0.03em] text-site-text md:text-[26px] lg:text-[28px]"
+                                    >
+                                        {{ $program['title'] }}
+                                    </h4>
+
+                                    <p class="mt-4">
+                                        <span class="inline-flex rounded-full bg-brand-green-300/15 px-3 py-1 text-[11px] font-semibold tracking-[0.04em] text-brand-green-700 md:text-[12px]">
+                                            {{ $program['frequency'] }}
+                                        </span>
+                                    </p>
+
+                                    <p class="mt-5 max-w-[520px] text-[14px] leading-[2] text-site-muted md:text-[15px] lg:leading-[1.9]">
+                                        {{ $program['description'] }}
+                                    </p>
+
+                                    @if (! $isPhoto)
+                                        <a
+                                            href="{{ asset($program['image']) }}"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="mt-6 inline-flex items-center gap-2 text-[13px] font-semibold text-brand-green-700 transition duration-200 hover:text-brand-green-900 lg:text-[15px]"
+                                        >
+                                            Lihat Poster →
+                                        </a>
+                                    @endif
+                                </div>
+                            </article>
+                        @endforeach
+                    </div>
+                </section>
             </div>
         </div>
     </section>

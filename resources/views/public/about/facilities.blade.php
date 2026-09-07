@@ -14,13 +14,11 @@
         $facilitySections = [
             [
                 'title' => 'Ruang & Sarana Belajar',
-                'description' => 'Dokumentasi berikut menampilkan lingkungan, sarana, dan area kegiatan yang digunakan dalam aktivitas PAUD Harapan Mulia. Nama serta inventaris fasilitas final tetap perlu diverifikasi pihak sekolah.',
                 'items' => [
-                    ['image' => 'images/paud/fasilitas-lingkungan.jpeg', 'title' => 'Lingkungan Belajar'],
-                    ['image' => 'images/paud/fasilitas-aktivitas.jpeg', 'title' => 'Area Aktivitas'],
-                    ['image' => 'images/paud/profile-sekolah.jpeg', 'title' => 'Dokumentasi Sekolah'],
-                    ['image' => 'images/paud/visi-kegiatan.jpeg', 'title' => 'Area Kegiatan'],
-                    ['image' => 'images/paud/hero-sekolah.jpeg', 'title' => 'Lingkungan Sekolah'],
+                    ['image' => 'images/facilities/tampak-depan-tk-harapan-mulia.jpeg', 'title' => 'Tampak Depan TK Harapan Mulia'],
+                    ['image' => 'images/facilities/taman-bermain-kb.jpeg', 'title' => 'Taman Bermain KB'],
+                    ['image' => 'images/facilities/kamar-mandi-kb.jpeg', 'title' => 'Kamar Mandi KB'],
+                    ['image' => 'images/facilities/aula-kb.jpeg', 'title' => 'Aula KB'],
                 ],
             ],
         ];
@@ -65,10 +63,6 @@
                         >
                             {{ $section['title'] }}
                         </h3>
-
-                        <p class="mx-auto mt-5 max-w-[830px] text-[14px] leading-[2] text-site-muted md:text-[15px] lg:mt-4 lg:text-[15px] lg:leading-[1.9]">
-                            {{ $section['description'] }}
-                        </p>
 
                         <div class="relative mx-auto mt-9 max-w-[1140px] px-0 sm:px-12 lg:px-0" data-facility-carousel>
                             <button

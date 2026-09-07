@@ -64,8 +64,20 @@ it('presents Sekolah Kami as a direct primary destination without PAUD or TK sub
 });
 
 it('keeps legacy PAUD and TK pages available outside primary navigation', function (): void {
-    get('/sekolah/paud')->assertOk();
-    get('/sekolah/tk')->assertOk();
+    foreach (['/sekolah/paud', '/sekolah/tk'] as $uri) {
+        get($uri)
+            ->assertOk()
+            ->assertSee('Tampak Depan TK Harapan Mulia')
+            ->assertSee('Taman Bermain KB')
+            ->assertSee('Kamar Mandi KB')
+            ->assertSee('Aula KB')
+            ->assertSee('images/facilities/tampak-depan-tk-harapan-mulia.jpeg')
+            ->assertSee('images/facilities/taman-bermain-kb.jpeg')
+            ->assertSee('images/facilities/kamar-mandi-kb.jpeg')
+            ->assertSee('images/facilities/aula-kb.jpeg')
+            ->assertDontSee('images/paud/fasilitas-lingkungan.jpeg')
+            ->assertDontSee('images/paud/fasilitas-aktivitas.jpeg');
+    }
 });
 
 it('shows Fasilitas in the shared about-page hero and keeps the facilities content heading', function (): void {
@@ -76,6 +88,14 @@ it('shows Fasilitas in the shared about-page hero and keeps the facilities conte
         ->assertSee('Fasilitas')
         ->assertSee('Beranda')
         ->assertSee('Ruang & Sarana Belajar')
+        ->assertSee('Tampak Depan TK Harapan Mulia')
+        ->assertSee('Taman Bermain KB')
+        ->assertSee('Kamar Mandi KB')
+        ->assertSee('Aula KB')
+        ->assertSee('images/facilities/tampak-depan-tk-harapan-mulia.jpeg')
+        ->assertSee('images/facilities/taman-bermain-kb.jpeg')
+        ->assertSee('images/facilities/kamar-mandi-kb.jpeg')
+        ->assertSee('images/facilities/aula-kb.jpeg')
         ->assertSee('Program Parenting & Kolaborasi Keluarga')
         ->assertSee('Kajian Sinergi Keluarga')
         ->assertSee('Gerakan Orang Tua Mengaji (GOM)')
@@ -85,6 +105,10 @@ it('shows Fasilitas in the shared about-page hero and keeps the facilities conte
         ->assertSee('images/program-parenting/gom-gerakan-orang-tua-mengaji.jpeg')
         ->assertSee('images/program-parenting/home-parenting.jpeg')
         ->assertSeeInOrder([
+            'Tampak Depan TK Harapan Mulia',
+            'Taman Bermain KB',
+            'Kamar Mandi KB',
+            'Aula KB',
             'kajian-sinergi-keluarga.jpeg',
             'Kajian Sinergi Keluarga',
             '3 bulan sekali',
@@ -95,6 +119,18 @@ it('shows Fasilitas in the shared about-page hero and keeps the facilities conte
             'Home Parenting',
             '1 bulan sekali',
         ])
+        ->assertDontSee('Lingkungan Belajar')
+        ->assertDontSee('Area Aktivitas')
+        ->assertDontSee('Dokumentasi Sekolah')
+        ->assertDontSee('Area Kegiatan')
+        ->assertDontSee('Lingkungan Sekolah')
+        ->assertDontSee('images/paud/fasilitas-lingkungan.jpeg')
+        ->assertDontSee('images/paud/fasilitas-aktivitas.jpeg')
+        ->assertDontSee('images/paud/profile-sekolah.jpeg')
+        ->assertDontSee('images/paud/visi-kegiatan.jpeg')
+        ->assertDontSee('images/paud/hero-sekolah.jpeg')
+        ->assertDontSee('Nama serta inventaris fasilitas final tetap perlu diverifikasi pihak sekolah.')
+        ->assertDontSee('Dokumentasi berikut menampilkan lingkungan')
         ->assertDontSee('Lingkungan & Aktivitas')
         ->assertDontSee('menunggu data fasilitas resmi');
 });
@@ -106,5 +142,18 @@ it('renders the canonical Sekolah Kami page as one Harapan Mulia institution', f
         ->assertSee('PAUD dan TK Islam Terpadu Harapan Mulia')
         ->assertSee('satu lingkungan pendidikan')
         ->assertSee('Keunggulan Sekolah')
-        ->assertSee('href="'.route('school.index').'"', false);
+        ->assertSee('href="'.route('school.index').'"', false)
+        ->assertSee('Tampak Depan TK Harapan Mulia')
+        ->assertSee('Taman Bermain KB')
+        ->assertSee('Kamar Mandi KB')
+        ->assertSee('Aula KB')
+        ->assertSee('images/facilities/tampak-depan-tk-harapan-mulia.jpeg')
+        ->assertSee('images/facilities/taman-bermain-kb.jpeg')
+        ->assertSee('images/facilities/kamar-mandi-kb.jpeg')
+        ->assertSee('images/facilities/aula-kb.jpeg')
+        ->assertDontSee('images/paud/fasilitas-lingkungan.jpeg')
+        ->assertDontSee('images/paud/fasilitas-aktivitas.jpeg')
+        ->assertDontSee('Lingkungan Belajar')
+        ->assertDontSee('Kegiatan Sekolah')
+        ->assertDontSee('Dokumentasi Sekolah');
 });

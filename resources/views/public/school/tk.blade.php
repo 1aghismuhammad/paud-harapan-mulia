@@ -77,11 +77,10 @@
                         'accent' => '#5EA10F',
                         'panel' => '#EAD9EF',
                         'items' => [
-                            ['image' => 'images/paud/fasilitas-aktivitas.jpeg', 'title' => 'Ruang Kelas'],
-                            ['image' => 'images/paud/profile-sekolah.jpeg', 'title' => 'Ruang & Lingkungan'],
-                            ['image' => 'images/paud/fasilitas-lingkungan.jpeg', 'title' => 'Lingkungan Belajar'],
-                            ['image' => 'images/paud/unit-tk.jpeg', 'title' => 'Unit TK'],
-                            ['image' => 'images/paud/visi-kegiatan.jpeg', 'title' => 'Area Kegiatan'],
+                            ['image' => 'images/facilities/tampak-depan-tk-harapan-mulia.jpeg', 'title' => 'Tampak Depan TK Harapan Mulia'],
+                            ['image' => 'images/facilities/taman-bermain-kb.jpeg', 'title' => 'Taman Bermain KB'],
+                            ['image' => 'images/facilities/kamar-mandi-kb.jpeg', 'title' => 'Kamar Mandi KB'],
+                            ['image' => 'images/facilities/aula-kb.jpeg', 'title' => 'Aula KB'],
                         ],
                     ],
                     [

@@ -74,6 +74,7 @@
                 $showcases = [
                     [
                         'title' => 'Fasilitas',
+                        'autoplay_delay' => 5000,
                         'accent' => '#5EA10F',
                         'panel' => '#EAD9EF',
                         'items' => [
@@ -85,6 +86,7 @@
                     ],
                     [
                         'title' => 'Aktivitas',
+                        'autoplay_delay' => 6500,
                         'accent' => '#F09712',
                         'panel' => '#FFF7DC',
                         'items' => [
@@ -97,6 +99,7 @@
                     ],
                     [
                         'title' => 'Pembiasaan',
+                        'autoplay_delay' => 8000,
                         'accent' => '#29693E',
                         'panel' => '#E4F3EC',
                         'items' => [
@@ -142,7 +145,7 @@
                         </div>
 
                         {{-- Carousel --}}
-                        <div class="relative min-w-0" data-showcase-carousel>
+                        <div class="relative min-w-0" data-showcase-carousel data-autoplay-delay="{{ $showcase['autoplay_delay'] }}">
                             <button
                                 type="button"
                                 class="absolute top-1/2 left-0 z-20 hidden h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#e5e8ec] bg-white text-[23px] text-site-text shadow-[0_10px_26px_rgba(17,24,39,0.12)] transition duration-300 hover:scale-105 hover:shadow-[0_14px_32px_rgba(17,24,39,0.16)] sm:inline-flex md:h-12 md:w-12"
@@ -337,7 +340,10 @@
             const previous = carousel.querySelector('[data-showcase-prev]');
             const next = carousel.querySelector('[data-showcase-next]');
 
-            const autoplayDelay = 5000;
+            const configuredDelay = Number.parseInt(carousel.dataset.autoplayDelay ?? '', 10);
+            const autoplayDelay = Number.isFinite(configuredDelay) && configuredDelay > 0
+                ? configuredDelay
+                : 5000;
             const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
             let activeIndex = 0;
@@ -415,7 +421,7 @@
             const startAutoplay = () => {
                 stopAutoplay();
 
-                if (document.hidden || maxStartIndex() === 0 || reduceMotion) {
+                if (document.hidden || maxStartIndex() === 0) {
                     return;
                 }
 

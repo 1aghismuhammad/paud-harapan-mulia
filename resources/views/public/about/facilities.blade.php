@@ -227,7 +227,9 @@
                 const MOBILE_TRANSITION_MS = 950;
                 const DEFAULT_TRANSITION_MS = 500;
 
-                if (!track || items.length < 2) return;
+                if (!track || items.length < 2) {
+                    return;
+                }
 
                 let index = 0;
                 let startX = null;
@@ -241,8 +243,14 @@
                 const isMobile = () => mobileMedia.matches;
 
                 const visibleCount = () => {
-                    if (window.matchMedia('(min-width: 992px)').matches) return 3;
-                    if (window.matchMedia('(min-width: 576px)').matches) return 2;
+                    if (window.matchMedia('(min-width: 992px)').matches) {
+                        return 3;
+                    }
+
+                    if (window.matchMedia('(min-width: 576px)').matches) {
+                        return 2;
+                    }
+
                     return 1;
                 };
 
@@ -277,7 +285,10 @@
                 const scheduleAutoplay = () => {
                     stopAutoplay();
 
-                    if (!isMobile() || document.hidden || items.length < 2 || reducedMotion) {
+                    // Autoplay keeps running while the tab is active on all viewports.
+                    // Reduced-motion only changes the transition style; it must not
+                    // silently disable the slideshow.
+                    if (document.hidden || items.length < 2) {
                         return;
                     }
 
@@ -298,20 +309,67 @@
                             ? 0
                             : targetIndex;
 
-                    if (nextIndex === index || isTransitioning) return;
+                    if (nextIndex === index || isTransitioning) {
+                        return;
+                    }
 
                     // Tablet/desktop retain the existing horizontal carousel behaviour.
                     if (!isMobile()) {
                         index = nextIndex;
                         render();
+
                         return;
                     }
 
-                    // Reduced-motion: autoplay stays off; prev/next/swipe jump without fade or scale.
+                    // Keep autoplay active for reduced-motion users, but remove the spatial
+                    // animation. This mirrors the hero carousel's accessibility behaviour.
                     if (reducedMotion) {
+                        const outgoing = items[index];
+
+                        isTransitioning = true;
+
+                        const fadeOut = outgoing.animate(
+                            [
+                                { opacity: 1 },
+                                { opacity: 0.18 },
+                            ],
+                            {
+                                duration: 320,
+                                easing: 'ease-in-out',
+                                fill: 'forwards',
+                            },
+                        );
+
+                        try {
+                            await fadeOut.finished;
+                        } catch {
+                            // Continue to the normalized final state below.
+                        }
+
+                        fadeOut.cancel();
                         index = nextIndex;
                         render({ animate: false });
+
+                        const incoming = items[index];
+                        const fadeIn = incoming.animate(
+                            [
+                                { opacity: 0.18 },
+                                { opacity: 1 },
+                            ],
+                            {
+                                duration: 480,
+                                easing: 'ease-out',
+                            },
+                        );
+
+                        try {
+                            await fadeIn.finished;
+                        } catch {
+                            // Continue to the normalized final state below.
+                        }
+
                         isTransitioning = false;
+
                         return;
                     }
 

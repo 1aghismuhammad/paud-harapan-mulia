@@ -6,6 +6,8 @@
             $seoDescription = trim($__env->yieldContent('meta_description', 'Website resmi PAUD Islam Terpadu Harapan Mulia Ngawen, Blora.'));
             $seoCanonical = url()->current();
             $seoImage = asset('images/paud/logo-official.webp');
+            $seoOgType = trim($__env->yieldContent('og_type')) ?: 'website';
+            $seoOgImage = trim($__env->yieldContent('og_image')) ?: $seoImage;
             $seoSiteName = 'PAUD IT Harapan Mulia';
             $seoOrganization = [
                 '@context' => 'https://schema.org',
@@ -34,18 +36,18 @@
         <link rel="canonical" href="{{ $seoCanonical }}">
         <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
 
-        <meta property="og:type" content="website">
+        <meta property="og:type" content="{{ $seoOgType }}">
         <meta property="og:site_name" content="{{ $seoSiteName }}">
         <meta property="og:locale" content="id_ID">
         <meta property="og:title" content="{{ $seoTitle }}">
         <meta property="og:description" content="{{ $seoDescription }}">
         <meta property="og:url" content="{{ $seoCanonical }}">
-        <meta property="og:image" content="{{ $seoImage }}">
+        <meta property="og:image" content="{{ $seoOgImage }}">
 
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="{{ $seoTitle }}">
         <meta name="twitter:description" content="{{ $seoDescription }}">
-        <meta name="twitter:image" content="{{ $seoImage }}">
+        <meta name="twitter:image" content="{{ $seoOgImage }}">
 
         <script type="application/ld+json">{!! json_encode($seoOrganization, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}</script>
 

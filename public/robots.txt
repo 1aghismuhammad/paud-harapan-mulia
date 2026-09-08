@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /up
+
+Sitemap: https://paudharapanmulia.sch.id/sitemap.xml

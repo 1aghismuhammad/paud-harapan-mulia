@@ -57,12 +57,12 @@
             <div class="space-y-16 md:space-y-20 lg:space-y-14">
                 @foreach ($facilitySections as $sectionIndex => $section)
                     <section class="text-center" aria-labelledby="facility-section-{{ $sectionIndex }}">
-                        <h3
+                        <h2
                             id="facility-section-{{ $sectionIndex }}"
                             class="text-[30px] font-semibold leading-[1.15] tracking-[-0.045em] text-site-text md:text-[38px] lg:text-[47px]"
                         >
                             {{ $section['title'] }}
-                        </h3>
+                        </h2>
 
                         <div class="relative mx-auto mt-9 max-w-[1140px] px-0 sm:px-12 lg:px-0" data-facility-carousel>
                             <button
@@ -124,12 +124,12 @@
                 @endforeach
 
                 <section class="text-center" aria-labelledby="parenting-section">
-                    <h3
+                    <h2
                         id="parenting-section"
                         class="text-[30px] font-semibold leading-[1.15] tracking-[-0.045em] text-site-text md:text-[38px] lg:text-[47px]"
                     >
                         Program Parenting &amp; Kolaborasi Keluarga
-                    </h3>
+                    </h2>
 
                     <p class="mx-auto mt-5 max-w-[830px] text-[14px] leading-[2] text-site-muted md:text-[15px] lg:mt-4 lg:text-[15px] lg:leading-[1.9]">
                         Harapan Mulia membangun sinergi antara sekolah dan keluarga melalui program pendampingan orang tua yang dilaksanakan secara berkala.
@@ -174,12 +174,12 @@
                                 </div>
 
                                 <div class="{{ $program['image_first_on_desktop'] ? '' : 'lg:order-1' }}">
-                                    <h4
+                                    <h3
                                         id="parenting-program-{{ $loop->index }}"
                                         class="text-[22px] font-semibold leading-tight tracking-[-0.03em] text-site-text md:text-[26px] lg:text-[28px]"
                                     >
                                         {{ $program['title'] }}
-                                    </h4>
+                                    </h3>
 
                                     <p class="mt-4">
                                         <span class="inline-flex rounded-full bg-brand-green-300/15 px-3 py-1 text-[11px] font-semibold tracking-[0.04em] text-brand-green-700 md:text-[12px]">

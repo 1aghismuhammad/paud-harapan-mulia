@@ -36,5 +36,6 @@ it('disallows admin and health paths in robots.txt', function (): void {
         ->and($robots)->toContain('User-agent: *')
         ->and($robots)->toContain('Allow: /')
         ->and($robots)->toContain('Disallow: /admin')
-        ->and($robots)->toContain('Disallow: /up');
+        ->and($robots)->toContain('Disallow: /up')
+        ->and($robots)->toContain('Sitemap: https://paudharapanmulia.sch.id/sitemap.xml');
 });

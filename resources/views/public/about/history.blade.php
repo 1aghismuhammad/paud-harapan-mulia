@@ -36,12 +36,12 @@
                     Pengenalan membaca Al-Qur’an, hafalan doa, praktik ibadah, dan pembiasaan perilaku Islami menjadi bagian dari karakter layanan pendidikan sekolah.
                 </p>
 
-                <h3 class="pt-4 text-[20px] font-semibold leading-[1.45] text-site-text md:text-[22px] lg:text-[24px]">Tujuan Penyelenggaraan Sekolah</h3>
+                <h2 class="pt-4 text-[20px] font-semibold leading-[1.45] text-site-text md:text-[22px] lg:text-[24px]">Tujuan Penyelenggaraan Sekolah</h2>
                 <p>
                     Sekolah berupaya menciptakan lingkungan belajar yang sehat, bersih, tertib, aman, nyaman, dan bernuansa Islami, sekaligus mendukung perkembangan peserta didik secara mandiri, kreatif, dan menyenangkan.
                 </p>
 
-                <h3 class="pt-4 text-[20px] font-semibold leading-[1.45] text-site-text md:text-[22px] lg:text-[24px]">Keunggulan</h3>
+                <h2 class="pt-4 text-[20px] font-semibold leading-[1.45] text-site-text md:text-[22px] lg:text-[24px]">Keunggulan</h2>
                 <ol class="list-decimal space-y-3 pl-5 md:pl-6">
                     <li>Pembiasaan keagamaan melalui doa, Al-Qur’an, dan praktik ibadah.</li>
                     <li>Pembelajaran kreatif dan menyenangkan yang mendukung kemandirian anak.</li>

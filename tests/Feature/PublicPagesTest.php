@@ -85,6 +85,8 @@ it('shows Fasilitas in the shared about-page hero and keeps the facilities conte
         ->assertOk()
         ->assertSee('inner-page-hero', false)
         ->assertSee('<h1', false)
+        ->assertSee('id="facility-section-0"', false)
+        ->assertSee('id="parenting-section"', false)
         ->assertSee('Fasilitas')
         ->assertSee('Beranda')
         ->assertSee('Ruang & Sarana Belajar')
